@@ -12,3 +12,4 @@ build/
 # Libs
 !lib/*
 !lib/*/*
+/dist/
