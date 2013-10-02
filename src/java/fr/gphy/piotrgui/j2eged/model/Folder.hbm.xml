@@ -14,17 +14,5 @@
         <property name="name" type="string">
             <column name="name" length="100" />
         </property>
-        <set name="metadatas" inverse="true">
-            <key>
-                <column name="folder" not-null="true" />
-            </key>
-            <one-to-many class="fr.gphy.piotrgui.j2eged.model.Metadata" />
-        </set>
-        <set name="folders" inverse="true">
-            <key>
-                <column name="parent_folder" />
-            </key>
-            <one-to-many class="fr.gphy.piotrgui.j2eged.model.Folder" />
-        </set>
     </class>
 </hibernate-mapping>

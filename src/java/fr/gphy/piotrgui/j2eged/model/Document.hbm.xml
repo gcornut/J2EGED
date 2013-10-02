@@ -17,23 +17,5 @@
         <many-to-one name="documentByDocAnt" class="fr.gphy.piotrgui.j2eged.model.Document" fetch="select">
             <column name="doc_ant" />
         </many-to-one>
-        <set name="documentsForDocAnt" inverse="true">
-            <key>
-                <column name="doc_ant" />
-            </key>
-            <one-to-many class="fr.gphy.piotrgui.j2eged.model.Document" />
-        </set>
-        <set name="documentsForDocPost" inverse="true">
-            <key>
-                <column name="doc_post" />
-            </key>
-            <one-to-many class="fr.gphy.piotrgui.j2eged.model.Document" />
-        </set>
-        <set name="versions" inverse="true">
-            <key>
-                <column name="doc" not-null="true" />
-            </key>
-            <one-to-many class="fr.gphy.piotrgui.j2eged.model.Version" />
-        </set>
     </class>
 </hibernate-mapping>
