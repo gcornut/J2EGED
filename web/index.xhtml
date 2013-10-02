@@ -15,35 +15,37 @@
 
         <h:body>
 
-            <p:layout fullPage="true">
+   <h:form id="loginForm">
 
-                <p:layoutUnit position="north" size="100" resizable="false" closable="false" collapsible="false">
-                    Logo
-                </p:layoutUnit>
+        <p:panel>
+            <f:facet name="header">Login</f:facet>
 
-                <p:layoutUnit position="south" size="100" closable="true" collapsible="true" resizable="true">
-                    Footer
-                </p:layoutUnit>
+            <p>Please login here</p>
 
-                <p:layoutUnit position="west" size="175" header="Left" collapsible="true" closable="false">
-                    <p:menu>
-                        <p:submenu label="Resources">
-                            <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
-                            <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
-                            <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
-                            <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
+            <div class="dialog">
+                <h:panelGrid columns="2" rowClasses="prop" columnClasses="name,value">
+                    <h:outputLabel for="username">Username</h:outputLabel>
+                    <h:inputText id="username"
+                              value="#{credentials.username}"/>
+                    <h:outputLabel for="password">Password</h:outputLabel>
+                    <h:inputSecret id="password"
+                                value="#{credentials.password}"/>
+                    <h:outputLabel for="rememberMe">Remember me</h:outputLabel>
+                    <h:selectBooleanCheckbox id="rememberMe"
+                                          value="#{rememberMe.enabled}"/>
+                </h:panelGrid>
+            </div>
 
-                        </p:submenu>
+            <p>
+              <i>Note - </i> You may login with the username 'admin' and a blank password.
+            </p>
 
-                    </p:menu>
-                </p:layoutUnit>
+        </p:panel>
 
-                <p:layoutUnit position="center">
-                    Welcome to PrimeFaces
-                </p:layoutUnit>
-
-            </p:layout>
-
+        <div class="actionButtons">
+            <h:commandButton id="submit" value="Login" action="#{identity.login}"/>
+        </div>
+</h:form>
         </h:body>
 
     </f:view>
