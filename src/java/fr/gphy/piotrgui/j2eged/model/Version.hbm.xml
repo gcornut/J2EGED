@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2 oct. 2013 16:50:55 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="fr.gphy.piotrgui.j2eged.model.Version" table="version" catalog="J2EGED">
+        <id name="idVersion" type="java.lang.Integer">
+            <column name="id_version" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="document" class="fr.gphy.piotrgui.j2eged.model.Document" fetch="select">
+            <column name="doc" not-null="true" />
+        </many-to-one>
+        <many-to-one name="user" class="fr.gphy.piotrgui.j2eged.model.User" fetch="select">
+            <column name="user" not-null="true" />
+        </many-to-one>
+        <many-to-one name="metadata" class="fr.gphy.piotrgui.j2eged.model.Metadata" fetch="select">
+            <column name="meta" not-null="true" />
+        </many-to-one>
+        <property name="changeDate" type="date">
+            <column name="change_date" length="10" not-null="true" />
+        </property>
+        <property name="commit" type="string">
+            <column name="commit" length="100" />
+        </property>
+    </class>
+</hibernate-mapping>

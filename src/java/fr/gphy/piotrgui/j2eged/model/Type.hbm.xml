@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2 oct. 2013 16:50:55 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="fr.gphy.piotrgui.j2eged.model.Type" table="type" catalog="J2EGED">
+        <id name="idType" type="java.lang.Integer">
+            <column name="id_type" />
+            <generator class="identity" />
+        </id>
+        <property name="mimeType" type="string">
+            <column name="mime_type" length="50" not-null="true" />
+        </property>
+        <property name="fileExtension" type="string">
+            <column name="file_extension" length="10" not-null="true" />
+        </property>
+        <set name="metadatas" inverse="true">
+            <key>
+                <column name="type" not-null="true" />
+            </key>
+            <one-to-many class="fr.gphy.piotrgui.j2eged.model.Metadata" />
+        </set>
+    </class>
+</hibernate-mapping>

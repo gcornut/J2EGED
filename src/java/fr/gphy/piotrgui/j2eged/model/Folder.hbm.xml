@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2 oct. 2013 16:50:55 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="fr.gphy.piotrgui.j2eged.model.Folder" table="folder" catalog="J2EGED">
+        <id name="idFolder" type="java.lang.Integer">
+            <column name="id_folder" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="folder" class="fr.gphy.piotrgui.j2eged.model.Folder" fetch="select">
+            <column name="parent_folder" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="name" length="100" />
+        </property>
+        <set name="metadatas" inverse="true">
+            <key>
+                <column name="folder" not-null="true" />
+            </key>
+            <one-to-many class="fr.gphy.piotrgui.j2eged.model.Metadata" />
+        </set>
+        <set name="folders" inverse="true">
+            <key>
+                <column name="parent_folder" />
+            </key>
+            <one-to-many class="fr.gphy.piotrgui.j2eged.model.Folder" />
+        </set>
+    </class>
+</hibernate-mapping>
