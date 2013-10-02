@@ -17,17 +17,5 @@
         <property name="password" type="string">
             <column name="password" length="20" not-null="true" />
         </property>
-        <set name="versions" inverse="true">
-            <key>
-                <column name="user" not-null="true" />
-            </key>
-            <one-to-many class="fr.gphy.piotrgui.j2eged.model.Version" />
-        </set>
-        <set name="metadatas" inverse="true">
-            <key>
-                <column name="author" not-null="true" />
-            </key>
-            <one-to-many class="fr.gphy.piotrgui.j2eged.model.Metadata" />
-        </set>
     </class>
 </hibernate-mapping>

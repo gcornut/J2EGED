@@ -16,8 +16,7 @@ public class Role  implements java.io.Serializable {
      private int canRead;
      private int canWrite;
      private int canCreate;
-     private Set<User> users = new HashSet<User>(0);
-
+     
     public Role() {
     }
 
@@ -33,7 +32,6 @@ public class Role  implements java.io.Serializable {
        this.canRead = canRead;
        this.canWrite = canWrite;
        this.canCreate = canCreate;
-       this.users = users;
     }
    
     public Integer getIdRole() {
@@ -71,14 +69,6 @@ public class Role  implements java.io.Serializable {
     public void setCanCreate(int canCreate) {
         this.canCreate = canCreate;
     }
-    public Set<User> getUsers() {
-        return this.users;
-    }
-    
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
 
 
 

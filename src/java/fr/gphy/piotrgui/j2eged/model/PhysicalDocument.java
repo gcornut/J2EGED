@@ -13,7 +13,6 @@ public class PhysicalDocument  implements java.io.Serializable {
 
      private Integer idPhysicalDocument;
      private byte[] binaryBlob;
-     private Set<Document> documents = new HashSet<Document>(0);
 
     public PhysicalDocument() {
     }
@@ -24,7 +23,6 @@ public class PhysicalDocument  implements java.io.Serializable {
     }
     public PhysicalDocument(byte[] binaryBlob, Set<Document> documents) {
        this.binaryBlob = binaryBlob;
-       this.documents = documents;
     }
    
     public Integer getIdPhysicalDocument() {
@@ -40,13 +38,6 @@ public class PhysicalDocument  implements java.io.Serializable {
     
     public void setBinaryBlob(byte[] binaryBlob) {
         this.binaryBlob = binaryBlob;
-    }
-    public Set<Document> getDocuments() {
-        return this.documents;
-    }
-    
-    public void setDocuments(Set<Document> documents) {
-        this.documents = documents;
     }
 
 

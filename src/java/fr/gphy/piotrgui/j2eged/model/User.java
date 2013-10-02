@@ -15,8 +15,6 @@ public class User  implements java.io.Serializable {
      private Role role;
      private String login;
      private String password;
-     private Set<Version> versions = new HashSet<Version>(0);
-     private Set<Metadata> metadatas = new HashSet<Metadata>(0);
 
     public User() {
     }
@@ -31,8 +29,6 @@ public class User  implements java.io.Serializable {
        this.role = role;
        this.login = login;
        this.password = password;
-       this.versions = versions;
-       this.metadatas = metadatas;
     }
    
     public Integer getIdUser() {
@@ -63,23 +59,6 @@ public class User  implements java.io.Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    public Set<Version> getVersions() {
-        return this.versions;
-    }
-    
-    public void setVersions(Set<Version> versions) {
-        this.versions = versions;
-    }
-    public Set<Metadata> getMetadatas() {
-        return this.metadatas;
-    }
-    
-    public void setMetadatas(Set<Metadata> metadatas) {
-        this.metadatas = metadatas;
-    }
-
-
-
 
 }
 

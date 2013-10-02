@@ -29,11 +29,5 @@
         <property name="name" type="string">
             <column name="name" length="50" not-null="true" />
         </property>
-        <set name="versions" inverse="true">
-            <key>
-                <column name="meta" not-null="true" />
-            </key>
-            <one-to-many class="fr.gphy.piotrgui.j2eged.model.Version" />
-        </set>
     </class>
 </hibernate-mapping>

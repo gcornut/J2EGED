@@ -14,8 +14,7 @@ public class Type  implements java.io.Serializable {
      private Integer idType;
      private String mimeType;
      private String fileExtension;
-     private Set<Metadata> metadatas = new HashSet<Metadata>(0);
-
+     
     public Type() {
     }
 
@@ -27,7 +26,6 @@ public class Type  implements java.io.Serializable {
     public Type(String mimeType, String fileExtension, Set<Metadata> metadatas) {
        this.mimeType = mimeType;
        this.fileExtension = fileExtension;
-       this.metadatas = metadatas;
     }
    
     public Integer getIdType() {
@@ -51,17 +49,6 @@ public class Type  implements java.io.Serializable {
     public void setFileExtension(String fileExtension) {
         this.fileExtension = fileExtension;
     }
-    public Set<Metadata> getMetadatas() {
-        return this.metadatas;
-    }
-    
-    public void setMetadatas(Set<Metadata> metadatas) {
-        this.metadatas = metadatas;
-    }
-
-
-
-
 }
 
 

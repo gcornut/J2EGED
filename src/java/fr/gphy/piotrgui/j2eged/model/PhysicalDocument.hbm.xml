@@ -11,11 +11,5 @@
         <property name="binaryBlob" type="binary">
             <column name="binary_blob" not-null="true" />
         </property>
-        <set name="documents" inverse="true">
-            <key>
-                <column name="id_doc" not-null="true" unique="true" />
-            </key>
-            <one-to-many class="fr.gphy.piotrgui.j2eged.model.Document" />
-        </set>
     </class>
 </hibernate-mapping>

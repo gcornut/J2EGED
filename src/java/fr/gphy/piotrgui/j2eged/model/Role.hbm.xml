@@ -20,11 +20,5 @@
         <property name="canCreate" type="int">
             <column name="can_create" not-null="true" />
         </property>
-        <set name="users" inverse="true">
-            <key>
-                <column name="role" not-null="true" />
-            </key>
-            <one-to-many class="fr.gphy.piotrgui.j2eged.model.User" />
-        </set>
     </class>
 </hibernate-mapping>
