@@ -6,7 +6,8 @@
 *.ear
 
 # Netbeans
-/J2EGED/nbproject/private/
+nbproject/private/
+build/
 
 # Libs
 !lib/*
