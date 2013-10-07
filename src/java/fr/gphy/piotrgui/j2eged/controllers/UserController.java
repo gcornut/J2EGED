@@ -31,7 +31,7 @@ public class UserController implements Serializable {
     }
 
     public String retour() {
-        return "index";
+        return "login";
     }
 
     public User getUser() {
@@ -43,6 +43,6 @@ public class UserController implements Serializable {
     }
 
     public String checkDB() {
-        return (this.helper.getConnection(user.getLogin(), user.getPassword())) ? "browser" : "index";
+        return (this.helper.getConnection(user.getLogin(), user.getPassword())) ? "browser" : "login";
     }
 }
