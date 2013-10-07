@@ -1,0 +1,51 @@
+/* 
+    Document   : index
+    Created on : 7 oct. 2013, 09:09:42
+    Author     : guillaume
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+#loginForm {
+    width: 500px;
+    height: auto;
+    margin: 100px auto 0 auto;
+    -moz-box-shadow: 0px 0px 10px 0px #656565;
+    -webkit-box-shadow: 0px 0px 10px 0px #656565;
+    -o-box-shadow: 0px 0px 10px 0px #656565;
+    box-shadow: 0px 0px 10px 0px #656565;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=NaN, Strength=10);
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#loginForm > div {
+    border: 0;
+}
+
+#loginForm h1 {
+    text-align: center;
+    margin: 0;
+}
+
+#loginForm img{
+    width: 100px;
+    height: 100px;
+}
+
+#loginForm table {
+    margin: 0 auto;
+}
+
+#loginForm td:last-of-type {
+   text-align: right; 
+}
+
+#loginForm td label {
+    margin-right: 20px;
+}

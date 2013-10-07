@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+            <link type="text/css" rel="stylesheet" href="css/index.css"/>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Login</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+            <h:form id="loginForm">
+                <p:panel>
+                    <h1>
+                        <img src="img/skull.png"/><br/>
+                        GED of Death
+                    </h1>
+                    <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
+                    <h:panelGrid cellspacing="5" id="grid">
+                        <p:row>
+                            <p:column>
+                                <label for="login :login">Login</label>
+                            </p:column>
+                            <p:column>
+                                <p:inputText required="true" id="login" value=""/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <label for="loginForm:password">Password</label>
+                            </p:column>
+                            <p:column>
+                                <p:password required="true"  id="password" value=""/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column colspan="2" >
+                                <p:commandButton id="submitButton" update="grid" value="Connexion" styleClass="ui-priority-primary"/>
+                            </p:column>
+                        </p:row>
+                    </h:panelGrid>
+                </p:panel>
+            </h:form>
+        </h:body>
+
+    </f:view>
+</html>
+
