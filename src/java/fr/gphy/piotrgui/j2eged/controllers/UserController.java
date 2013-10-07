@@ -5,16 +5,10 @@
 package fr.gphy.piotrgui.j2eged.controllers;
 
 import fr.gphy.piotrgui.j2eged.helpers.UserHelper;
-import fr.gphy.piotrgui.j2eged.hibernate.HibernateUtil;
 import fr.gphy.piotrgui.j2eged.model.User;
 import java.io.Serializable;
-import java.math.BigInteger;
-import java.util.Iterator;
-import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import org.hibernate.Query;
-import org.hibernate.Session;
 
 /**
  *
