@@ -1,5 +1,5 @@
 package fr.gphy.piotrgui.j2eged.model;
-// Generated 2 oct. 2013 16:50:55 by Hibernate Tools 3.2.1.GA
+// Generated 7 oct. 2013 11:33:07 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -16,7 +16,8 @@ public class Role  implements java.io.Serializable {
      private int canRead;
      private int canWrite;
      private int canCreate;
-     
+     private Set<User> users = new HashSet<User>(0);
+
     public Role() {
     }
 
@@ -32,6 +33,7 @@ public class Role  implements java.io.Serializable {
        this.canRead = canRead;
        this.canWrite = canWrite;
        this.canCreate = canCreate;
+       this.users = users;
     }
    
     public Integer getIdRole() {
@@ -69,6 +71,14 @@ public class Role  implements java.io.Serializable {
     public void setCanCreate(int canCreate) {
         this.canCreate = canCreate;
     }
+    public Set<User> getUsers() {
+        return this.users;
+    }
+    
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
 
 
 

@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2 oct. 2013 16:50:55 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 7 oct. 2013 11:33:07 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="fr.gphy.piotrgui.j2eged.model.Metadata" table="metadata" catalog="J2EGED">
+    <class name="fr.gphy.piotrgui.j2eged.model.Metadata" table="metadata" catalog="j2eged">
         <id name="idMeta" type="java.lang.Integer">
             <column name="id_meta" />
             <generator class="identity" />
@@ -29,5 +29,11 @@
         <property name="name" type="string">
             <column name="name" length="50" not-null="true" />
         </property>
+        <set name="versions" inverse="true">
+            <key>
+                <column name="meta" not-null="true" />
+            </key>
+            <one-to-many class="fr.gphy.piotrgui.j2eged.model.Version" />
+        </set>
     </class>
 </hibernate-mapping>

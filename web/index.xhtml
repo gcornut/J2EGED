@@ -9,11 +9,29 @@
         <h:head>
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>Login</title>
+                <title>Welcome on GOD</title>
             </f:facet>
         </h:head>
 
         <h:body>
+            
+            
+        <p:growl showDetail="true" sticky="false"/>
+
+        <p:panel header="Enregistrement">
+            <h:form>
+
+                <h:panelGrid columns="2">
+                    <label for="login" >Login:</label>
+                    <p:inputText value="#{UserController.user.login}" required="true" label="login"/>
+                    <label for="password" >Mot de passe:</label>   
+                    <p:inputText value="#{UserController.user.password}" required="true" label="password" type="password"/>
+                </h:panelGrid>
+                <p:commandButton value="Valider" action="#{UserController.checkDB()}" ajax="false" style="margin: 0px auto 0px auto"/>
+            </h:form>
+            
+        </p:panel>
+        
         </h:body>
 
     </f:view>

@@ -7,13 +7,16 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/J2EGED?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">root</property>
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+    <property name="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</property>
+    <mapping resource="fr/gphy/piotrgui/j2eged/model/Version.hbm.xml"/>
     <mapping resource="fr/gphy/piotrgui/j2eged/model/Document.hbm.xml"/>
     <mapping resource="fr/gphy/piotrgui/j2eged/model/Metadata.hbm.xml"/>
-    <mapping resource="fr/gphy/piotrgui/j2eged/model/User.hbm.xml"/>
-    <mapping resource="fr/gphy/piotrgui/j2eged/model/Role.hbm.xml"/>
-    <mapping resource="fr/gphy/piotrgui/j2eged/model/Type.hbm.xml"/>
-    <mapping resource="fr/gphy/piotrgui/j2eged/model/Folder.hbm.xml"/>
-    <mapping resource="fr/gphy/piotrgui/j2eged/model/Version.hbm.xml"/>
     <mapping resource="fr/gphy/piotrgui/j2eged/model/PhysicalDocument.hbm.xml"/>
+    <mapping resource="fr/gphy/piotrgui/j2eged/model/User.hbm.xml"/>
+    <mapping resource="fr/gphy/piotrgui/j2eged/model/Type.hbm.xml"/>
+    <mapping resource="fr/gphy/piotrgui/j2eged/model/Role.hbm.xml"/>
+    <mapping resource="fr/gphy/piotrgui/j2eged/model/Folder.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

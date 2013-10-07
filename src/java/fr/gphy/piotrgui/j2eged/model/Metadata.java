@@ -1,5 +1,5 @@
 package fr.gphy.piotrgui.j2eged.model;
-// Generated 2 oct. 2013 16:50:55 by Hibernate Tools 3.2.1.GA
+// Generated 7 oct. 2013 11:33:07 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -20,6 +20,7 @@ public class Metadata  implements java.io.Serializable {
      private int size;
      private Date dateCreation;
      private String name;
+     private Set<Version> versions = new HashSet<Version>(0);
 
     public Metadata() {
     }
@@ -40,6 +41,7 @@ public class Metadata  implements java.io.Serializable {
        this.size = size;
        this.dateCreation = dateCreation;
        this.name = name;
+       this.versions = versions;
     }
    
     public Integer getIdMeta() {
@@ -98,6 +100,14 @@ public class Metadata  implements java.io.Serializable {
     public void setName(String name) {
         this.name = name;
     }
+    public Set<Version> getVersions() {
+        return this.versions;
+    }
+    
+    public void setVersions(Set<Version> versions) {
+        this.versions = versions;
+    }
+
 
 
 
