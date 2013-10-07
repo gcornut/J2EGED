@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2 oct. 2013 16:50:55 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 7 oct. 2013 11:33:07 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="fr.gphy.piotrgui.j2eged.model.Document" table="document" catalog="J2EGED">
+    <class name="fr.gphy.piotrgui.j2eged.model.Document" table="document" catalog="j2eged">
         <id name="idDoc" type="java.lang.Integer">
             <column name="id_doc" />
             <generator class="identity" />
@@ -11,17 +11,32 @@
         <many-to-one name="documentByDocPost" class="fr.gphy.piotrgui.j2eged.model.Document" fetch="select">
             <column name="doc_post" />
         </many-to-one>
-        <many-to-one name="physicalDocument" class="fr.gphy.piotrgui.j2eged.model.PhysicalDocument" update="false" insert="false" fetch="select">
-            <column name="id_doc" not-null="true" unique="true" />
-        </many-to-one>
         <many-to-one name="documentByDocAnt" class="fr.gphy.piotrgui.j2eged.model.Document" fetch="select">
             <column name="doc_ant" />
         </many-to-one>
+        <set name="documentsForDocAnt" inverse="true">
+            <key>
+                <column name="doc_ant" />
+            </key>
+            <one-to-many class="fr.gphy.piotrgui.j2eged.model.Document" />
+        </set>
+        <set name="documentsForDocPost" inverse="true">
+            <key>
+                <column name="doc_post" />
+            </key>
+            <one-to-many class="fr.gphy.piotrgui.j2eged.model.Document" />
+        </set>
         <set name="versions" inverse="true">
--            <key>
--                <column name="doc" not-null="true" />
--            </key>
--            <one-to-many class="fr.gphy.piotrgui.j2eged.model.Version" />
--       </set>
+            <key>
+                <column name="doc" not-null="true" />
+            </key>
+            <one-to-many class="fr.gphy.piotrgui.j2eged.model.Version" />
+        </set>
+        <set name="physicalDocuments" inverse="true">
+            <key>
+                <column name="id_physical_document" not-null="true" unique="true" />
+            </key>
+            <one-to-many class="fr.gphy.piotrgui.j2eged.model.PhysicalDocument" />
+        </set>
     </class>
 </hibernate-mapping>

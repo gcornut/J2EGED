@@ -29,7 +29,7 @@
                                 <label for="login :login">Login</label>
                             </p:column>
                             <p:column>
-                                <p:inputText required="true" id="login" value=""/>
+                                <p:inputText required="true" id="login" value="#{UserController.user.login}"/>
                             </p:column>
                         </p:row>
                         <p:row>
@@ -37,12 +37,12 @@
                                 <label for="loginForm:password">Password</label>
                             </p:column>
                             <p:column>
-                                <p:password required="true"  id="password" value=""/>
+                                <p:password required="true"  id="password" value="#{UserController.user.password}"/>
                             </p:column>
                         </p:row>
                         <p:row>
                             <p:column colspan="2" >
-                                <p:commandButton id="submitButton" update="grid" value="Connexion" styleClass="ui-priority-primary"/>
+                                <p:commandButton id="submitButton" action="#{UserController.checkDB()}" ajax="false" update="grid" value="Connexion" styleClass="ui-priority-primary"/>
                             </p:column>
                         </p:row>
                     </h:panelGrid>
