@@ -76,6 +76,10 @@
                                     <h:outputText value="#{doc.meta.name}" />  
                                     <span>type : <h:outputText value="#{doc.meta.type.mimeType}" /></span>
                                 </c:if>
+                                <c:if test="#{doc.folder != null}">
+                                    <h:outputText value="#{doc.folder.name}" />  
+                                    <span>type : folder</span>
+                                </c:if>
                             </h:panelGrid>  
                         </p:panel>  
 
