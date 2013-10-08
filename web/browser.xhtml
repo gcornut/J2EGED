@@ -74,15 +74,16 @@
                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
                                 rowsPerPageTemplate="9,12,15">  
 
-                        
-                        <p:panel style="text-align:center">  
-                            <h:panelGrid columns="1" style="width:100%">  
-                               
-                                    <h:outputText value="plop" rendered="#{doc.type}"/>
-                               
-                                
 
-                            </h:panelGrid>  
+                        <p:panel style="text-align:center">  
+                            <h:panelGrid columns="1" style="width:100%" rendered="${doc.doc != null}"> 
+                                <h:outputText value="#{doc.meta.name}" />  
+                                <p:column>type : <h:outputText value="#{doc.meta.type.mimeType}" /></p:column>
+                            </h:panelGrid>
+                            <h:panelGrid columns="1" style="width:100%" rendered="${doc.folder != null}"> 
+                                <h:outputText value="#{doc.folder.name}" />  
+                                <div>type : folder</div>
+                            </h:panelGrid> 
                         </p:panel>  
 
                     </p:dataGrid>  
