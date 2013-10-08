@@ -76,31 +76,27 @@ public class BrowserController implements Serializable {
 
         private Folder folder = null;
         
-        private Integer type;
+        private Boolean type;
         
         public DisplayDoc(Document doc, Metadata meta) {
             this.doc = doc;
             this.meta = meta;
-            this.type = 1;
+            this.type = true;
         }
 
         public DisplayDoc(Folder folder) {
             this.folder = folder;
-            this.type = 2;
+            this.type = false;
         }
 
-        public Integer getType() {
+        public Boolean getType() {
             return type;
         }
 
-        public void setType(Integer type) {
+        public void setType(Boolean type) {
             this.type = type;
         }
-        
-        public Boolean isDoc() {
-            return (type.intValue() == 1);
-        }
-        
+
         
 
         public Folder getFolder() {

@@ -3,7 +3,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <f:view contentType="text/html">
         <h:head>
@@ -73,19 +74,13 @@
                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
                                 rowsPerPageTemplate="9,12,15">  
 
-                        <c:set var="plop" value="${doc.isDoc}"></c:set>
+                        
                         <p:panel style="text-align:center">  
                             <h:panelGrid columns="1" style="width:100%">  
-                                <c:if test="${plop}" >
-                                    <h:outputText value="#{doc.meta.name}" />  
-                                    <span>type : <h:outputText value="#{doc.meta.type.mimeType}" /></span>
-                                </c:if>
-                                <c:if test="! ${plop}">
-
-                                    <h:outputText value="#{doc.folder.name}" />
-                                    <h:outputText value="${doc.isDoc()}" />  
-                                    <span>type : folder</span>
-                                </c:if>
+                               
+                                    <h:outputText value="plop" rendered="#{doc.type}"/>
+                               
+                                
 
                             </h:panelGrid>  
                         </p:panel>  
