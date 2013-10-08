@@ -3,7 +3,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <f:view contentType="text/html">
         <h:head>
@@ -72,9 +72,10 @@
 
                         <p:panel style="text-align:center">  
                             <h:panelGrid columns="1" style="width:100%">  
-           
-                                <h:outputText value="#{doc.meta.name}" />  
-                                type : <h:outputText value="#{doc.meta.type.mimeType}" />
+                                <c:if test="#{doc.doc != null}">
+                                    <h:outputText value="#{doc.meta.name}" />  
+                                    <span>type : <h:outputText value="#{doc.meta.type.mimeType}" /></span>
+                                </c:if>
                             </h:panelGrid>  
                         </p:panel>  
 
