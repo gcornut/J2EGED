@@ -1,0 +1,62 @@
+/* 
+    Document   : browser
+    Created on : 7 oct. 2013, 12:33:33
+    Author     : guillaume
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+.ui-button-text {
+    padding: inherit;
+}
+
+body{
+    font-size: 12px !important;
+}
+
+.ui-layout-north {
+    padding: 0px 3px 0px 3px !important;
+    border: 0px !important;
+}
+
+.ui-splitbutton button:last-of-type {
+    border-left: 0px;
+}
+
+.button-group.ui-splitbutton {
+    margin-left: 3px;
+    margin-right: 7px;
+}
+
+.ui-icon-list {
+    background-image: url("../img/icon.png") !important;
+    background-position: -263px 0 !important;
+}
+
+.ui-icon-th-large {
+    background-image: url("../img/icon.png") !important;
+    background-position: -215px 0 !important;
+}
+
+.ui-icon-backward {
+    background-image: url("../img/icon.png") !important;
+    background-position: -431px -72px !important;
+}
+
+.ui-icon-forward {
+    background-image: url("../img/icon.png") !important;
+    background-position: -455px -72px !important;
+}
+
+.ui-icon-user {
+    background-image: url("../img/icon.png") !important;
+    background-position: -167px 0 !important;
+}
+
+.ui-toolbar-group-right input {
+    margin-right: 10px;
+}
