@@ -8,6 +8,7 @@
     <f:view contentType="text/html">
         <h:head>
             <f:facet name="first">
+                <link type="text/css" rel="stylesheet" href="css/browser.css"/>
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
                 <title>Browser</title>
             </f:facet>
@@ -17,14 +18,31 @@
 
             <p:layout fullPage="true">
 
-                <p:layoutUnit position="north" size="50" resizable="false" closable="false" collapsible="false">
-                    <p:toolbar>
-                        <p:toolbarGroup align="left">
-                            <p:splitButton>
+                <p:layoutUnit position="north" size="46" resizable="false" closable="false" collapsible="false">
+                    <h:form>
+                        <p:toolbar>
+                            <p:toolbarGroup align="left">
+                                <span class="button-group ui-widget ui-splitbutton ui-buttonset">
+                                    <p:commandButton styleClass="ui-corner-left" type="button" title="Backward" icon="ui-icon-backward"/>  
+                                    <p:commandButton styleClass="ui-corner-right" type="button" title="Forward" icon="ui-icon-forward"/> 
+                                </span>
+                                <p:separator/>
+                                <span class="button-group ui-widget ui-splitbutton ui-buttonset">
+                                    <p:commandButton styleClass="ui-corner-left" type="button" title="Icon View" icon="ui-icon-th-large"/>  
+                                    <p:commandButton styleClass="ui-corner-right" type="button" title="List View" icon="ui-icon-list"/> 
+                                </span>
+                                <p:separator/> 
+                            </p:toolbarGroup>
+                            <p:toolbarGroup align="right">
+                                <p:inputText id="search" value="" label="Search" />  
+                                <p:watermark for="search" value="Search a file" />
                                 
-                            </p:splitButton>
-                        </p:toolbarGroup>
-                    </p:toolbar>
+                                <p:splitButton value="#{UserController.user.login}" icon="ui-icon-user">
+                                    <p:menuitem value="Logout" icon="ui-icon-closethick"/>
+                                </p:splitButton>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+                    </h:form>
                 </p:layoutUnit>
 
                 <p:layoutUnit position="south" size="100" closable="true" collapsible="true" resizable="true">
@@ -45,7 +63,7 @@
                 </p:layoutUnit>
 
                 <p:layoutUnit position="center">
-                    Welcome to PrimeFaces
+                   
                 </p:layoutUnit>
 
             </p:layout>
@@ -54,4 +72,3 @@
 
     </f:view>
 </html>
-
