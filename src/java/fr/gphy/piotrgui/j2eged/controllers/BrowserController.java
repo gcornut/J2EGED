@@ -6,6 +6,7 @@ package fr.gphy.piotrgui.j2eged.controllers;
 
 import fr.gphy.piotrgui.j2eged.helpers.BrowserHelper;
 import fr.gphy.piotrgui.j2eged.model.Document;
+import fr.gphy.piotrgui.j2eged.model.Folder;
 import fr.gphy.piotrgui.j2eged.model.Metadata;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import javax.inject.Named;
 public class BrowserController implements Serializable {
 
     private List<Object[]> data;
+    private List<Folder> folders;
     private List<DisplayDoc> toDisplay = new ArrayList<>();
     private BrowserHelper helper = new BrowserHelper();
 
@@ -43,12 +45,17 @@ public class BrowserController implements Serializable {
 
     public void loadDocument() {
         this.data = this.helper.getRootDocuments();
+        this.folders = this.helper.getFolder(1);
         this.loadToDisplay();
     }
 
     public void loadToDisplay() {
         for (Object[] row : this.data) {
             this.toDisplay.add(new DisplayDoc((Document) row[0], (Metadata) row[1]));
+        }
+        
+        for (Folder fold : this.folders) {
+            this.toDisplay.add(new DisplayDoc(fold));
         }
     }
 
@@ -57,14 +64,28 @@ public class BrowserController implements Serializable {
     
     public class DisplayDoc {
 
-        private Document doc;
-        private Metadata meta;
+        private Document doc = null;
+        private Metadata meta = null;
 
+        private Folder folder = null;
+        
         public DisplayDoc(Document doc, Metadata meta) {
             this.doc = doc;
             this.meta = meta;
         }
 
+        public DisplayDoc(Folder folder) {
+            this.folder = folder;
+        }
+
+        public Folder getFolder() {
+            return folder;
+        }
+
+        public void setFolder(Folder folder) {
+            this.folder = folder;
+        }
+        
         public Document getDoc() {
             return doc;
         }
