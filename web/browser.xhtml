@@ -15,7 +15,9 @@
         </h:head>
 
         <h:body>
- <p:growl showDetail="true" sticky="false"/>
+            <f:event listener="#{BrowserController.loadDocument()}" type="preRenderView" />
+
+            <p:growl showDetail="true" sticky="false"/>
             <p:layout fullPage="true">
 
                 <p:layoutUnit position="north" size="46" resizable="false" closable="false" collapsible="false">
@@ -63,7 +65,20 @@
                 </p:layoutUnit>
 
                 <p:layoutUnit position="center">
-                   
+                    <p:dataGrid var="doc" value="#{BrowserController.toDisplay}" columns="3"  
+                        rows="12" paginator="true"  
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                        rowsPerPageTemplate="9,12,15">  
+
+                        <p:panel style="text-align:center">  
+                            <h:panelGrid columns="1" style="width:100%">  
+           
+                                <h:outputText value="#{doc.meta.name}" />  
+                                type : <h:outputText value="#{doc.meta.type.mimeType}" />
+                            </h:panelGrid>  
+                        </p:panel>  
+
+                    </p:dataGrid>  
                 </p:layoutUnit>
 
             </p:layout>

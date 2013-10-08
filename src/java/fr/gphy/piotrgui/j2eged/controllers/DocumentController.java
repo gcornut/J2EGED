@@ -27,6 +27,8 @@ public class DocumentController implements Serializable {
         this.helper = new DocumentHelper();
     }
 
+    
+    
     public Document getDoc() {
         return doc;
     }
