@@ -6,6 +6,7 @@ package fr.gphy.piotrgui.j2eged.helpers;
 
 import fr.gphy.piotrgui.j2eged.hibernate.HibernateUtil;
 import fr.gphy.piotrgui.j2eged.model.Document;
+import fr.gphy.piotrgui.j2eged.model.Folder;
 import fr.gphy.piotrgui.j2eged.model.Metadata;
 import java.util.List;
 import org.hibernate.Query;
@@ -37,6 +38,21 @@ public class BrowserHelper {
                     .addEntity(Metadata.class);
 
             return query.list();
+
+        } catch (Exception e) {
+            throw e;
+        }
+
+    }
+    
+    public List<Folder> getFolder(int clef) {
+        session.beginTransaction();
+
+        try {
+            Query query = session.createSQLQuery("select * from folder where parent_folder = '" + Integer.toString(clef) + "'")
+                    .addEntity(Folder.class);
+
+            return (List<Folder>) query.list();
 
         } catch (Exception e) {
             throw e;
