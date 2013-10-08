@@ -17,7 +17,10 @@
         <h:body>
             <f:event listener="#{BrowserController.loadDocument()}" type="preRenderView" />
 
+            <!--
             <p:growl showDetail="true" sticky="false"/>
+            -->
+
             <p:layout fullPage="true">
 
                 <p:layoutUnit position="north" size="46" resizable="false" closable="false" collapsible="false">
@@ -38,7 +41,7 @@
                             <p:toolbarGroup align="right">
                                 <p:inputText id="search" value="" label="Search" />  
                                 <p:watermark for="search" value="Search a file" />
-                                
+
                                 <p:splitButton value="#{UserController.user.login}" icon="ui-icon-user">
                                     <p:menuitem value="Logout" icon="ui-icon-closethick"/>
                                 </p:splitButton>
@@ -66,20 +69,24 @@
 
                 <p:layoutUnit position="center">
                     <p:dataGrid var="doc" value="#{BrowserController.toDisplay}" columns="3"  
-                        rows="12" paginator="true"  
-                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
-                        rowsPerPageTemplate="9,12,15">  
+                                rows="12" paginator="true"  
+                                paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                rowsPerPageTemplate="9,12,15">  
 
+                        <c:set var="plop" value="${doc.isDoc}"></c:set>
                         <p:panel style="text-align:center">  
                             <h:panelGrid columns="1" style="width:100%">  
-                                <c:if test="#{doc.doc != null}">
+                                <c:if test="${plop}" >
                                     <h:outputText value="#{doc.meta.name}" />  
                                     <span>type : <h:outputText value="#{doc.meta.type.mimeType}" /></span>
                                 </c:if>
-                                <c:if test="#{doc.folder != null}">
-                                    <h:outputText value="#{doc.folder.name}" />  
+                                <c:if test="! ${plop}">
+
+                                    <h:outputText value="#{doc.folder.name}" />
+                                    <h:outputText value="${doc.isDoc()}" />  
                                     <span>type : folder</span>
                                 </c:if>
+
                             </h:panelGrid>  
                         </p:panel>  
 

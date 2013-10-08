@@ -42,8 +42,15 @@ public class BrowserController implements Serializable {
     public void setToDisplay(List<DisplayDoc> toDisplay) {
         this.toDisplay = toDisplay;
     }
+    
+    public void clear() {
+        this.toDisplay = new ArrayList<>();
+    }
 
     public void loadDocument() {
+        this.clear();
+        
+        
         this.data = this.helper.getRootDocuments();
         this.folders = this.helper.getFolder(1);
         this.loadToDisplay();
@@ -69,14 +76,32 @@ public class BrowserController implements Serializable {
 
         private Folder folder = null;
         
+        private Integer type;
+        
         public DisplayDoc(Document doc, Metadata meta) {
             this.doc = doc;
             this.meta = meta;
+            this.type = 1;
         }
 
         public DisplayDoc(Folder folder) {
             this.folder = folder;
+            this.type = 2;
         }
+
+        public Integer getType() {
+            return type;
+        }
+
+        public void setType(Integer type) {
+            this.type = type;
+        }
+        
+        public Boolean isDoc() {
+            return (type.intValue() == 1);
+        }
+        
+        
 
         public Folder getFolder() {
             return folder;
