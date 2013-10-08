@@ -76,28 +76,14 @@ public class BrowserController implements Serializable {
 
         private Folder folder = null;
         
-        private Boolean type;
-        
         public DisplayDoc(Document doc, Metadata meta) {
             this.doc = doc;
             this.meta = meta;
-            this.type = true;
         }
 
         public DisplayDoc(Folder folder) {
             this.folder = folder;
-            this.type = false;
         }
-
-        public Boolean getType() {
-            return type;
-        }
-
-        public void setType(Boolean type) {
-            this.type = type;
-        }
-
-        
 
         public Folder getFolder() {
             return folder;
@@ -113,6 +99,10 @@ public class BrowserController implements Serializable {
 
         public Metadata getMeta() {
             return meta;
+        }
+        
+        public Boolean isFolder() {
+            return (this.folder != null);
         }
     }
 }
