@@ -51,8 +51,8 @@ public class BrowserController implements Serializable {
         this.clear();
         
         
-        this.data = this.helper.getRootDocuments();
-        this.folders = this.helper.getFolder(1);
+        this.data = this.helper.getDocuments(null);
+        this.folders = this.helper.getFolders(1);
         this.loadToDisplay();
     }
 
