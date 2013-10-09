@@ -14,13 +14,22 @@ root {
     padding: inherit;
 }
 
-body{
-    font-size: 12px !important;
+.ui-layout {
+    padding: 0 !important;
 }
 
 .ui-layout-north {
-    padding: 0px 3px 0px 3px !important;
+    padding: 0 !important;
     border: 0px !important;
+}
+
+.ui-layout-resizer-closed {
+    border: 0 !important;
+}
+
+body {
+    padding: 10px;   
+    font-size: 12px !important;
 }
 
 .ui-splitbutton button:last-of-type {
@@ -57,6 +66,24 @@ body{
     background-position: -167px 0 !important;
 }
 
+.ui-icon-upload {
+    background-image: url("../img/icon.png") !important;
+    background-position: -287px -144px;
+}
+
+.ui-icon-download {
+    background-image: url("../img/icon.png") !important;
+    background-position: -311px -144px !important;
+}
+
 .ui-toolbar-group-right input {
     margin-right: 10px;
+}
+
+#javax_faces_developmentstage_messages {
+    display: none;
+}
+
+.ui-layout-south #terminal {
+    border: 0 !important;
 }

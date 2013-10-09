@@ -18,10 +18,19 @@
         <h:body>
             <f:event listener="#{BrowserController.loadDocument()}" type="preRenderView" />
 
-            <!--
             <p:growl showDetail="true" sticky="false"/>
-            -->
+            
+            <p:dialog header="Upload file" widgetVar="dlg" resizable="false" >  
+                <h:form id="form">  
 
+                    <p:fileUpload fileUploadListener="null" mode="advanced" dragDropSupport="false"  
+                  update="messages" sizeLimit="100000" />  
+  
+                    <p:commandButton id="submitButton" value="Submit" update=":display" oncomplete="PF('dlg').hide();"/>  
+
+                </h:form>  
+            </p:dialog> 
+            
             <p:layout fullPage="true">
 
                 <p:layoutUnit position="north" size="46" resizable="false" closable="false" collapsible="false">
@@ -38,6 +47,10 @@
                                     <p:commandButton styleClass="ui-corner-right" type="button" title="List View" icon="ui-icon-list"/> 
                                 </span>
                                 <p:separator/> 
+                                <span class="button-group ui-widget ui-splitbutton ui-buttonset">
+                                    <p:commandButton styleClass="ui-corner-left" type="button" title="Upload" icon="ui-icon-upload"/>  
+                                    <p:commandButton styleClass="ui-corner-right" type="button" title="Download" icon="ui-icon-download"/> 
+                                </span>
                             </p:toolbarGroup>
                             <p:toolbarGroup align="right">
                                 <p:inputText id="search" value="" label="Search" />  
@@ -51,10 +64,12 @@
                     </h:form>
                 </p:layoutUnit>
 
-                <p:layoutUnit position="south" size="100" closable="true" collapsible="true" resizable="true">
-                    Footer
+                <p:layoutUnit header="Terminal" position="south" size="100" minSize="100" closable="true" collapsible="true" resizable="true" collapsed="true">
+                    <p:terminal id="terminal" widgetVar="term" commandHandler="#{terminalController.handleCommand}" prompt="$"
+                                welcomeMessage="Welcome to GED of Death Terminal!" />    
                 </p:layoutUnit>
 
+                <!--
                 <p:layoutUnit position="west" size="175" header="Left" collapsible="true" closable="false">
                     <p:menu>
                         <p:submenu label="Resources">
@@ -67,6 +82,7 @@
 
                     </p:menu>
                 </p:layoutUnit>
+                -->
 
                 <p:layoutUnit position="center">
                     <p:dataGrid var="doc" value="#{BrowserController.toDisplay}" columns="3"  
@@ -76,11 +92,11 @@
 
 
                         <p:panel style="text-align:center">  
-                            <h:panelGrid columns="1" style="width:100%" rendered="${doc.doc != null}"> 
+                            <h:panelGrid columns="1" style="width:100%" rendered="${!doc.isFolder()}"> 
                                 <h:outputText value="#{doc.meta.name}" />  
                                 <p:column>type : <h:outputText value="#{doc.meta.type.mimeType}" /></p:column>
                             </h:panelGrid>
-                            <h:panelGrid columns="1" style="width:100%" rendered="${doc.folder != null}"> 
+                            <h:panelGrid columns="1" style="width:100%" rendered="${doc.isFolder()}"> 
                                 <h:outputText value="#{doc.folder.name}" />  
                                 <div>type : folder</div>
                             </h:panelGrid> 
