@@ -20,13 +20,13 @@
 
             <p:growl showDetail="true" sticky="false"/>
             
-            <p:dialog header="Upload file" widgetVar="dlg" resizable="false" >  
+            <p:dialog header="Upload file" id="dialogUpload" widgetVar="dlg" resizable="false" >  
                 <h:form id="form">  
 
-                    <p:fileUpload fileUploadListener="null" mode="advanced" dragDropSupport="false"  
-                  update="messages" sizeLimit="100000" />  
+                    <p:fileUpload fileUploadListener="#{BrowserController.uploadListener}" cancelLabel="#{msg['cancel']}" mode="advanced" dragDropSupport="false"  
+                    sizeLimit="100000" />  
   
-                    <p:commandButton id="submitButton" value="Submit" update=":display" oncomplete="PF('dlg').hide();"/>  
+                    <p:commandButton id="submitButton" value="Submit"  oncomplete="PF('dlg').hide();"/>  
 
                 </h:form>  
             </p:dialog> 
@@ -43,12 +43,12 @@
                                 </span>
                                 <p:separator/>
                                 <span class="button-group ui-widget ui-splitbutton ui-buttonset">
-                                    <p:commandButton styleClass="ui-corner-left" type="button" title="Icon View" icon="ui-icon-th-large"/>  
+                                    <p:commandButton styleClass="ui-corner-left" type="button" title="Icon View" icon="ui-icon-th-large" />  
                                     <p:commandButton styleClass="ui-corner-right" type="button" title="List View" icon="ui-icon-list"/> 
                                 </span>
                                 <p:separator/> 
                                 <span class="button-group ui-widget ui-splitbutton ui-buttonset">
-                                    <p:commandButton styleClass="ui-corner-left" type="button" title="Upload" icon="ui-icon-upload"/>  
+                                    <p:commandButton styleClass="ui-corner-left" type="button" title="Upload" icon="ui-icon-upload"  action="#{Bean.test}"/>  
                                     <p:commandButton styleClass="ui-corner-right" type="button" title="Download" icon="ui-icon-download"/> 
                                 </span>
                             </p:toolbarGroup>
