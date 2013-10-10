@@ -8,17 +8,18 @@ import fr.gphy.piotrgui.j2eged.helpers.BrowserHelper;
 import fr.gphy.piotrgui.j2eged.model.Document;
 import fr.gphy.piotrgui.j2eged.model.Folder;
 import fr.gphy.piotrgui.j2eged.model.Metadata;
+import javax.faces.event.ActionEvent;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
+import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ManagedBean;
 
 /**
  *
  * @author Piotr
  */
-@Named("BrowserController")
+@ManagedBean(name="BrowserController")
 @SessionScoped
 public class BrowserController implements Serializable {
 
@@ -26,6 +27,7 @@ public class BrowserController implements Serializable {
     private List<Folder> folders;
     private List<DisplayDoc> toDisplay = new ArrayList<>();
     private BrowserHelper helper = new BrowserHelper();
+    private Folder currenFolder = null;
 
     public List<Object[]> getData() {
         return data;
@@ -50,7 +52,6 @@ public class BrowserController implements Serializable {
     public void loadDocument() {
         this.clear();
         
-        
         this.data = this.helper.getDocuments(null);
         this.folders = this.helper.getFolders(1);
         this.loadToDisplay();
@@ -66,7 +67,10 @@ public class BrowserController implements Serializable {
         }
     }
 
-    
+    public void clickOnFolder(ActionEvent event) {
+        System.err.println("TOTO");
+        System.err.println(event.getSource());
+    }
     
     
     public class DisplayDoc {
