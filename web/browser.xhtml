@@ -19,18 +19,18 @@
             <f:event listener="#{BrowserController.loadDocument()}" type="preRenderView" />
 
             <p:growl showDetail="true" sticky="false"/>
-            
+
             <p:dialog header="Upload file" widgetVar="dlg" resizable="false" >  
                 <h:form id="form">  
 
                     <p:fileUpload fileUploadListener="null" mode="advanced" dragDropSupport="false"  
-                  update="messages" sizeLimit="100000" />  
-  
-                    <p:commandButton id="submitButton" value="Submit" update=":display" oncomplete="PF('dlg').hide();"/>  
+                                   sizeLimit="100000" />  
+
+                    <p:commandButton id="submitButton" value="Submit"  oncomplete="PF('dlg').hide();"/>  
 
                 </h:form>  
             </p:dialog> 
-            
+
             <p:layout fullPage="true">
 
                 <p:layoutUnit position="north" size="46" resizable="false" closable="false" collapsible="false">
@@ -84,22 +84,26 @@
                 </p:layoutUnit>
                 -->
 
-                <p:layoutUnit position="center">
+                <p:layoutUnit position="center" id="browserView">
                     <p:dataGrid var="doc" value="#{BrowserController.toDisplay}" columns="3"  
                                 rows="12" paginator="true"  
                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
                                 rowsPerPageTemplate="9,12,15">  
 
-
-                        <p:panel style="text-align:center">  
-                            <h:panelGrid columns="1" style="width:100%" rendered="${!doc.isFolder()}"> 
+                        <p:panel style="text-align:center">
+                            <h:panelGrid columns="1" style="width:100%" rendered="${!doc.isFolder()}" > 
                                 <h:outputText value="#{doc.meta.name}" />  
                                 <p:column>type : <h:outputText value="#{doc.meta.type.mimeType}" /></p:column>
                             </h:panelGrid>
-                            <h:panelGrid columns="1" style="width:100%" rendered="${doc.isFolder()}"> 
-                                <h:outputText value="#{doc.folder.name}" />  
-                                <div>type : folder</div>
-                            </h:panelGrid> 
+
+                            <h:panelGrid columns="1" style="width:100%" rendered="${doc.isFolder()}">
+                                <h:form id="formFolder">
+                                    <p:commandLink actionListener="#{BrowserController.clickOnFolder}">
+                                        <h:outputText value="#{doc.folder.name}" />
+                                    </p:commandLink>
+                                    <div>type : folder</div>
+                                </h:form>
+                            </h:panelGrid>
                         </p:panel>  
 
                     </p:dataGrid>  
