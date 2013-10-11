@@ -20,14 +20,13 @@
 
             <p:growl showDetail="true" sticky="false"/>
             
-            <p:dialog header="Upload file" id="dialogUpload" widgetVar="dlg" resizable="false" >  
+            <p:dialog header="Upload file" modal="true" id="dialogUpload" widgetVar="dlg" resizable="false" width="700px">  
                 <h:form id="form">  
 
-                    <p:fileUpload fileUploadListener="#{BrowserController.uploadListener}" cancelLabel="#{msg['cancel']}" mode="advanced" dragDropSupport="false"  
-                    sizeLimit="100000" />  
+                    <p:fileUpload fileUploadListener="#{BrowserController.uploadListener}" 
+                                  mode="advanced" dragDropSupport="false"  
+                                  sizeLimit="100000" />  
   
-                    <p:commandButton id="submitButton" value="Submit"  oncomplete="PF('dlg').hide();"/>  
-
                 </h:form>  
             </p:dialog> 
 
