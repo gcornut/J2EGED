@@ -32,9 +32,21 @@ root {
     border-radius: 5px;
 }
 
+.ui-layout-center .ui-breadcrumb {
+    border-radius: 0px;
+    border: 0;
+}
+
 .ui-layout-center #browserView_content {
     border-right: 0px !important;
     border-left: 0px !important;
+    border-bottom: 0px !important;
+    bottom: 0;
+    top: 29px;
+    position: absolute;
+    right: 0;
+    left: 0;
+    overflow-y: scroll;
 }
 
 .ui-layout-resizer-closed {
