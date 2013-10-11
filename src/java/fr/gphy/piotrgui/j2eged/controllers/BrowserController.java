@@ -68,6 +68,10 @@ public class BrowserController implements Serializable {
         System.err.println(event.getSource());
     }
     
+    public void clickOnUpload(ActionEvent event) {
+        System.err.println("Upload");
+    }
+    
     
     public class DisplayDoc {
 
