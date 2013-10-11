@@ -84,10 +84,13 @@
                 -->
 
                 <p:layoutUnit position="center" >
-                    <p:dataGrid id="browserView" var="doc" value="#{BrowserController.toDisplay}" columns="3"  
-                                rows="12" paginator="true"  
-                                paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
-                                rowsPerPageTemplate="9,12,15">  
+                    <h:form id="formBreadcrumb">
+                        <p:breadCrumb>  
+                            <p:menuitem value="Root" url="#" />
+                        </p:breadCrumb>
+                    </h:form> 
+                    <p:dataGrid id="browserView" var="doc" value="#{BrowserController.toDisplay}" 
+                                columns="5">  
 
                         <p:panel style="text-align:center">
                             <h:panelGrid columns="1" style="width:100%" rendered="${!doc.isFolder()}" > 

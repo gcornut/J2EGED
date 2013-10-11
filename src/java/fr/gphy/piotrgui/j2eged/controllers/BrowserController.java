@@ -69,16 +69,15 @@ public class BrowserController implements Serializable {
         
         this.clear();
         
-        this.currenFolder = null;
+        this.currenFolder = newFolder;
         this.data = this.helper.getDocuments(idFolder);
-        this.folders = this.helper.getFolders(1);
+        this.folders = this.helper.getFolders(idFolder);
+        
         this.loadToDisplay();
     }
 
     public void clickOnFolder(ActionEvent event) {
         int idDestFolder = Integer.valueOf(((HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest()).getParameter("idFolder"));
-        /*CommandLink actionLink = (CommandLink) event.getSource();
-        int idDestFolder = (Integer) actionLink.getValue();*/
         this.clear();
         
         //Get the future folder

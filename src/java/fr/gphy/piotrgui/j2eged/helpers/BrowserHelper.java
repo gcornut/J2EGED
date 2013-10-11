@@ -55,11 +55,16 @@ public class BrowserHelper implements Serializable {
     }
     
     
-    public List<Folder> getFolders(int clef) {
+    public List<Folder> getFolders(Integer clef) {
         session.beginTransaction();
 
         try {
-            Query query = session.createSQLQuery("select * from folder where parent_folder = '" + Integer.toString(clef) + "'")
+            String sql = "select * from folder where parent_folder";
+            if(clef != null) 
+                sql += "= " + clef + ";";
+            else 
+                sql += " is null;";
+            Query query = session.createSQLQuery(sql)
                     .addEntity(Folder.class);
 
             return (List<Folder>) query.list();
