@@ -8,8 +8,8 @@ import fr.gphy.piotrgui.j2eged.hibernate.HibernateUtil;
 import fr.gphy.piotrgui.j2eged.model.Document;
 import fr.gphy.piotrgui.j2eged.model.Folder;
 import fr.gphy.piotrgui.j2eged.model.Metadata;
+import java.io.Serializable;
 import java.util.List;
-import javax.servlet.http.Part;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -17,7 +17,7 @@ import org.hibernate.Session;
  *
  * @author Piotr
  */
-public class BrowserHelper {
+public class BrowserHelper implements Serializable {
 
     Session session = null;
 

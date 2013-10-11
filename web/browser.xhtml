@@ -84,8 +84,8 @@
                 </p:layoutUnit>
                 -->
 
-                <p:layoutUnit position="center" id="browserView">
-                    <p:dataGrid var="doc" value="#{BrowserController.toDisplay}" columns="3"  
+                <p:layoutUnit position="center" >
+                    <p:dataGrid id="browserView" var="doc" value="#{BrowserController.toDisplay}" columns="3"  
                                 rows="12" paginator="true"  
                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
                                 rowsPerPageTemplate="9,12,15">  
@@ -98,8 +98,8 @@
 
                             <h:panelGrid columns="1" style="width:100%" rendered="${doc.isFolder()}">
                                 <h:form id="formFolder">
-                                    <p:commandLink actionListener="#{BrowserController.clickOnFolder}">
-                                        <h:outputText value="#{doc.folder.name}" />
+                                    <p:commandLink actionListener="#{BrowserController.clickOnFolder}" update=":browserView" value="#{doc.folder.name}">
+                                        <f:param name="idFolder" value="#{doc.folder.idFolder}"/>
                                     </p:commandLink>
                                     <div>type : folder</div>
                                 </h:form>

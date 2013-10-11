@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -50,11 +52,7 @@ public class BrowserController implements Serializable {
     }
 
     public void loadDocument() {
-        this.clear();
-        
-        this.data = this.helper.getDocuments(null);
-        this.folders = this.helper.getFolders(1);
-        this.loadToDisplay();
+        changeFolder(null);
     }
 
     public void loadToDisplay() {
@@ -66,10 +64,36 @@ public class BrowserController implements Serializable {
             this.toDisplay.add(new DisplayDoc(fold));
         }
     }
+    
+    public void changeFolder(Folder newFolder) {
+        Integer idFolder = null;
+        if(newFolder != null) {
+            idFolder = newFolder.getIdFolder();
+        }
+        
+        this.clear();
+        
+        this.currenFolder = null;
+        this.data = this.helper.getDocuments(idFolder);
+        this.folders = this.helper.getFolders(1);
+        this.loadToDisplay();
+    }
 
     public void clickOnFolder(ActionEvent event) {
-        System.err.println("TOTO");
-        System.err.println(event.getSource());
+        int idDestFolder = Integer.valueOf(((HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest()).getParameter("idFolder"));
+        /*CommandLink actionLink = (CommandLink) event.getSource();
+        int idDestFolder = (Integer) actionLink.getValue();*/
+        this.clear();
+        
+        //Get the future folder
+        for(Folder f: folders) {
+            if(f.getIdFolder() == idDestFolder){
+                this.currenFolder = f;
+                break;
+            }
+        }
+        System.err.println(this.currenFolder);
+        changeFolder(this.currenFolder);
     }
     
     
