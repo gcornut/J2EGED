@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 7 oct. 2013 11:33:07 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 11 oct. 2013 16:39:57 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="fr.gphy.piotrgui.j2eged.model.PhysicalDocument" table="physical_document" catalog="j2eged">
         <id name="idPhysicalDocument" type="java.lang.Integer">
             <column name="id_physical_document" />
             <generator class="identity" />
         </id>
-        <many-to-one name="document" class="fr.gphy.piotrgui.j2eged.model.Document" update="false" insert="false" fetch="select">
-            <column name="id_physical_document" not-null="true" unique="true" />
+        <many-to-one name="document" class="fr.gphy.piotrgui.j2eged.model.Document" fetch="select">
+            <column name="id_doc" not-null="true" />
         </many-to-one>
         <property name="binaryBlob" type="binary">
             <column name="binary_blob" not-null="true" />
