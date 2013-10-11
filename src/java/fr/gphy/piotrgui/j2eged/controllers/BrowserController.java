@@ -132,5 +132,6 @@ public class BrowserController implements Serializable {
         public Boolean isFolder() {
             return (this.folder != null);
         }
+        
     }
 }
