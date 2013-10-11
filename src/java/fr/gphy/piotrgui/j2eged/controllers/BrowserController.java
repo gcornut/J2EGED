@@ -10,9 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 
 /**
- *
+ * 
  * @author Piotr
  */
 @ManagedBean(name="BrowserController")
@@ -68,7 +69,7 @@ public class BrowserController implements Serializable {
         System.err.println(event.getSource());
     }
     
-    public void clickOnUpload(ActionEvent event) {
+    public void clickOnUpload() {
         System.err.println("Upload");
     }
     
