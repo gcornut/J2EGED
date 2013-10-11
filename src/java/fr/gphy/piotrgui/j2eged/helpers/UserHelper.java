@@ -5,11 +5,7 @@
 package fr.gphy.piotrgui.j2eged.helpers;
 
 import fr.gphy.piotrgui.j2eged.hibernate.HibernateUtil;
-import fr.gphy.piotrgui.j2eged.model.Document;
-import fr.gphy.piotrgui.j2eged.model.Metadata;
-import fr.gphy.piotrgui.j2eged.model.User;
-import java.math.BigInteger;
-import java.util.List;
+import java.io.Serializable;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -17,7 +13,7 @@ import org.hibernate.Session;
  *
  * @author Piotr
  */
-public class UserHelper {
+public class UserHelper implements Serializable {
 
     Session session = null;
 
