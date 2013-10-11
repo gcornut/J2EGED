@@ -23,6 +23,20 @@ root {
     border: 0px !important;
 }
 
+.ui-layout-center {
+    padding: 0 !important;
+}
+
+.ui-layout-center > * {
+    padding: 0 !important;
+    border-radius: 5px;
+}
+
+.ui-layout-center #browserView_content {
+    border-right: 0px !important;
+    border-left: 0px !important;
+}
+
 .ui-layout-resizer-closed {
     border: 0 !important;
 }
