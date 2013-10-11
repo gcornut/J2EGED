@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package fr.gphy.piotrgui.j2eged.controllers;
 
 import fr.gphy.piotrgui.j2eged.helpers.BrowserHelper;
@@ -94,6 +90,10 @@ public class BrowserController implements Serializable {
         }
         System.err.println(this.currenFolder);
         changeFolder(this.currenFolder);
+    }
+    
+    public void clickOnUpload(ActionEvent event) {
+        System.err.println("Upload");
     }
     
     
