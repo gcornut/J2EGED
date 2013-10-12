@@ -79,4 +79,23 @@ public class BrowserHelper implements Serializable {
         }
 
     }
+    
+    public Folder getFolder(Integer clef) {
+        session.beginTransaction();
+
+        try {
+            String sql = "select * from folder where id_folder";
+            if(clef != null) 
+                sql += "= " + clef + ";";
+            else 
+                sql += " is null;";
+            Query query = session.createSQLQuery(sql)
+                    .addEntity(Folder.class);
+
+            return ((List<Folder>) query.list()).get(0);
+
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 }

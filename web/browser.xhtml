@@ -25,7 +25,7 @@
 
                     <p:fileUpload fileUploadListener="#{UploadController.handleUploadFile}" 
                                   mode="advanced" dragDropSupport="false"  
-                                  sizeLimit="100000000" update="@form">
+                                  sizeLimit="100000" update="@form">
                         <f:attribute name="user" value="#{UserController.user}" />
                         <f:attribute name="folder" value="#{BrowserController.currenFolder}" />
 
@@ -41,8 +41,8 @@
                         <p:toolbar>
                             <p:toolbarGroup align="left">
                                 <span class="button-group ui-widget ui-splitbutton ui-buttonset">
-                                    <p:commandButton styleClass="ui-corner-left" title="Backward" icon="ui-icon-backward" action="#{BrowserController.changeToParentFolder}" update=":formFolder"/>  
-                                    <p:commandButton styleClass="ui-corner-right" type="button" title="Forward" icon="ui-icon-forward"/> 
+                                    <p:commandButton styleClass="ui-corner-left" title="Backward" icon="ui-icon-backward" ajax="true" immediate="true" update=":formFolder" action="#{BrowserController.clickOnBackward}" />  
+                                    <p:commandButton styleClass="ui-corner-right" title="Forward" icon="ui-icon-forward" ajax="true" immediate="true" update=":formFolder" action="#{BrowserController.clickOnForward}" />
                                 </span>
                                 <p:separator/>
                                 <span class="button-group ui-widget ui-splitbutton ui-buttonset">
@@ -77,18 +77,17 @@
                     <h:form id="formTree">  
 
                         <p:tree value="#{TreeController.root}" var="node" id="tree">  
-                             
-                              <p:treeNode id="treeNode">  
-                                  <p:commandLink actionListener="#{BrowserController.clickOnFolder}" update=":formFolder" value="#{node.name}">
-                                        <f:param name="idFolder" value="#{node.idFolder}"/>
-                                    </p:commandLink>
+                            <p:treeNode id="treeNode">  
+                                <p:commandLink actionListener="#{BrowserController.clickOnFolder}" update=":formFolder" value="#{node}">
+                                    <f:param name="idFolder" value="#{doc.folder.idFolder}"/>
+                                </p:commandLink>
                             </p:treeNode>  
                         </p:tree>  
 
                     </h:form> 
                 </p:layoutUnit>
 
-                
+
                 <p:layoutUnit position="center" id="browserView">
                     <h:form id="formBreadcrumb">
                         <p:breadCrumb>  
