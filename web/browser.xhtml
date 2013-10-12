@@ -150,7 +150,10 @@
                             </p:column>  
 
                         </p:dataTable>
-
+  
+                        <p:galleria value="#{galleriaBean.images}" var="image" panelWidth="500" panelHeight="313" showCaption="true" rendered="#{BrowserController.galleriaView}">  
+                            <p:graphicImage value="/images/galleria/#{image}" alt="Image Description for #{image}" title="#{image}"/>  
+                        </p:galleria>  
                     </h:form>
                 </p:layoutUnit>
 
