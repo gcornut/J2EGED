@@ -54,7 +54,14 @@ public class BrowserController implements Serializable {
     }
 
     public void loadDocument() {
-        changeFolder(null);
+        if(currenFolder == null)
+            changeFolder(currenFolder);
+    }
+    
+    public String changeToParentFolder() {
+        if(currenFolder != null)
+            changeFolder(currenFolder.getFolder());
+        return "";
     }
 
     public void loadToDisplay() {
@@ -65,11 +72,6 @@ public class BrowserController implements Serializable {
         for (Folder fold : this.folders) {
             this.toDisplay.add(new DisplayDoc(fold));
         }
-        
-        if(currenFolder != null)
-            System.err.println(currenFolder);
-        
-        System.err.println(toDisplay.size());
     }
     
     public void changeFolder(Folder newFolder) {
