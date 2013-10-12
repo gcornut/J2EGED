@@ -38,12 +38,12 @@ root {
     border: 0;
 }
 
-.ui-layout-center .ui-datagrid-data {
+.ui-layout-center .ui-datagrid-content {
     border-right: 0px !important;
     border-left: 0px !important;
     border-bottom: 0px !important;
     bottom: 0;
-    top: 32px;
+    top: 30px;
     position: absolute;
     right: 0;
     left: 0;
