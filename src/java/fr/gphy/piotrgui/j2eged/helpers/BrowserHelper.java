@@ -24,8 +24,14 @@ public class BrowserHelper implements Serializable {
     public BrowserHelper() {
         this.session = HibernateUtil.getSessionFactory().getCurrentSession();
     }
+   
+    public void reloadSession() {
+        this.session = HibernateUtil.getSessionFactory().openSession();
+    }
+    
 
     public List<Object[]> getDocuments(Integer id_folder) {
+   
         session.beginTransaction();      
 
         try {

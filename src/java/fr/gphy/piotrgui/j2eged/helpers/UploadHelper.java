@@ -97,7 +97,7 @@ public class UploadHelper {
 
             session.save(version);
             tx.commit();
-
+            
             this.reloadSession();
         } catch (Exception e) {
             throw e;
