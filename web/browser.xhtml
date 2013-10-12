@@ -78,7 +78,9 @@
 
                         <p:tree value="#{TreeController.root}" var="node" id="tree">  
                             <p:treeNode id="treeNode">  
-                                <h:outputText value="#{node}" id="lblNode"/>  
+                                <p:commandLink actionListener="#{BrowserController.clickOnFolder}" update=":formFolder" value="#{node}">
+                                        <f:param name="idFolder" value="#{doc.folder.idFolder}"/>
+                                    </p:commandLink>
                             </p:treeNode>  
                         </p:tree>  
 
