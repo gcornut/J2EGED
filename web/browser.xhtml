@@ -15,7 +15,7 @@
             </f:facet>
         </h:head>
 
-        <h:body>
+        <h:body id="body">
             <f:event listener="#{BrowserController.loadDocument()}" type="preRenderView" />
 
             <p:growl showDetail="true" sticky="false"/>
@@ -25,8 +25,12 @@
 
                     <p:fileUpload fileUploadListener="#{UploadController.handleUploadFile}" 
                                   mode="advanced" dragDropSupport="false"  
-                                  sizeLimit="100000" />  
-
+                                  sizeLimit="100000" update="@form">
+                        <f:attribute name="user" value="#{UserController.user}" />
+                        <f:attribute name="folder" value="#{BrowserController.currenFolder}" />
+                        
+                    </p:fileUpload>  
+                    
                 </h:form>  
             </p:dialog> 
 

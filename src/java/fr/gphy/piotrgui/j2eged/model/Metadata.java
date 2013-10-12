@@ -1,5 +1,5 @@
 package fr.gphy.piotrgui.j2eged.model;
-// Generated 11 oct. 2013 16:39:56 by Hibernate Tools 3.2.1.GA
+// Generated 12 oct. 2013 14:58:54 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -26,10 +26,9 @@ public class Metadata  implements java.io.Serializable {
     }
 
 	
-    public Metadata(Type type, User user, Folder folder, int size, Date dateCreation, String name) {
+    public Metadata(Type type, User user, int size, Date dateCreation, String name) {
         this.type = type;
         this.user = user;
-        this.folder = folder;
         this.size = size;
         this.dateCreation = dateCreation;
         this.name = name;

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 11 oct. 2013 16:39:57 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 12 oct. 2013 14:58:55 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="fr.gphy.piotrgui.j2eged.model.Role" table="role" catalog="j2eged">
         <id name="idRole" type="java.lang.Integer">

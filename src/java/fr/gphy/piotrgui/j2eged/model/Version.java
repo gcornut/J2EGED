@@ -1,5 +1,5 @@
 package fr.gphy.piotrgui.j2eged.model;
-// Generated 11 oct. 2013 16:39:56 by Hibernate Tools 3.2.1.GA
+// Generated 12 oct. 2013 14:58:54 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
