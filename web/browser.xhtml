@@ -37,11 +37,11 @@
             <p:layout fullPage="true">
 
                 <p:layoutUnit position="north" size="46" resizable="false" closable="false" collapsible="false">
-                    <h:form>
+                    <h:form id="formToolbar">
                         <p:toolbar>
                             <p:toolbarGroup align="left">
                                 <span class="button-group ui-widget ui-splitbutton ui-buttonset">
-                                    <p:commandButton styleClass="ui-corner-left" type="button" title="Backward" icon="ui-icon-backward"/>  
+                                    <p:commandButton styleClass="ui-corner-left" title="Backward" icon="ui-icon-backward" action="#{BrowserController.changeToParentFolder}" update=":formFolder"/>  
                                     <p:commandButton styleClass="ui-corner-right" type="button" title="Forward" icon="ui-icon-forward"/> 
                                 </span>
                                 <p:separator/>
@@ -85,16 +85,17 @@
                     </h:form> 
                 </p:layoutUnit>
 
+                
                 <p:layoutUnit position="center" id="browserView">
                     <h:form id="formBreadcrumb">
                         <p:breadCrumb>  
-                            <p:menuitem value="Root" url="#" />
+                            <p:menuitem value="Root" url="#"  />
                             <p:menuitem value="Root" url="#" />
                         </p:breadCrumb>
                     </h:form> 
                     <h:form id="formFolder">
                         <p:dataGrid var="doc" value="#{BrowserController.toDisplay}" 
-                                    columns="5">  
+                                    columns="6">  
 
                             <p:panel style="text-align:center" styleClass="browser-element">
                                 <h:panelGrid columns="1" style="width:100%" rendered="${!doc.isFolder()}" > 
