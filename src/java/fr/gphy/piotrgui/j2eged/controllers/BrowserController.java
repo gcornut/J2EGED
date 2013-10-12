@@ -210,7 +210,7 @@ public class BrowserController implements Serializable {
         }
     }
 
-    public class DisplayDoc {
+    public class DisplayDoc implements Serializable {
 
         private Document doc = null;
         private Metadata meta = null;

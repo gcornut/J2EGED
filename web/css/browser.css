@@ -10,6 +10,11 @@ root {
     display: block;
 }
 
+body {
+    padding: 10px;   
+    font-size: 12px !important;
+}
+
 .ui-button-text {
     padding: inherit;
 }
@@ -19,120 +24,148 @@ root {
 }
 
 /* Toolbar */
-.ui-layout-north {
-    padding: 0 !important;
-    border: 0px !important;
-}
+    .ui-layout-north {
+        padding: 0 !important;
+        border: 0px !important;
+    }
 
-.ui-layout-north, #formToolbar, #formToolbar > div {
-    overflow: hidden !important;
-}
+    .ui-layout-north, #formToolbar, #formToolbar > div {
+        overflow: hidden !important;
+    }
 
-.ui-layout-center {
-    padding: 0 !important;
-}
+/* Center */
+    .ui-layout-center {
+        padding: 0 !important;
+    }
 
-.ui-layout-center > * {
-    padding: 0 !important;
-    border-radius: 5px;
-}
+    .ui-layout-center > * {
+        padding: 0 !important;
+        border-radius: 5px;
+    }
 
-.ui-layout-center .ui-breadcrumb {
-    border-radius: 0px;
-    border: 0;
-}
+    .ui-layout-center .ui-breadcrumb {
+        border-radius: 0px;
+        border: 0;
+    }
 
-.ui-layout-center .ui-datagrid-content {
-    border-right: 0px !important;
-    border-left: 0px !important;
-    border-bottom: 0px !important;
-    bottom: 0;
-    top: 30px;
-    position: absolute;
-    right: 0;
-    left: 0;
-    overflow-y: scroll;
-}
+    .ui-layout-center .ui-datagrid-content {
+        border-right: 0px !important;
+        border-left: 0px !important;
+        border-bottom: 0px !important;
+        bottom: 0;
+        top: 30px;
+        position: absolute;
+        right: 0;
+        left: 0;
+        overflow-y: scroll;
+    }
+    
+    .ui-toolbar-group-right input {
+        margin-right: 10px;
+    }
+
+    .ui-toolbar-group-center {
+        width: 146px;
+        height: 31px;
+        position: absolute;
+        left: 50%;
+        margin-left: -73px;
+        font-size: 16px;
+    }
+
+    .ui-toolbar-group-center img {
+        margin-bottom: -7px;
+    }
+    
+    /* Datagrid */
+
+        .browser-element {
+            text-align: center;
+        }
+
+        .browser-element:hover {
+            background: #EEEEEE;
+        }
+        
+    /* Datatable */
+        .ui-datatable-tablewrapper, .ui-datatable-data {
+            border-right: 0px;
+            border-left: 0px;
+        }
+        
+
 
 .ui-layout-resizer-closed {
     border: 0 !important;
 }
 
-body {
-    padding: 10px;   
-    font-size: 12px !important;
-}
+/* Split button */
+    .button-group button:nth-child(2),
+    .ui-splitbutton button:nth-child(2),
+    .button-group button:nth-child(3),
+    .ui-splitbutton button:nth-child(3)
+    .button-group button:nth-child(4),
+    .ui-splitbutton button:nth-child(4),
+    .button-group button:nth-child(5),
+    .ui-splitbutton button:nth-child(5) {
+        border-left: 0px!important;
+    }
 
-.ui-splitbutton button {
-    border-left: 0px;
-}
-
-.button-group.ui-splitbutton {
-    margin-left: 3px;
-    margin-right: 7px;
-}
-
-.ui-toolbar-group-right input {
-    margin-right: 10px;
-}
-
-.ui-toolbar-group-center {
-    width: 146px;
-    height: 31px;
-    position: absolute;
-    left: 50%;
-    margin-left: -73px;
-    font-size: 16px;
-}
-
-.ui-toolbar-group-center img {
-    margin-bottom: -7px;
-}
+    .button-group.ui-splitbutton {
+        margin-left: 3px;
+        margin-right: 7px;
+    }
 
 #javax_faces_developmentstage_messages {
     display: none;
 }
 
-.ui-layout-south #terminal {
-    border: 0 !important;
-}
+/* Terminal */
+    .ui-layout-south #terminal {
+        border: 0 !important;
+    }
 
-.browser-element {
-    text-align: center;
-}
+/* Sidebar */
+    .ui-layout-west {
+        padding: 0 !important;
+    }
 
-.browser-element:hover {
-    background: #EEEEEE;
-}
+    .ui-layout-west .ui-tree{
+        border: 0 !important;
+        width: 100% !important
+    }
 
-.ui-layout-west {
-    padding: 0 !important;
-}
+    .ui-layout-west .ui-layout-unit-header {
+        -webkit-border-bottom-left-radius: 0px;
+        -moz-border-radius-bottomleft: 0px;
+        border-bottom-left-radius: 0px;
+        -webkit-border-bottom-right-radius: 0px;
+        -moz-border-radius-bottomright: 0px;
+        border-bottom-right-radius: 0px;
+        border-top: 0px;
+        border-right: 0px;
+        border-left: 0px;
+    }
+    
+    /* Tree node */
+        .ui-treenode-label {
+            background-image: url("../img/icon.png");
+            background-position: -384px -120px;
+            background-repeat: no-repeat;
+            padding-left: 18px !important;
+            display: inline-block;
+            width: 0px;
+            overflow: visible;
+        }
 
-.ui-layout-west .ui-tree{
-    border: 0 !important;
-    width: 100% !important
-}
-
-.ui-layout-west .ui-layout-unit-header {
-    -webkit-border-bottom-left-radius: 0px;
-    -moz-border-radius-bottomleft: 0px;
-    border-bottom-left-radius: 0px;
-    -webkit-border-bottom-right-radius: 0px;
-    -moz-border-radius-bottomright: 0px;
-    border-bottom-right-radius: 0px;
-    border-top: 0px;
-    border-right: 0px;
-    border-left: 0px;
-}
-
-div[id*="formToolbar"].ui-menu.ui-menu-dynamic {
-    left: initial !important;
-    right: 24px !important;
-    -webkit-border-top-right-radius: 0px;
-    -moz-border-radius-topright: 0px;
-    border-top-right-radius: 0px;
-}
+/* Logout menu */
+    div[id*="formToolbar"].ui-menu.ui-menu-dynamic {
+        left: initial !important;
+        right: 24px !important;
+        -webkit-border-top-right-radius: 0px;
+        -moz-border-radius-topright: 0px;
+        border-top-right-radius: 0px;
+    }
 
 button:active {
     outline: none !important;

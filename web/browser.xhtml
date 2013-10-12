@@ -29,8 +29,9 @@
                 <h:form id="form">  
 
                     <p:fileUpload fileUploadListener="#{UploadController.handleUploadFile}" 
-                                  mode="advanced" dragDropSupport="false"  
-                                  sizeLimit="100000" update="@form">
+                                  mode="advanced" dragDropSupport="true" multiple="false"
+                                  fileLimit="1"
+                                  sizeLimit="100000" update=":formFolder">
                         <f:attribute name="user" value="#{UserController.user}" />
                         <f:attribute name="folder" value="#{BrowserController.currenFolder}" />
 
@@ -103,7 +104,7 @@
                 <p:layoutUnit position="center" id="browserView">
                     <h:form id="formBreadcrumb">
                         <p:breadCrumb>  
-                            <p:menuitem value="Root" url="#"  />
+                            <p:menuitem value="Root" url="#" />
                             <p:menuitem value="Root" url="#" />
                         </p:breadCrumb>
                     </h:form> 
@@ -128,7 +129,7 @@
 
                         </p:dataGrid>
 
-                        <p:dataTable id="tbl" var="docList" value="#{BrowserController.toDisplay}" paginator="true" rendered="#{BrowserController.listView}">  
+                        <p:dataTable id="tbl" var="docList" value="#{BrowserController.toDisplay}" paginator="false" rendered="#{BrowserController.listView}">  
                             <p:column>  
                                 <f:facet name="header">  
                                     <h:outputText value="Name" />  

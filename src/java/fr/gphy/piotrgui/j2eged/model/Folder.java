@@ -68,9 +68,6 @@ public class Folder  implements java.io.Serializable {
         return (idFolder == null) ? "null" : this.idFolder.toString();
     }
 
-
-
-
 }
 
 

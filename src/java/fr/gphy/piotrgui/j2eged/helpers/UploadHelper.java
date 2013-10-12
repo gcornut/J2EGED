@@ -11,6 +11,7 @@ import fr.gphy.piotrgui.j2eged.model.PhysicalDocument;
 import fr.gphy.piotrgui.j2eged.model.Type;
 import fr.gphy.piotrgui.j2eged.model.User;
 import fr.gphy.piotrgui.j2eged.model.Version;
+import java.io.Serializable;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -19,8 +20,7 @@ import org.hibernate.Transaction;
  *
  * @author Piotr
  */
-
-public class UploadHelper {
+public class UploadHelper implements Serializable {
 
     Session session = null;
 
@@ -90,15 +90,13 @@ public class UploadHelper {
         }
     }
 
-    public void createNewVersion(Version version) {
+    public Transaction createNewVersion(Version version) {
          Transaction tx = session.beginTransaction();
 
         try {
 
             session.save(version);
-            tx.commit();
-            
-            this.reloadSession();
+            return tx;
         } catch (Exception e) {
             throw e;
         }
