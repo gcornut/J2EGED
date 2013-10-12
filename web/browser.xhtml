@@ -10,6 +10,7 @@
         <h:head>
             <f:facet name="first">
                 <link type="text/css" rel="stylesheet" href="css/browser.css"/>
+                <link type="text/css" rel="stylesheet" href="css/icon.css"/>
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
                 <title>Browser</title>
             </f:facet>
@@ -49,7 +50,8 @@
                                 <p:separator/>
                                 <span class="button-group ui-widget ui-splitbutton ui-buttonset">
                                     <p:commandButton styleClass="ui-corner-left" title="Icon View" icon="ui-icon-th-large" ajax="true" immediate="true" update=":formFolder" action="#{BrowserController.setIconView(true)}"/>  
-                                    <p:commandButton styleClass="ui-corner-right" title="List View" icon="ui-icon-list" ajax="true" immediate="true" update=":formFolder" action="#{BrowserController.setListView(true)}"/> 
+                                    <p:commandButton title="List View" icon="ui-icon-list" ajax="true" immediate="true" update=":formFolder" action="#{BrowserController.setListView(true)}"/> 
+                                    <p:commandButton styleClass="ui-corner-right" title="Gallery View" icon="ui-icon-gallery" ajax="true" immediate="true" update=":formFolder" action="null"/>
                                 </span>
                                 <p:separator/> 
                                 <span class="button-group ui-widget ui-splitbutton ui-buttonset">
