@@ -38,12 +38,11 @@
 
                 <p:layoutUnit position="north" size="46" resizable="false" closable="false" collapsible="false">
                     <h:form id="formToolbar">
-
                         <p:toolbar>
                             <p:toolbarGroup align="left">
                                 <span class="button-group ui-widget ui-splitbutton ui-buttonset">
-                                    <p:commandButton styleClass="ui-corner-left" title="Backward" icon="ui-icon-backward" action="#{BrowserController.clickOnBackward}" update=":formFolder" immediate="true" ajax="true" />  
-                                    <p:commandButton styleClass="ui-corner-right" title="Forward" icon="ui-icon-forward" action="#{BrowserController.clickOnForward}" update=":formFolder" immediate="true" ajax="true" /> 
+                                    <p:commandButton styleClass="ui-corner-left" title="Backward" icon="ui-icon-backward" ajax="true" immediate="true" update=":formFolder" action="#{BrowserController.clickOnBackward}" />  
+                                    <p:commandButton styleClass="ui-corner-right" title="Forward" icon="ui-icon-forward" ajax="true" immediate="true" update=":formFolder" action="#{BrowserController.clickOnForward}" />
                                 </span>
                                 <p:separator/>
                                 <span class="button-group ui-widget ui-splitbutton ui-buttonset">
