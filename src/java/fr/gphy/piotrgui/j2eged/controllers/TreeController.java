@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import org.primefaces.event.NodeSelectEvent;
 import org.primefaces.model.TreeNode;
 import org.primefaces.model.DefaultTreeNode;
 
@@ -35,8 +36,12 @@ public class TreeController implements Serializable {
         }
 
         for (Folder f : list) {
-            TreeNode node = new DefaultTreeNode(f.getName(), root);
+            TreeNode node = new DefaultTreeNode(f, root);
             this.initTree(node, this.helper.getFolders(f.getIdFolder()));
         }
     }
+    
+    public void onNodeSelect(NodeSelectEvent event) {  
+        System.err.println("plp");
+    }  
 }
