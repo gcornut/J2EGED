@@ -74,6 +74,9 @@ public class UploadHelper {
 
         try {
             session.save(doc);
+            
+            session.flush();
+            session.clear();
         } catch (Exception e) {
             throw e;
         }
@@ -85,6 +88,8 @@ public class UploadHelper {
         try {
 
             session.save(meta);
+            session.flush();
+            session.clear();
         } catch (Exception e) {
             throw e;
         }
@@ -96,8 +101,12 @@ public class UploadHelper {
         try {
 
             session.save(version);
+            
+            session.flush();
+            session.clear();
+           
             tx.commit();
-
+            
             this.reloadSession();
         } catch (Exception e) {
             throw e;
