@@ -62,7 +62,7 @@ public class BrowserController implements Serializable {
         this.toDisplay = new ArrayList<>();
     }
 
-    public void onLoad() throws IOException {
+    public void onLoad() {
         if (currenFolder == null) {
             changeFolder(currenFolder);
         }

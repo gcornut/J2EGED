@@ -19,6 +19,7 @@
         <h:body id="body">
             <f:event listener="#{BrowserController.onLoad()}" type="preRenderView" />
             <f:event listener="#{UserController.checkLogged()}" type="preRenderView" />
+            <f:event listener="#{ImagesController.loadImages()}" type="preRenderView" />
 
 
             <p:growl showDetail="true" sticky="false"/>
@@ -51,7 +52,7 @@
                                 <span class="button-group ui-widget ui-splitbutton ui-buttonset">
                                     <p:commandButton styleClass="ui-corner-left" title="Icon View" icon="ui-icon-th-large" ajax="true" immediate="true" update=":formFolder" action="#{BrowserController.setIconView(true)}"/>  
                                     <p:commandButton title="List View" icon="ui-icon-list" ajax="true" immediate="true" update=":formFolder" action="#{BrowserController.setListView(true)}"/> 
-                                    <p:commandButton styleClass="ui-corner-right" title="Gallery View" icon="ui-icon-gallery" ajax="true" immediate="true" update=":formFolder" action="null"/>
+                                    <p:commandButton styleClass="ui-corner-right" title="Gallery View" icon="ui-icon-gallery" ajax="true" immediate="true" update=":formFolder" action="#{BrowserController.setGalleriaView(false)}"/>
                                 </span>
                                 <p:separator/> 
                                 <span class="button-group ui-widget ui-splitbutton ui-buttonset">
