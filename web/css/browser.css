@@ -84,8 +84,8 @@ body {
         }
 
         .browser-element:hover {
-            background: #EEEEEE;
-        }
+            background: #F2F2F2;
+;        }
         
     /* Datatable */
         .ui-datatable-tablewrapper, .ui-datatable-data {
@@ -156,6 +156,10 @@ body {
             display: inline-block;
             width: 0px;
             overflow: visible;
+        }
+        
+        span.ui-icon-triangle-1-s ~ .ui-treenode-label {
+            background-position: -408px -120px;
         }
 
 /* Logout menu */
