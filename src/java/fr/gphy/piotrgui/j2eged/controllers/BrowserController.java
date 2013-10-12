@@ -94,6 +94,16 @@ public class BrowserController implements Serializable {
     public void clickOnUpload() {
         System.err.println("Upload");
     }
+
+    public Folder getCurrenFolder() {
+        return currenFolder;
+    }
+
+    public void setCurrenFolder(Folder currenFolder) {
+        this.currenFolder = currenFolder;
+    }
+    
+    
     
     
     public class DisplayDoc {

@@ -48,8 +48,7 @@ public class BrowserHelper implements Serializable {
                     + "from document "
                     + "inner join version on version.doc=document.id_doc "
                     + "inner join metadata on version.meta = metadata.id_meta "
-                    + "inner join folder on metadata.folder = folder.id_folder "
-                    + "where doc_post is null and folder.parent_folder";
+                    + "where doc_post is null and metadata.folder";
         
         return (folder == null) ? query.concat(" is null") : query.concat(" ='" + Integer.toString(folder) + "'");
     }
