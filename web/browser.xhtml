@@ -23,7 +23,7 @@
             <p:dialog header="Upload file" modal="true" id="dialogUpload" widgetVar="dlg" resizable="false" width="700px">  
                 <h:form id="form">  
 
-                    <p:fileUpload fileUploadListener="#{BrowserController.uploadListener}" 
+                    <p:fileUpload fileUploadListener="#{UploadController.handleUploadFile}" 
                                   mode="advanced" dragDropSupport="false"  
                                   sizeLimit="100000" />  
 
