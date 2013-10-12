@@ -1,0 +1,40 @@
+
+.ui-icon-list {
+    background-image: url("../img/icon.png") !important;
+    background-position: -263px 0 !important;
+}
+
+.ui-icon-th-large {
+    background-image: url("../img/icon.png") !important;
+    background-position: -215px 0 !important;
+}
+
+.ui-icon-backward {
+    background-image: url("../img/icon.png") !important;
+    background-position: -431px -72px !important;
+}
+
+.ui-icon-forward {
+    background-image: url("../img/icon.png") !important;
+    background-position: -455px -72px !important;
+}
+
+.ui-icon-user {
+    background-image: url("../img/icon.png") !important;
+    background-position: -167px 0 !important;
+}
+
+.ui-icon-upload {
+    background-image: url("../img/icon.png") !important;
+    background-position: -287px -144px;
+}
+
+.ui-icon-download {
+    background-image: url("../img/icon.png") !important;
+    background-position: -311px -144px !important;
+}
+
+.ui-icon-gallery {
+    background-image: url("../img/icon.png") !important;
+    background-position: -456px -48px;
+}

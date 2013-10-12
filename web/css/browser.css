@@ -18,10 +18,14 @@ root {
     padding: 0 !important;
 }
 
+/* Toolbar */
 .ui-layout-north {
     padding: 0 !important;
     border: 0px !important;
-    overflow: hidden;
+}
+
+.ui-layout-north, #formToolbar, #formToolbar > div {
+    overflow: hidden !important;
 }
 
 .ui-layout-center {
@@ -59,7 +63,7 @@ body {
     font-size: 12px !important;
 }
 
-.ui-splitbutton button:last-of-type {
+.ui-splitbutton button {
     border-left: 0px;
 }
 
@@ -68,55 +72,21 @@ body {
     margin-right: 7px;
 }
 
-.ui-icon-list {
-    background-image: url("../img/icon.png") !important;
-    background-position: -263px 0 !important;
-}
-
-.ui-icon-th-large {
-    background-image: url("../img/icon.png") !important;
-    background-position: -215px 0 !important;
-}
-
-.ui-icon-backward {
-    background-image: url("../img/icon.png") !important;
-    background-position: -431px -72px !important;
-}
-
-.ui-icon-forward {
-    background-image: url("../img/icon.png") !important;
-    background-position: -455px -72px !important;
-}
-
-.ui-icon-user {
-    background-image: url("../img/icon.png") !important;
-    background-position: -167px 0 !important;
-}
-
-.ui-icon-upload {
-    background-image: url("../img/icon.png") !important;
-    background-position: -287px -144px;
-}
-
-.ui-icon-download {
-    background-image: url("../img/icon.png") !important;
-    background-position: -311px -144px !important;
-}
-
 .ui-toolbar-group-right input {
     margin-right: 10px;
 }
 
 .ui-toolbar-group-center {
-    width: 126px;
+    width: 146px;
     height: 31px;
     position: absolute;
     left: 50%;
-    margin-left: -63px;
+    margin-left: -73px;
+    font-size: 16px;
 }
 
 .ui-toolbar-group-center img {
-    margin-bottom: -9px;
+    margin-bottom: -7px;
 }
 
 #javax_faces_developmentstage_messages {
