@@ -23,9 +23,15 @@ public class BrowserController implements Serializable {
 
     private List<Object[]> data;
     private List<Folder> folders;
-    private List<DisplayDoc> toDisplay = new ArrayList<>();
-    private BrowserHelper helper = new BrowserHelper();
-    private Folder currenFolder = null;
+    private List<DisplayDoc> toDisplay;
+    private BrowserHelper helper;
+    private Folder currenFolder;
+
+    public BrowserController() {
+        toDisplay = new ArrayList<>();
+        helper = new BrowserHelper();
+        currenFolder = null;
+    }
 
     public List<Object[]> getData() {
         return data;
@@ -59,6 +65,11 @@ public class BrowserController implements Serializable {
         for (Folder fold : this.folders) {
             this.toDisplay.add(new DisplayDoc(fold));
         }
+        
+        if(currenFolder != null)
+            System.err.println(currenFolder);
+        
+        System.err.println(toDisplay.size());
     }
     
     public void changeFolder(Folder newFolder) {
@@ -90,7 +101,7 @@ public class BrowserController implements Serializable {
                 break;
             }
         }
-        System.err.println(this.currenFolder);
+        //System.err.println(this.currenFolder);
         changeFolder(this.currenFolder);
     }
     
