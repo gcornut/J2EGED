@@ -6,6 +6,7 @@ package fr.gphy.piotrgui.j2eged.helpers;
 
 import fr.gphy.piotrgui.j2eged.hibernate.HibernateUtil;
 import fr.gphy.piotrgui.j2eged.model.Folder;
+import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -14,7 +15,7 @@ import org.hibernate.Session;
  *
  * @author Piotr
  */
-public class TreeHelper {
+public class TreeHelper implements Serializable {
     
     Session session = null;
 

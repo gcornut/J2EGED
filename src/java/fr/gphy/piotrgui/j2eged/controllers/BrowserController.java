@@ -175,7 +175,7 @@ public class BrowserController implements Serializable {
         }
         
         public void add(Folder f) {
-            int pos = historyPosition != null ? historyPosition : 0;
+            int pos = historyPosition != null ? historyPosition+1 : 0;
             
             if(pos+1 < history.size()) {
                 for(int i = pos+1; i < history.size(); i++) {
