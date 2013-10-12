@@ -58,11 +58,9 @@ public class UserController implements Serializable {
     
     public void checkLogged() throws IOException {
         FacesContext context = FacesContext.getCurrentInstance();
-        UserController userController = (UserController) context.getApplication()
-                                .evaluateExpressionGet(context, "#{UserController}", UserController.class);
         
         String currentUrl = context.getExternalContext().getRequestServletPath();
-        if (userController.getUser() == null) {
+        if (getUser().getLogin() == null) {
             if(!currentUrl.equals("/login.xhtml")) {
                 context.getExternalContext().redirect("login.xhtml");
             }
