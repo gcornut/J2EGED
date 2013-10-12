@@ -19,14 +19,14 @@
             <f:event listener="#{BrowserController.loadDocument()}" type="preRenderView" />
 
             <p:growl showDetail="true" sticky="false"/>
-            
+
             <p:dialog header="Upload file" modal="true" id="dialogUpload" widgetVar="dlg" resizable="false" width="700px">  
                 <h:form id="form">  
 
                     <p:fileUpload fileUploadListener="#{BrowserController.uploadListener}" 
                                   mode="advanced" dragDropSupport="false"  
                                   sizeLimit="100000" />  
-  
+
                 </h:form>  
             </p:dialog> 
 
@@ -47,7 +47,8 @@
                                 </span>
                                 <p:separator/> 
                                 <span class="button-group ui-widget ui-splitbutton ui-buttonset">
-                                    <p:button styleClass="ui-corner-left" title="Upload" icon="ui-icon-upload" onclick="PF('dlg').show(); return false;"  />
+                                    <p:button styleClass="ui-corner-left" title="Upload" icon="ui-icon-upload" onclick="PF('dlg').show();
+                                            return false;"  />
                                     <p:commandButton styleClass="ui-corner-right" type="button" title="Download" icon="ui-icon-download"/> 
                                 </span>
                             </p:toolbarGroup>
@@ -83,31 +84,34 @@
                 </p:layoutUnit>
                 -->
 
-                <p:layoutUnit position="center" >
+                <p:layoutUnit position="center" id="browserView">
                     <h:form id="formBreadcrumb">
                         <p:breadCrumb>  
                             <p:menuitem value="Root" url="#" />
+                            <p:menuitem value="Root" url="#" />
                         </p:breadCrumb>
                     </h:form> 
-                    <p:dataGrid id="browserView" var="doc" value="#{BrowserController.toDisplay}" 
-                                columns="5">  
+                    <h:form id="formFolder">
+                        <p:dataGrid var="doc" value="#{BrowserController.toDisplay}" 
+                                    columns="5">  
 
-                        <p:panel style="text-align:center">
-                            <h:panelGrid columns="1" style="width:100%" rendered="${!doc.isFolder()}" > 
-                                <h:outputText value="#{doc.meta.name}" />  
-                                <p:column>type : <h:outputText value="#{doc.meta.type.mimeType}" /></p:column>
-                            </h:panelGrid>
-
-                            <h:panelGrid columns="1" style="width:100%" rendered="${doc.isFolder()}">
-                                <h:form id="formFolder">
-                                    <p:commandLink actionListener="#{BrowserController.clickOnFolder}" update=":browserView" value="#{doc.folder.name}">
+                            <p:panel style="text-align:center" styleClass="browser-element">
+                                <h:panelGrid columns="1" style="width:100%" rendered="${!doc.isFolder()}" > 
+                                    <img src="img/file.png" alt="[file]" width="128px" height="128px"/>
+                                    <h:outputText value="#{doc.meta.name}" />  
+                                    <p:column>type : <h:outputText value="#{doc.meta.type.mimeType}" /></p:column>
+                                </h:panelGrid>
+                                <h:panelGrid columns="1" style="width:100%" rendered="${doc.isFolder()}">
+                                    <img src="img/folder.png" alt="[folder]" width="128px" height="128px"/>
+                                    <p:commandLink actionListener="#{BrowserController.clickOnFolder}" update=":formFolder" value="#{doc.folder.name}">
                                         <f:param name="idFolder" value="#{doc.folder.idFolder}"/>
                                     </p:commandLink>
                                     <div>type : folder</div>
-                                </h:form>
-                            </h:panelGrid>
-                        </p:panel>  
-                    </p:dataGrid>  
+                                </h:panelGrid>
+                            </p:panel>
+
+                        </p:dataGrid>
+                    </h:form>
                 </p:layoutUnit>
 
             </p:layout>
