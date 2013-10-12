@@ -28,9 +28,9 @@
                                   sizeLimit="100000" update="@form">
                         <f:attribute name="user" value="#{UserController.user}" />
                         <f:attribute name="folder" value="#{BrowserController.currenFolder}" />
-                        
+
                     </p:fileUpload>  
-                    
+
                 </h:form>  
             </p:dialog> 
 
@@ -73,20 +73,17 @@
                                 welcomeMessage="Welcome to GED of Death Terminal!" />    
                 </p:layoutUnit>
 
-                <!--
-                <p:layoutUnit position="west" size="175" header="Left" collapsible="true" closable="false">
-                    <p:menu>
-                        <p:submenu label="Resources">
-                            <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
-                            <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
-                            <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
-                            <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
+                <p:layoutUnit position="west" resizable="true" header="Sidebar" size="200" collapsible="true" closable="false">
+                    <h:form id="formTree">  
 
-                        </p:submenu>
+                        <p:tree value="#{TreeController.root}" var="node" id="tree">  
+                            <p:treeNode id="treeNode">  
+                                <h:outputText value="#{node}" id="lblNode"/>  
+                            </p:treeNode>  
+                        </p:tree>  
 
-                    </p:menu>
+                    </h:form> 
                 </p:layoutUnit>
-                -->
 
                 <p:layoutUnit position="center" id="browserView">
                     <h:form id="formBreadcrumb">

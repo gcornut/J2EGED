@@ -122,3 +122,17 @@ body {
 .browser-element:hover {
     background: #EEEEEE;
 }
+
+.ui-layout-west {
+    padding: 0 !important;
+}
+
+.ui-layout-west .ui-tree{
+    border: 0 !important;
+    width: 100% !important
+}
+
+.ui-layout-unit-header {
+    border-radius: 0px !important;
+}
+
