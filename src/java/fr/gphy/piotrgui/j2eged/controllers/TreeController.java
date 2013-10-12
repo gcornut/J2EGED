@@ -20,10 +20,17 @@ public class TreeController implements Serializable {
     public TreeController() {
         this.helper = new TreeHelper();
 
-
-        root = new DefaultTreeNode("Root", null);
         
-        this.initTree(root, this.helper.getFolders(null));
+        root = new DefaultTreeNode("Root", null);
+
+        Folder rootFolder = new Folder();
+        rootFolder.setName("root");
+        
+        TreeNode node = new DefaultTreeNode(rootFolder, root);
+        node.setExpanded(true);
+        node.setSelectable(true);
+        
+        this.initTree(node, this.helper.getFolders(null));
     }
 
     public TreeNode getRoot() {
@@ -37,6 +44,7 @@ public class TreeController implements Serializable {
 
         for (Folder f : list) {
             TreeNode node = new DefaultTreeNode(f, root);
+            node.setExpanded(true);
             this.initTree(node, this.helper.getFolders(f.getIdFolder()));
         }
     }
@@ -44,4 +52,15 @@ public class TreeController implements Serializable {
     public void onNodeSelect(NodeSelectEvent event) {  
         System.err.println("plp");
     }  
+    
+    public void deselectAll() {
+        this.deselectAll(root.getChildren().get(0));
+    }
+    
+    public void deselectAll(TreeNode node) {
+        for (TreeNode n : node.getChildren()) {
+            n.setExpanded(false);
+            this.deselectAll(n);
+        }
+    }
 }

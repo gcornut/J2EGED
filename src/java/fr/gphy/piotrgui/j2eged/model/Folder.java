@@ -62,6 +62,11 @@ public class Folder  implements java.io.Serializable {
     public void setFolders(Set<Folder> folders) {
         this.folders = folders;
     }
+    
+     @Override
+    public String toString() {
+        return (idFolder == null) ? "null" : this.idFolder.toString();
+    }
 
 
 

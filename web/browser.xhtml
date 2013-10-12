@@ -19,6 +19,7 @@
             <f:event listener="#{BrowserController.onLoad()}" type="preRenderView" />
             <f:event listener="#{UserController.checkLogged()}" type="preRenderView" />
 
+
             <p:growl showDetail="true" sticky="false"/>
 
             <p:dialog header="Upload file" modal="true" id="dialogUpload" widgetVar="dlg" resizable="false" width="700px">  
@@ -47,8 +48,8 @@
                                 </span>
                                 <p:separator/>
                                 <span class="button-group ui-widget ui-splitbutton ui-buttonset">
-                                    <p:commandButton styleClass="ui-corner-left" type="button" title="Icon View" icon="ui-icon-th-large" />  
-                                    <p:commandButton styleClass="ui-corner-right" type="button" title="List View" icon="ui-icon-list"/> 
+                                    <p:commandButton styleClass="ui-corner-left" title="Icon View" icon="ui-icon-th-large" ajax="true" immediate="true" update=":formFolder" action="#{BrowserController.setIconView(true)}"/>  
+                                    <p:commandButton styleClass="ui-corner-right" title="List View" icon="ui-icon-list" ajax="true" immediate="true" update=":formFolder" action="#{BrowserController.setListView(true)}"/> 
                                 </span>
                                 <p:separator/> 
                                 <span class="button-group ui-widget ui-splitbutton ui-buttonset">
@@ -86,7 +87,7 @@
                         <p:tree value="#{TreeController.root}" var="node" id="tree">  
                             <p:treeNode id="treeNode">  
                                 <p:commandLink actionListener="#{BrowserController.clickOnFolder}" update=":formFolder" value="#{node.name}">
-                                    <f:param name="idFolder" value="#{node.idFolder}"/>
+                                    <f:param name="idFolder" value="#{node.toString()}"/>
                                 </p:commandLink>
                             </p:treeNode>  
                         </p:tree>  
@@ -102,9 +103,9 @@
                             <p:menuitem value="Root" url="#" />
                         </p:breadCrumb>
                     </h:form> 
-                    <h:form id="formFolder">
+                    <h:form id="formFolder" >
                         <p:dataGrid var="doc" value="#{BrowserController.toDisplay}" 
-                                    columns="6">  
+                                    columns="6" rendered="#{BrowserController.iconView}">  
 
                             <p:panel style="text-align:center" styleClass="browser-element">
                                 <h:panelGrid columns="1" style="width:100%" rendered="${!doc.isFolder()}" > 
@@ -122,11 +123,38 @@
                             </p:panel>
 
                         </p:dataGrid>
+
+                        <p:dataTable id="tbl" var="docList" value="#{BrowserController.toDisplay}" paginator="true" rendered="#{BrowserController.listView}">  
+                            <p:column>  
+                                <f:facet name="header">  
+                                    <h:outputText value="Name" />  
+                                </f:facet>  
+                                <h:outputText value="#{docList.meta.name}" rendered="#{!docList.isFolder()}"/>  
+                                <h:outputText value="#{docList.folder.name}" rendered="#{docList.isFolder()}"/>  
+                            </p:column>  
+
+                            <p:column exportable="false">  
+                                <f:facet name="header">  
+                                    <h:outputText value="Size" />  
+                                </f:facet>  
+                                <h:outputText value="#{docList.meta.size}" rendered="#{!docList.isFolder()}"/>  
+                                <h:outputText value="-" rendered="#{docList.isFolder()}"/>  
+                            </p:column>  
+
+                            <p:column>  
+                                <f:facet name="header">  
+                                    <h:outputText value="Type" />  
+                                </f:facet>  
+                                <h:outputText value="#{docList.meta.type.mimeType}" rendered="#{!docList.isFolder()}"/>  
+                                <h:outputText value="Folder" rendered="#{docList.isFolder()}"/>   
+                            </p:column>  
+
+                        </p:dataTable>
+
                     </h:form>
                 </p:layoutUnit>
 
             </p:layout>
-
         </h:body>
 
     </f:view>

@@ -8,11 +8,9 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.faces.application.Application;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.el.ValueBinding;
 import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,6 +27,11 @@ public class BrowserController implements Serializable {
     private List<DisplayDoc> toDisplay;
     private final BrowserHelper helper;
     private Folder currenFolder;
+    
+    private boolean listView = false;
+    private boolean iconView = true;
+    private boolean galleriaView = false;
+    
     private final FolderHistory folderHistory;
 
     public BrowserController() {
@@ -101,8 +104,9 @@ public class BrowserController implements Serializable {
     }
 
     public void clickOnFolder(ActionEvent event) {
-        String paramId = ((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest()).getParameter("idFolder");
-        Integer idDestFolder = paramId != null ? Integer.valueOf(paramId) : null;
+        System.err.println("clickOnFolder");
+        String paramId = ((HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest()).getParameter("idFolder");
+        Integer idDestFolder = !paramId.equals("null") ? Integer.valueOf(paramId) : null;
         this.clear();
 
         this.helper.reloadSession();
@@ -126,7 +130,37 @@ public class BrowserController implements Serializable {
     public void setCurrenFolder(Folder currenFolder) {
         this.currenFolder = currenFolder;
     }
+    
+    public boolean isListView() {
+        return listView;
+    }
 
+    public void setListView(boolean listView) {
+        this.listView = listView;
+        this.iconView = !listView;
+        this.galleriaView = !listView;
+    }
+
+    public boolean isIconView() {
+        return iconView;
+    }
+
+    public void setIconView(boolean iconView) {
+        this.iconView = iconView;
+        this.listView = !iconView;
+        this.galleriaView = !iconView;
+    }
+
+    public boolean isGalleriaView() {
+        return galleriaView;
+    }
+
+    public void setGalleriaView(boolean galleriaView) {
+        this.galleriaView = galleriaView;
+        this.iconView = !galleriaView;
+        this.listView = !galleriaView;
+    }
+    
     public class FolderHistory implements Serializable {
 
         private List<Folder> history;
