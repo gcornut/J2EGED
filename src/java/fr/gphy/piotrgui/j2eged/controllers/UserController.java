@@ -7,6 +7,7 @@ package fr.gphy.piotrgui.j2eged.controllers;
 import fr.gphy.piotrgui.j2eged.helpers.UserHelper;
 import fr.gphy.piotrgui.j2eged.model.Document;
 import fr.gphy.piotrgui.j2eged.model.User;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,28 @@ public class UserController implements Serializable {
         this.user = user;
     }
 
+    public String logOut() {
+        user = new User();
+        return "login";
+    }
+    
+    public void checkLogged() throws IOException {
+        FacesContext context = FacesContext.getCurrentInstance();
+        UserController userController = (UserController) context.getApplication()
+                                .evaluateExpressionGet(context, "#{UserController}", UserController.class);
+        
+        String currentUrl = context.getExternalContext().getRequestServletPath();
+        if (userController.getUser() == null) {
+            if(!currentUrl.equals("/login.xhtml")) {
+                context.getExternalContext().redirect("login.xhtml");
+            }
+        } else {
+            if(currentUrl.equals("/login.xhtml")) {
+                context.getExternalContext().redirect("browser.xhtml");
+            }
+        }
+    }
+    
     public String checkDB() {
         FacesContext context = FacesContext.getCurrentInstance();
         

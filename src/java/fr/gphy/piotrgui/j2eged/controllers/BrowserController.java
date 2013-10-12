@@ -4,20 +4,23 @@ import fr.gphy.piotrgui.j2eged.helpers.BrowserHelper;
 import fr.gphy.piotrgui.j2eged.model.Document;
 import fr.gphy.piotrgui.j2eged.model.Folder;
 import fr.gphy.piotrgui.j2eged.model.Metadata;
-import javax.faces.event.ActionEvent;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.faces.bean.SessionScoped;
+import javax.faces.application.Application;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.el.ValueBinding;
+import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * 
+ *
  * @author Piotr
  */
-@ManagedBean(name="BrowserController")
+@ManagedBean(name = "BrowserController")
 @SessionScoped
 public class BrowserController implements Serializable {
 
@@ -26,14 +29,13 @@ public class BrowserController implements Serializable {
     private List<DisplayDoc> toDisplay;
     private final BrowserHelper helper;
     private Folder currenFolder;
-    
     private final FolderHistory folderHistory;
 
     public BrowserController() {
         toDisplay = new ArrayList<DisplayDoc>();
         helper = new BrowserHelper();
         currenFolder = null;
-        
+
         folderHistory = new FolderHistory();
     }
 
@@ -52,70 +54,71 @@ public class BrowserController implements Serializable {
     public void setToDisplay(List<DisplayDoc> toDisplay) {
         this.toDisplay = toDisplay;
     }
-    
+
     public void clear() {
         this.toDisplay = new ArrayList<>();
     }
 
-    public void loadDocument() {
-        if(currenFolder == null)
+    public void onLoad() throws IOException {
+        if (currenFolder == null) {
             changeFolder(currenFolder);
+        }
     }
 
     public void loadToDisplay() {
-        for (Object[] row : this.data) {
-            this.toDisplay.add(new DisplayDoc((Document) row[0], (Metadata) row[1]));
-        }
-        
         for (Folder fold : this.folders) {
             this.toDisplay.add(new DisplayDoc(fold));
         }
+        
+        for (Object[] row : this.data) {
+            this.toDisplay.add(new DisplayDoc((Document) row[0], (Metadata) row[1]));
+        }
+
     }
     
     public void changeFolder(Folder newFolder) {
+        changeFolder(newFolder, true);
+    }
+    
+    public void changeFolder(Folder newFolder, boolean browsing) {
         Integer idFolder = null;
-        if(newFolder != null) {
+        if (newFolder != null) {
             idFolder = newFolder.getIdFolder();
         }
-        
+
         this.clear();
-        
+
         this.currenFolder = newFolder;
-        
+
         this.helper.reloadSession();
-        
+
         this.data = this.helper.getDocuments(idFolder);
         this.folders = this.helper.getFolders(idFolder);
-        
+
         this.loadToDisplay();
-        folderHistory.add(currenFolder);
+        
+        if(browsing) folderHistory.add(currenFolder);
     }
 
     public void clickOnFolder(ActionEvent event) {
-        String paramId = ((HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest()).getParameter("idFolder");
+        String paramId = ((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest()).getParameter("idFolder");
         Integer idDestFolder = paramId != null ? Integer.valueOf(paramId) : null;
         this.clear();
-        
+
         this.helper.reloadSession();
         this.currenFolder = this.helper.getFolder(idDestFolder);
-        
+
         changeFolder(this.currenFolder);
     }
     
-    public void clickOnUpload() {
-        System.err.println("Upload");
+    public void clickOnBackward() {
+        changeFolder(folderHistory.backward(), false);
     }
 
-    public void clickOnBackward() {
-        changeFolder(folderHistory.backward());
-        System.err.println("<");
-    }
-    
     public void clickOnForward() {
-        changeFolder(folderHistory.forward());
-        System.err.println(">");
+        changeFolder(folderHistory.forward(), false);
     }
-    
+
     public Folder getCurrenFolder() {
         return currenFolder;
     }
@@ -123,58 +126,60 @@ public class BrowserController implements Serializable {
     public void setCurrenFolder(Folder currenFolder) {
         this.currenFolder = currenFolder;
     }
-    
-    
+
     public class FolderHistory implements Serializable {
 
         private List<Folder> history;
         private Integer historyPosition;
-        
+
         public FolderHistory() {
             history = new ArrayList<Folder>();
             historyPosition = null;
         }
-        
+
         public void add(Folder f) {
-            int pos = historyPosition != null ? historyPosition+1 : 0;
-            
-            if(pos+1 < history.size()) {
-                for(int i = pos+1; i < history.size(); i++) {
+            int pos = historyPosition != null ? historyPosition + 1 : 0;
+
+            if (pos + 1 < history.size()) {
+                for (int i = pos + 1; i < history.size(); i++) {
                     history.remove(i);
                 }
             }
             history.add(pos, f);
+            historyPosition = pos;
         }
-        
+
         public Folder backward() {
-            if(historyPosition != null) {
+            if (historyPosition != null) {
                 historyPosition--;
-                if(historyPosition < 0) historyPosition = 0;
-                
+                if (historyPosition < 0) {
+                    historyPosition = 0;
+                }
+
                 return history.get(historyPosition);
             }
             return null;
         }
-        
+
         public Folder forward() {
-            if(historyPosition != null) {
+            if (historyPosition != null) {
                 historyPosition++;
-                if(historyPosition >= history.size()) historyPosition = history.size()-1;
-                
+                if (historyPosition >= history.size()) {
+                    historyPosition = history.size() - 1;
+                }
+
                 return history.get(historyPosition);
             }
             return null;
         }
-        
     }
-    
+
     public class DisplayDoc {
 
         private Document doc = null;
         private Metadata meta = null;
-
         private Folder folder = null;
-        
+
         public DisplayDoc(Document doc, Metadata meta) {
             this.doc = doc;
             this.meta = meta;
@@ -191,7 +196,7 @@ public class BrowserController implements Serializable {
         public void setFolder(Folder folder) {
             this.folder = folder;
         }
-        
+
         public Document getDoc() {
             return doc;
         }
@@ -199,10 +204,9 @@ public class BrowserController implements Serializable {
         public Metadata getMeta() {
             return meta;
         }
-        
+
         public Boolean isFolder() {
             return (this.folder != null);
         }
-        
     }
 }

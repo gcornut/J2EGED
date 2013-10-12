@@ -107,6 +107,18 @@ body {
     margin-right: 10px;
 }
 
+.ui-toolbar-group-center {
+    width: 126px;
+    height: 31px;
+    position: absolute;
+    left: 50%;
+    margin-left: -63px;
+}
+
+.ui-toolbar-group-center img {
+    margin-bottom: -9px;
+}
+
 #javax_faces_developmentstage_messages {
     display: none;
 }
@@ -132,7 +144,26 @@ body {
     width: 100% !important
 }
 
-.ui-layout-unit-header {
-    border-radius: 0px !important;
+.ui-layout-west .ui-layout-unit-header {
+    -webkit-border-bottom-left-radius: 0px;
+    -moz-border-radius-bottomleft: 0px;
+    border-bottom-left-radius: 0px;
+    -webkit-border-bottom-right-radius: 0px;
+    -moz-border-radius-bottomright: 0px;
+    border-bottom-right-radius: 0px;
+    border-top: 0px;
+    border-right: 0px;
+    border-left: 0px;
 }
 
+div[id*="formToolbar"].ui-menu.ui-menu-dynamic {
+    left: initial !important;
+    right: 24px !important;
+    -webkit-border-top-right-radius: 0px;
+    -moz-border-radius-topright: 0px;
+    border-top-right-radius: 0px;
+}
+
+button:active {
+    outline: none !important;
+}

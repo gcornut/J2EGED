@@ -16,6 +16,7 @@
         </h:head>
 
         <h:body>
+            <f:event listener="#{UserController.checkLogged()}" type="preRenderView"/>
             <h:form id="loginForm">
                 <p:panel>
                     <h1>
@@ -23,28 +24,13 @@
                         GED of Death
                     </h1>
                     <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
-                    <h:panelGrid cellspacing="5" id="grid">
-                        <p:row>
-                            <p:column>
-                                <label for="login :login">Login</label>
-                            </p:column>
-                            <p:column>
-                                <p:inputText required="true" id="login" value="#{UserController.user.login}"/>
-                            </p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column>
-                                <label for="loginForm:password">Password</label>
-                            </p:column>
-                            <p:column>
-                                <p:password required="true"  id="password" value="#{UserController.user.password}"/>
-                            </p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column colspan="2" >
-                                <p:commandButton id="submitButton" action="#{UserController.checkDB()}" ajax="false" update="grid" value="Connexion" styleClass="ui-priority-primary"/>
-                            </p:column>
-                        </p:row>
+                    <h:panelGrid cellspacing="5" id="grid" columns="2">
+                        <label for="login :login">Login</label>
+                        <p:inputText required="true" id="login" value="#{UserController.user.login}"/>
+                        <label for="loginForm:password">Password</label>
+                        <p:password required="true"  id="password" value="#{UserController.user.password}"/>
+                        <br/>
+                        <p:commandButton id="submitButton" action="#{UserController.checkDB()}" ajax="false" update="grid" value="Connexion" styleClass="ui-priority-primary"/>
                     </h:panelGrid>
                 </p:panel>
             </h:form>

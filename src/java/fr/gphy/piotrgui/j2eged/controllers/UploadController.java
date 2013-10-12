@@ -43,7 +43,6 @@ public class UploadController implements Serializable {
         this.helper = new UploadHelper();
     }
     
-    
     public void handleUploadFile(FileUploadEvent event) throws IOException {
         UploadedFile file = event.getFile();
 

@@ -16,7 +16,8 @@
         </h:head>
 
         <h:body id="body">
-            <f:event listener="#{BrowserController.loadDocument()}" type="preRenderView" />
+            <f:event listener="#{BrowserController.onLoad()}" type="preRenderView" />
+            <f:event listener="#{UserController.checkLogged()}" type="preRenderView" />
 
             <p:growl showDetail="true" sticky="false"/>
 
@@ -56,12 +57,18 @@
                                     <p:commandButton styleClass="ui-corner-right" type="button" title="Download" icon="ui-icon-download"/> 
                                 </span>
                             </p:toolbarGroup>
+                            <p:toolbarGroup align="center">
+                                <span class="logo button-group">
+                                    <img src="img/skull.png" width="29px" height="29px"/>
+                                    GED of Death
+                                </span>
+                            </p:toolbarGroup>
                             <p:toolbarGroup align="right">
                                 <p:inputText id="search" value="" label="Search" />  
                                 <p:watermark for="search" value="Search a file" />
 
                                 <p:splitButton value="#{UserController.user.login}" icon="ui-icon-user">
-                                    <p:menuitem value="Logout" icon="ui-icon-closethick"/>
+                                    <p:menuitem value="Logout" icon="ui-icon-closethick" action="#{UserController.logOut}" ajax="false" immediate="true"/>
                                 </p:splitButton>
                             </p:toolbarGroup>
                         </p:toolbar>
