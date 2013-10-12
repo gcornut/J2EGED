@@ -27,6 +27,11 @@ public class BrowserController implements Serializable {
     private final BrowserHelper helper;
     private Folder currenFolder;
     
+    private boolean listView = false;
+    private boolean iconView = true;
+    private boolean galleriaView = false;
+    
+    
     private final FolderHistory folderHistory;
 
     public BrowserController() {
@@ -92,8 +97,9 @@ public class BrowserController implements Serializable {
     }
 
     public void clickOnFolder(ActionEvent event) {
+        System.err.println("plop");
         String paramId = ((HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest()).getParameter("idFolder");
-        Integer idDestFolder = paramId != null ? Integer.valueOf(paramId) : null;
+        Integer idDestFolder = !paramId.equals("null") ? Integer.valueOf(paramId) : null;
         this.clear();
         
         this.helper.reloadSession();
@@ -123,6 +129,39 @@ public class BrowserController implements Serializable {
     public void setCurrenFolder(Folder currenFolder) {
         this.currenFolder = currenFolder;
     }
+    
+    
+    
+    public boolean isListView() {
+        return listView;
+    }
+
+    public void setListView(boolean listView) {
+        this.listView = listView;
+        this.iconView = !listView;
+        this.galleriaView = !listView;
+    }
+
+    public boolean isIconView() {
+        return iconView;
+    }
+
+    public void setIconView(boolean iconView) {
+        this.iconView = iconView;
+        this.listView = !iconView;
+        this.galleriaView = !iconView;
+    }
+
+    public boolean isGalleriaView() {
+        return galleriaView;
+    }
+
+    public void setGalleriaView(boolean galleriaView) {
+        this.galleriaView = galleriaView;
+        this.iconView = !galleriaView;
+        this.listView = !galleriaView;
+    }
+    
     
     
     public class FolderHistory implements Serializable {
