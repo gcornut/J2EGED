@@ -5,6 +5,7 @@
 package fr.gphy.piotrgui.j2eged.helpers;
 
 import fr.gphy.piotrgui.j2eged.hibernate.HibernateUtil;
+import fr.gphy.piotrgui.j2eged.model.Folder;
 import fr.gphy.piotrgui.j2eged.model.Metadata;
 import fr.gphy.piotrgui.j2eged.model.PhysicalDocument;
 import java.util.List;
@@ -26,17 +27,14 @@ public class ImagesHelper {
         this.session = HibernateUtil.getSessionFactory().openSession();
     }
     
-    public List<Object[]> getImages(Integer id_folder) {
+    public List<Object[]> getImages(Folder folder) {
           session.beginTransaction();      
 
         try {
-            Query query = session.createSQLQuery(this.getDemandString(id_folder))
-                    .addEntity(Metadata.class)
-                    .addEntity(PhysicalDocument.class);
+            Integer id = (folder == null) ? null : folder.getIdFolder();
+            Query query = session.createSQLQuery(this.getDemandString(id)).addEntity(Metadata.class).addEntity(PhysicalDocument.class);
 
-            if (query.list() == null) {
-                System.err.println("toto");
-            }
+              
             return query.list();
 
         } catch (Exception e) {

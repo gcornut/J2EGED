@@ -26,7 +26,7 @@ public class BrowserController implements Serializable {
     private List<Folder> folders;
     private List<DisplayDoc> toDisplay;
     private final BrowserHelper helper;
-    private Folder currenFolder;
+    private Folder currentFolder;
     
     private boolean listView = false;
     private boolean iconView = true;
@@ -37,7 +37,7 @@ public class BrowserController implements Serializable {
     public BrowserController() {
         toDisplay = new ArrayList<DisplayDoc>();
         helper = new BrowserHelper();
-        currenFolder = null;
+        currentFolder = null;
 
         folderHistory = new FolderHistory();
     }
@@ -63,8 +63,8 @@ public class BrowserController implements Serializable {
     }
 
     public void onLoad() {
-        if (currenFolder == null) {
-            changeFolder(currenFolder);
+        if (currentFolder == null) {
+            changeFolder(currentFolder);
         }
     }
 
@@ -91,7 +91,7 @@ public class BrowserController implements Serializable {
 
         this.clear();
 
-        this.currenFolder = newFolder;
+        this.currentFolder = newFolder;
 
         this.helper.reloadSession();
 
@@ -100,7 +100,7 @@ public class BrowserController implements Serializable {
 
         this.loadToDisplay();
         
-        if(browsing) folderHistory.add(currenFolder);
+        if(browsing) folderHistory.add(currentFolder);
     }
 
     public void clickOnFolder(ActionEvent event) {
@@ -110,9 +110,9 @@ public class BrowserController implements Serializable {
         this.clear();
 
         this.helper.reloadSession();
-        this.currenFolder = this.helper.getFolder(idDestFolder);
+        this.currentFolder = this.helper.getFolder(idDestFolder);
 
-        changeFolder(this.currenFolder);
+        changeFolder(this.currentFolder);
     }
     
     public void clickOnBackward() {
@@ -123,12 +123,12 @@ public class BrowserController implements Serializable {
         changeFolder(folderHistory.forward(), false);
     }
 
-    public Folder getCurrenFolder() {
-        return currenFolder;
+    public Folder getCurrentFolder() {
+        return currentFolder;
     }
 
-    public void setCurrenFolder(Folder currenFolder) {
-        this.currenFolder = currenFolder;
+    public void setCurrentFolder(Folder currenFolder) {
+        this.currentFolder = currenFolder;
     }
     
     public boolean isListView() {
@@ -160,6 +160,8 @@ public class BrowserController implements Serializable {
         this.iconView = !galleriaView;
         this.listView = !galleriaView;
     }
+    
+    
     
     public class FolderHistory implements Serializable {
 
