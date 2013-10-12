@@ -4,7 +4,6 @@ import fr.gphy.piotrgui.j2eged.helpers.BrowserHelper;
 import fr.gphy.piotrgui.j2eged.model.Document;
 import fr.gphy.piotrgui.j2eged.model.Folder;
 import fr.gphy.piotrgui.j2eged.model.Metadata;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,7 +13,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpServletRequest;
-import org.hibernate.mapping.Collection;
 import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
 import org.primefaces.model.menu.MenuModel;
@@ -31,7 +29,8 @@ public class BrowserController implements Serializable {
     private List<Folder> folders;
     private List<DisplayDoc> toDisplay;
     private final BrowserHelper helper;
-    private Folder currenFolder;
+    private Folder currentFolder;
+    
     private boolean listView = false;
     private boolean iconView = true;
     private boolean galleriaView = false;
@@ -41,7 +40,8 @@ public class BrowserController implements Serializable {
     public BrowserController() {
         toDisplay = new ArrayList<DisplayDoc>();
         helper = new BrowserHelper();
-        currenFolder = null;
+        
+        currentFolder = null;
         
         breadCrumbModel = new DefaultMenuModel();
         
@@ -73,12 +73,13 @@ public class BrowserController implements Serializable {
         Integer idDestFolder = -1;
         try {
            idDestFolder = paramId.equals("null") ? null : Integer.valueOf(paramId);
+           changeFolder(idDestFolder);
+           return;
         } catch (Exception e) {}
         
-        if(idDestFolder != null && idDestFolder != -1) 
-            changeFolder(idDestFolder);
-        else
-            changeFolder(currenFolder, false);
+        System.err.println(idDestFolder);
+        
+        changeFolder(currentFolder, false);
     }
     
     public MenuModel getBreadCrumbModel() {
@@ -99,8 +100,8 @@ public class BrowserController implements Serializable {
         this.clear();
         
         this.helper.reloadSession();
-        this.currenFolder = this.helper.getFolder(idFolder);
-        changeFolder(currenFolder);
+        this.currentFolder = this.helper.getFolder(idFolder);
+        changeFolder(currentFolder);
     }
     
     public void changeFolder(Folder newFolder) {
@@ -114,9 +115,9 @@ public class BrowserController implements Serializable {
         }
         
         this.clear();
-        
-        this.currenFolder = newFolder;
-        
+
+        this.currentFolder = newFolder;
+
         this.helper.reloadSession();
         
         this.data = this.helper.getDocuments(idFolder);
@@ -125,7 +126,7 @@ public class BrowserController implements Serializable {
         this.loadToDisplay();
         
         if (browsing) {
-            folderHistory.add(currenFolder);
+            folderHistory.add(currentFolder);
         }
         updateBreadCrumb();
     }
@@ -134,7 +135,7 @@ public class BrowserController implements Serializable {
         breadCrumbModel = new DefaultMenuModel();
         ArrayList<Folder> folderPath = new ArrayList<Folder>();
         
-        Folder f = currenFolder;
+        Folder f = currentFolder;
         while (f != null) {
             folderPath.add(f);
             f = f.getFolder();
@@ -164,13 +165,13 @@ public class BrowserController implements Serializable {
     public void clickOnForward() {
         changeFolder(folderHistory.forward(), false);
     }
-    
-    public Folder getCurrenFolder() {
-        return currenFolder;
+
+    public Folder getCurrentFolder() {
+        return currentFolder;
     }
-    
-    public void setCurrenFolder(Folder currenFolder) {
-        this.currenFolder = currenFolder;
+
+    public void setCurrentFolder(Folder currenFolder) {
+        this.currentFolder = currenFolder;
     }
     
     public boolean isListView() {
@@ -202,6 +203,8 @@ public class BrowserController implements Serializable {
         this.iconView = !galleriaView;
         this.listView = !galleriaView;
     }
+    
+    
     
     public class FolderHistory implements Serializable {
         

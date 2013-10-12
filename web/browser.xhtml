@@ -19,7 +19,8 @@
         <h:body id="body">
             <f:event listener="#{BrowserController.onLoad()}" type="preRenderView" />
             <f:event listener="#{UserController.checkLogged()}" type="preRenderView" />
-            <f:event listener="#{ImagesController.loadImages()}" type="preRenderView" />
+            <f:event listener="#{ImagesController.loadImages(BrowserController.currentFolder)}" type="preRenderView" >
+            </f:event>
 
 
             <p:growl showDetail="true" sticky="false"/>
@@ -50,9 +51,10 @@
                                 </span>
                                 <p:separator/>
                                 <span class="button-group ui-widget ui-splitbutton ui-buttonset">
-                                    <p:commandButton styleClass="ui-corner-left" title="Icon View" icon="ui-icon-th-large" ajax="true" immediate="true" update=":formFolder,:formBreadcrumb" action="#{BrowserController.setIconView(true)}"/>  
-                                    <p:commandButton title="List View" icon="ui-icon-list" ajax="true" immediate="true" update=":formFolder,:formBreadcrumb" action="#{BrowserController.setListView(true)}"/> 
-                                    <p:commandButton styleClass="ui-corner-right" title="Gallery View" icon="ui-icon-gallery" ajax="true" immediate="true" update=":formFolder,:formBreadcrumb" action="#{BrowserController.setGalleriaView(false)}"/>
+                                    <p:commandButton styleClass="ui-corner-left" title="Icon View" icon="ui-icon-th-large" ajax="true" immediate="true" update=":formFolder" action="#{BrowserController.setIconView(true)}"/>  
+                                    <p:commandButton title="List View" icon="ui-icon-list" ajax="true" immediate="true" update=":formFolder" action="#{BrowserController.setListView(true)}"/> 
+                                    <p:commandButton styleClass="ui-corner-right" title="Gallery View" icon="ui-icon-gallery" ajax="true" immediate="true" update=":formFolder" action="#{BrowserController.setGalleriaView(true)}"/>
+
                                 </span>
                                 <p:separator/> 
                                 <span class="button-group ui-widget ui-splitbutton ui-buttonset">
@@ -154,8 +156,8 @@
 
                         </p:dataTable>
   
-                        <p:galleria value="#{galleriaBean.images}" var="image" panelWidth="500" panelHeight="313" showCaption="true" rendered="#{BrowserController.galleriaView}">  
-                            <p:graphicImage value="/images/galleria/#{image}" alt="Image Description for #{image}" title="#{image}"/>  
+                        <p:galleria value="#{ImagesController.listOfImages}" var="image" panelWidth="500" panelHeight="313" showCaption="true" rendered="#{BrowserController.galleriaView}">  
+                            <p:graphicImage value="#{image}"  title="#{ImagesController.retrieveNameInHash(image)}"/>  
                         </p:galleria>  
                     </h:form>
                 </p:layoutUnit>
