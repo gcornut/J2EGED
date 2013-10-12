@@ -20,6 +20,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.Basic;
+import org.hibernate.Transaction;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
@@ -27,87 +28,84 @@ import org.primefaces.model.UploadedFile;
  *
  * @author Piotr
  */
-@ManagedBean(name="UploadController")
+@ManagedBean(name = "UploadController")
 @SessionScoped
-
 public class UploadController implements Serializable {
+
     private byte[] blob;
-    
     private Metadata meta;
     private Version version;
-    
     private UploadHelper helper;
- 
-    
+
     public UploadController() {
         this.helper = new UploadHelper();
     }
-    
+
     public void handleUploadFile(FileUploadEvent event) throws IOException {
         UploadedFile file = event.getFile();
 
         Long l = file.getSize();
-       
+
         blob = new byte[l.intValue()];
         file.getInputstream().read(blob);
         file.getInputstream().close();
-        
+
         this.initMetadata(event);
-        
-       
+
+
         this.saveFile();
-        
-          FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Uploaded", this.meta.getName() + "." + this.meta.getType().getFileExtension()));
-        
+
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Uploaded", this.meta.getName() + "." + this.meta.getType().getFileExtension()));
+
     }
-    
+
     public void initMetadata(FileUploadEvent event) {
-        
+
         UploadedFile file = event.getFile();
-        
-        String ext = file.getFileName().substring(file.getFileName().lastIndexOf('.')+1, file.getFileName().length());
+
+        String ext = file.getFileName().substring(file.getFileName().lastIndexOf('.') + 1, file.getFileName().length());
         String name = file.getFileName().substring(0, file.getFileName().length() - ext.length() - 1);
         Date date = new Date();
         User user = (User) event.getComponent().getAttributes().get("user");
         Folder folder = (Folder) event.getComponent().getAttributes().get("folder");
-        Integer size = ((Long)file.getSize()).intValue();
+        Integer size = ((Long) file.getSize()).intValue();
         Integer version = 1;
-        
+
         Type type = this.helper.getTypeFromExtension(ext);
-        
+
         this.meta = new Metadata(type, this.helper.retrieveUserFromLog(user.getLogin(), user.getPassword()), size, date, name);
         this.meta.setFolder(folder);
         this.meta.setVersion(version);
     }
-    
-    
+
     public void initVersion() {
         Date change_date = this.meta.getDateCreation();
         String commit = "Create document";
         Document doc = this.helper.getLastDocument();
         User user = new User();
-        
+
         this.version = new Version(doc, this.meta.getUser(), meta, change_date, commit);
     }
 
-    
     public void saveFile() {
         System.err.println("new file");
         this.helper.createNewFile();
         System.err.println("file");
         this.helper.createNewPhysicalDoc(blob);
         System.err.println("phy");
-        
+
         /////////////////////////////////////////////////////////////////////////////////
         this.helper.createNewMetadata(this.meta);
         System.err.println("meta");
         this.initVersion();
-        
-        this.helper.createNewVersion(this.version);
+
+        Transaction tx = this.helper.createNewVersion(this.version);
         System.err.println("version");
-       
+
+        tx.commit();
+        this.helper.reloadSession();
     }
-    
+
     public String reloadPage() {
         return "browser";
     }
