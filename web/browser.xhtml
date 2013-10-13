@@ -55,7 +55,7 @@
                             ajax="true" immediate="false"
                             action="#{BrowserController.createFolder()}" value="Create" 
                             update=":formFolder,:formBreadcrumb,:formTree" oncomplete="PF('dlgCF').hide();"
-                        />  
+                            />  
                     </h:panelGrid>
                 </h:form>  
             </p:dialog> 
@@ -70,12 +70,12 @@
                                     <p:commandButton styleClass="ui-corner-right" title="Forward" icon="ui-icon-forward" ajax="true" immediate="true" update=":formFolder,:formBreadcrumb,:formTree" action="#{BrowserController.clickOnForward}" />
                                 </span>
                                 <p:separator/>
-                                <span class="button-group ui-widget ui-splitbutton ui-buttonset">
-                                    <p:commandButton styleClass="ui-corner-left" title="Icon View" icon="ui-icon-th-large" ajax="true" immediate="true" update=":formFolder" action="#{BrowserController.setIconView(true)}"/>  
-                                    <p:commandButton title="List View" icon="ui-icon-list" ajax="true" immediate="true" update=":formFolder" action="#{BrowserController.setListView(true)}"/> 
-                                    <p:commandButton styleClass="ui-corner-right" title="Gallery View" icon="ui-icon-gallery" ajax="true" immediate="true" update=":formFolder" action="#{BrowserController.setGalleriaView(true)}"/>
-
-                                </span>
+                                <p:selectOneButton styleClass="view-buttons" value="#{BrowserController.selectedView}" >  
+                                    <f:selectItem itemLabel="I" itemValue="1" />  
+                                    <f:selectItem itemLabel="L" itemValue="2" />  
+                                    <f:selectItem itemLabel="G" itemValue="3" />
+                                    <p:ajax update=":formFolder" />
+                                </p:selectOneButton>
                                 <p:separator/> 
                                 <p:splitButton value="Upload" icon="ui-icon-upload" onclick="PF('dlg').show();
                                         return false;">
@@ -98,10 +98,12 @@
                     </h:form>
                 </p:layoutUnit>
 
+                <!--
                 <p:layoutUnit header="Terminal" position="south" size="100" minSize="100" closable="true" collapsible="true" resizable="true" collapsed="true">
                     <p:terminal id="terminal" widgetVar="term" commandHandler="#{terminalController.handleCommand}" prompt="$"
                                 welcomeMessage="Welcome to GED of Death Terminal!" />    
                 </p:layoutUnit>
+                -->
 
                 <p:layoutUnit position="west" resizable="true" header="Sidebar" size="200" collapsible="true" closable="false">
                     <h:form id="formTree">  
@@ -129,8 +131,9 @@
                     </div>
                     <div id="center-data">
                         <h:form id="formFolder" >
-                            <p:dataGrid id="iconViewData" var="doc" value="#{BrowserController.toDisplay}" 
-                                        columns="6" rendered="#{BrowserController.iconView}">  
+                            <p:dataGrid id="iconViewData" var="doc" 
+                                        value="#{BrowserController.toDisplay}" columns="6" 
+                                        rendered="${BrowserController.isIconView()}">  
 
                                 <p:panel  style="text-align:center" styleClass="browser-element">
 
@@ -155,7 +158,8 @@
 
                             </p:dataGrid>
 
-                            <p:dataTable id="tbl" var="docList" value="#{BrowserController.toDisplay}" paginator="false" rendered="#{BrowserController.listView}">  
+                            <p:dataTable id="tbl" var="docList" value="#{BrowserController.toDisplay}" paginator="false" 
+                                         rendered="${BrowserController.isListView()}">  
                                 <p:column rendered="#{!docList.isFolder()}">  
                                     <f:facet name="header">  
                                         <h:outputText value="Name" />  
@@ -196,12 +200,13 @@
 
                             </p:dataTable>
 
-                            <h:form id="plop" rendered="#{BrowserController.galleriaView}">
+                            <h:form id="plop" 
+                                    rendered="${BrowserController.isGalleriaView()}">
                                 <h:form id="no_record" rendered="#{ImagesController.listIsNull()}">
                                     <img src="img/No_record_found.png" width="300px" height="300px"/>
                                 </h:form>
                                 <p:galleria value="#{ImagesController.listOfID}" var="image" autoPlay="false" showCaption="true" rendered="#{!ImagesController.listIsNull()}">  
-                                    <p:graphicImage value="/ImageServlet/?Image_id=#{image}" height="250" width="250"/> 
+                                    <p:graphicImage value="/ImageServlet/?Image_id=#{image}" styleClass="image"/> 
                                 </p:galleria>  
                             </h:form>
                         </h:form>
