@@ -220,7 +220,7 @@ public class BrowserController implements Serializable {
         this.helper.createFolder(currentFolder, newFolderName);
         
         changeFolder(currentFolder, false);
-        newFolderName = "";
+        //newFolderName = "";
     }
     
     public class FolderHistory implements Serializable {

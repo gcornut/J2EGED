@@ -43,9 +43,13 @@
                 <h:form id="formCreateFolder">  
                     <h:panelGrid columns="2" style="margin-bottom:10px;width: 100%">  
                         <h:outputLabel for="name" value="Folder name" />  
-                        <p:inputText id="name" value="#{BrowserController.newFolderName}" />  
+                        <p:inputText id="name" required="true" value="#{BrowserController.newFolderName}" />  
                         <br/>                                            
-                        <p:commandButton ajax="true" immediate="true" action="#{BrowserController.createFolder()}" value="Submit" update=":formFolder,:formBreadcrumb" oncomplete="PF('dlg').hide();"/>  
+                        <p:commandButton 
+                            ajax="true" immediate="false"
+                            action="#{BrowserController.createFolder()}" value="Create" 
+                            update=":formFolder,:formBreadcrumb" oncomplete="PF('dlgCF').hide();"
+                        />  
                     </h:panelGrid>
                 </h:form>  
             </p:dialog> 
