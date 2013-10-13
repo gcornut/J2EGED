@@ -5,6 +5,7 @@ import fr.gphy.piotrgui.j2eged.model.Folder;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 import org.primefaces.event.NodeSelectEvent;
 import org.primefaces.model.TreeNode;
@@ -18,18 +19,19 @@ public class TreeController implements Serializable {
     private TreeHelper helper;
 
     public TreeController() {
-        this.helper = new TreeHelper();
+       
         this.initAll();
     }
 
     public TreeNode getRoot() {
         this.initAll();
-        System.err.println("toto");
         return root;
     }
 
     public void initAll() {
         root = new DefaultTreeNode("Root", null);
+        
+         this.helper = new TreeHelper();
 
         Folder rootFolder = new Folder();
         rootFolder.setName("root");
