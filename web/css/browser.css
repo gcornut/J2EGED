@@ -226,7 +226,7 @@ body {
         border-top-left-radius: 0px;
     }
 
-button:active {
+button:focus {
     outline: none !important;
 }
 
@@ -238,4 +238,40 @@ button:active {
 
 #formCreateFolder tr:last-child td{
     text-align: center;
+}
+
+/* Galleria */
+.ui-galleria {
+    position: absolute !important;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+    border: 0 !important;
+}
+
+.ui-galleria-filmstrip-wrapper {
+    position: absolute !important;
+    bottom:0;
+    right: 30px;
+    left: 30px;
+    width: 100% !important;
+    z-index: 0;
+}
+
+.ui-galleria .ui-galleria-panel-wrapper li {
+    text-align: center;
+    width: 100% !important;
+}
+
+.ui-galleria .image {
+    max-height: 90%;
+}
+
+.ui-galleria, .ui-galleria-caption, .ui-galleria-panel-wrapper {
+    width: 99% !important;
+}
+
+.ui-galleria-nav-prev, .ui-galleria-nav-next {
+    z-index:100;
 }
