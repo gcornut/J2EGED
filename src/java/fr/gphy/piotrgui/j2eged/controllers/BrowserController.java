@@ -37,6 +37,16 @@ public class BrowserController implements Serializable {
     private MenuModel breadCrumbModel;
     private final FolderHistory folderHistory;
     
+    private String newFolderName;
+
+    public String getNewFolderName() {
+        return newFolderName;
+    }
+
+    public void setNewFolderName(String newFolderName) {
+        this.newFolderName = newFolderName;
+    }
+    
     public BrowserController() {
         toDisplay = new ArrayList<DisplayDoc>();
         helper = new BrowserHelper();
@@ -205,7 +215,13 @@ public class BrowserController implements Serializable {
         this.listView = !galleriaView;
     }
     
-    
+    public void createFolder() {
+        System.err.println("createFolder = " + newFolderName);
+        this.helper.createFolder(currentFolder, newFolderName);
+        
+        changeFolder(currentFolder, false);
+        newFolderName = "";
+    }
     
     public class FolderHistory implements Serializable {
         

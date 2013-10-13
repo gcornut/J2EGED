@@ -38,3 +38,8 @@
     background-image: url("../img/icon.png") !important;
     background-position: -456px -48px;
 }
+
+.ui-icon-plus {
+    background-image: url("../img/icon.png") !important;
+    background-position: -407px -96px !important;
+}

@@ -17,7 +17,7 @@ import org.hibernate.Session;
  *
  * @author Piotr
  */
-public class ImagesHelper implements Serializable{
+public class ImagesHelper implements Serializable {
      Session session = null;
 
     public ImagesHelper() {

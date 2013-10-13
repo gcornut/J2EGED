@@ -41,7 +41,7 @@ public class UploadController implements Serializable {
 
     public void handleUploadFile(FileUploadEvent event) throws IOException {
         UploadedFile file = event.getFile();
-
+        
         Long l = file.getSize();
 
         blob = new byte[l.intValue()];

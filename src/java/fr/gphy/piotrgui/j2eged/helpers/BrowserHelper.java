@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -93,6 +94,21 @@ public class BrowserHelper implements Serializable {
 
             return (Folder) query.uniqueResult();
 
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+    
+    public void createFolder(Folder parentFolder, String name) {
+        Folder newFolder = new Folder();
+        newFolder.setName(name);
+        newFolder.setFolder(parentFolder != null ? getFolder(parentFolder.getIdFolder()) : null);
+        Transaction tx = session.beginTransaction();
+
+        try {
+            session.save(newFolder);
+            tx.commit();
+            this.reloadSession();
         } catch (Exception e) {
             throw e;
         }

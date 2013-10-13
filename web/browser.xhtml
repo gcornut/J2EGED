@@ -26,10 +26,10 @@
             <p:growl showDetail="true" sticky="false"/>
 
             <p:dialog header="Upload file" modal="true" id="dialogUpload" widgetVar="dlg" resizable="false" width="700px">  
-                <h:form id="form">  
+                <h:form id="formUpload">  
 
                     <p:fileUpload fileUploadListener="#{UploadController.handleUploadFile}" 
-                                  mode="advanced" dragDropSupport="true" multiple="false"
+                                  mode="advanced" dragDropSupport="true" multiple="false" oncomplete="PF('dlg').hide();"
                                   sizeLimit="100000" update=":formFolder,:formBreadcrumb">
                         <f:attribute name="user" value="#{UserController.user}" />
                         <f:attribute name="folder" value="#{BrowserController.currentFolder}" />
@@ -39,8 +39,18 @@
                 </h:form>  
             </p:dialog> 
 
-            <p:layout fullPage="true">
+            <p:dialog header="Create a folder" modal="true" id="dialogCreateFolder" widgetVar="dlgCF" resizable="false" width="300px">  
+                <h:form id="formCreateFolder">  
+                    <h:panelGrid columns="2" style="margin-bottom:10px;width: 100%">  
+                        <h:outputLabel for="name" value="Folder name" />  
+                        <p:inputText id="name" value="#{BrowserController.newFolderName}" />  
+                        <br/>                                            
+                        <p:commandButton ajax="true" immediate="true" action="#{BrowserController.createFolder()}" value="Submit" update=":formFolder,:formBreadcrumb" oncomplete="PF('dlg').hide();"/>  
+                    </h:panelGrid>
+                </h:form>  
+            </p:dialog> 
 
+            <p:layout fullPage="true">
                 <p:layoutUnit position="north" size="42" resizable="false" closable="false" collapsible="false">
                     <h:form id="formToolbar">
                         <p:toolbar>
@@ -57,11 +67,11 @@
 
                                 </span>
                                 <p:separator/> 
-                                <span class="button-group ui-widget ui-splitbutton ui-buttonset">
-                                    <p:button styleClass="ui-corner-left" title="Upload" icon="ui-icon-upload" onclick="PF('dlg').show();
-                                            return false;"/>
-                                    <p:commandButton styleClass="ui-corner-right" type="button" title="Download" icon="ui-icon-download"/> 
-                                </span>
+                                <p:splitButton value="Upload" icon="ui-icon-upload" onclick="PF('dlg').show();
+                                        return false;">
+                                    <p:menuitem value="Create a folder" icon="ui-icon-plus" onclick="PF('dlgCF').show();
+                                        return false;"/>
+                                </p:splitButton>
                             </p:toolbarGroup>
                             <p:toolbarGroup align="center">
                                 <span class="logo button-group">
@@ -114,7 +124,7 @@
 
                                 <p:panel style="text-align:center" styleClass="browser-element">
                                     <h:panelGrid columns="1" style="width:100%"  onclick="PrimeFaces.ab({source: 'formFolder', update: 'formFolder formBreadcrumb', params: [{name: 'idFolder', value: '4'}]});
-                                            return false;" rendered="${!doc.isFolder()}"> 
+                                        return false;" rendered="${!doc.isFolder()}"> 
                                         <img src="img/file.png" alt="[file]" width="80px" height="80px"/>
                                         <h:outputText value="#{doc.meta.name}" />  
                                         <p:column>type : <h:outputText value="#{doc.meta.type.mimeType}" /></p:column>
