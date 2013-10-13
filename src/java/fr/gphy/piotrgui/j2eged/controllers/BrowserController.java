@@ -77,9 +77,10 @@ public class BrowserController implements Serializable {
            return;
         } catch (Exception e) {}
         
-        System.err.println(idDestFolder);
+        //System.err.println(idDestFolder);
         
         changeFolder(currentFolder, false);
+        folderHistory.clear();
     }
     
     public MenuModel getBreadCrumbModel() {
@@ -208,11 +209,16 @@ public class BrowserController implements Serializable {
     
     public class FolderHistory implements Serializable {
         
-        private List<Folder> history;
+        private final ArrayList<Folder> history;
         private Integer historyPosition;
         
         public FolderHistory() {
             history = new ArrayList<Folder>();
+            historyPosition = null;
+        }
+        
+        public void clear() {
+            history.clear();
             historyPosition = null;
         }
         

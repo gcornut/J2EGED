@@ -32,33 +32,6 @@ body {
     .ui-layout-north, #formToolbar, #formToolbar > div {
         overflow: hidden !important;
     }
-
-/* Center */
-    .ui-layout-center {
-        padding: 0 !important;
-    }
-
-    .ui-layout-center > * {
-        padding: 0 !important;
-        border-radius: 5px;
-    }
-
-    .ui-layout-center .ui-breadcrumb {
-        border-radius: 0px;
-        border: 0;
-    }
-
-    .ui-layout-center .ui-datagrid-content {
-        border-right: 0px !important;
-        border-left: 0px !important;
-        border-bottom: 0px !important;
-        bottom: 0;
-        top: 30px;
-        position: absolute;
-        right: 0;
-        left: 0;
-        overflow-y: scroll;
-    }
     
     .ui-toolbar-group-right input {
         margin-right: 10px;
@@ -76,8 +49,46 @@ body {
     .ui-toolbar-group-center img {
         margin-bottom: -7px;
     }
-    
+
+/* Center */
+    .ui-layout-center {
+        padding: 0 !important;
+    }
+
+    .ui-layout-center > * {
+        padding: 0 !important;
+        border-radius: 5px;
+    }
+
+    /* Breadcrumb */
+        #center-topbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1;
+        }
+
+        .ui-layout-center .ui-breadcrumb {
+            border-radius: 0px;
+            border: 0;
+            border-bottom: 1px solid #dddddd;
+        }
+        
+    #center-data {
+        top: 31px;
+        position: absolute;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        overflow-y: scroll;
+    }
+
     /* Datagrid */
+        .ui-layout-center .ui-datagrid-content {
+            border: 0px !important;
+            bottom: 0;
+        }
 
         .browser-element {
             text-align: center;
@@ -85,7 +96,8 @@ body {
 
         .browser-element:hover {
             background: #F2F2F2;
-;        }
+            cursor: pointer;
+        }
         
     /* Datatable */
         .ui-datatable-tablewrapper, .ui-datatable-data {
@@ -93,6 +105,44 @@ body {
             border-left: 0px;
         }
         
+        .ui-datatable th {
+            border-top-width: 0px !important;
+            border-radius: 0px !important;
+        }
+        
+        .ui-datatable th:last-child {
+            border-right-width: 0px !important;
+        }
+        
+        .ui-datatable th:first-child {
+            border-left-width: 0px !important;
+        }
+        
+        .ui-datatable td:last-child {
+            border-right-width: 0px !important;
+        }
+        
+        .ui-datatable .icon {
+            background-image: url("../img/icon.png");
+            background-repeat: no-repeat;
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+            margin-bottom: -3px;
+        }
+        
+        .ui-datatable .file .icon {
+            background-position: -24px -24px;
+        }
+        
+        .ui-datatable .folder .icon {
+            background-position: -384px -120px;
+        }
+        
+        .ui-datatable tr:hover {
+            background: #F2F2F2;
+            cursor: pointer;
+        }
 
 
 .ui-layout-resizer-closed {

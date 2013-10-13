@@ -30,9 +30,9 @@
 
                     <p:fileUpload fileUploadListener="#{UploadController.handleUploadFile}" 
                                   mode="advanced" dragDropSupport="true" multiple="false"
-                                  fileLimit="1" sizeLimit="100000" update=":formFolder,:formBreadcrumb">
+                                  sizeLimit="100000" update=":formFolder,:formBreadcrumb">
                         <f:attribute name="user" value="#{UserController.user}" />
-                        <f:attribute name="folder" value="#{BrowserController.currenFolder}" />
+                        <f:attribute name="folder" value="#{BrowserController.currentFolder}" />
 
                     </p:fileUpload>  
 
@@ -41,7 +41,7 @@
 
             <p:layout fullPage="true">
 
-                <p:layoutUnit position="north" size="46" resizable="false" closable="false" collapsible="false">
+                <p:layoutUnit position="north" size="42" resizable="false" closable="false" collapsible="false">
                     <h:form id="formToolbar">
                         <p:toolbar>
                             <p:toolbarGroup align="left">
@@ -59,7 +59,7 @@
                                 <p:separator/> 
                                 <span class="button-group ui-widget ui-splitbutton ui-buttonset">
                                     <p:button styleClass="ui-corner-left" title="Upload" icon="ui-icon-upload" onclick="PF('dlg').show();
-                                            return false;"  />
+                                            return false;"/>
                                     <p:commandButton styleClass="ui-corner-right" type="button" title="Download" icon="ui-icon-download"/> 
                                 </span>
                             </p:toolbarGroup>
@@ -70,9 +70,6 @@
                                 </span>
                             </p:toolbarGroup>
                             <p:toolbarGroup align="right">
-                                <p:inputText id="search" value="" label="Search" />  
-                                <p:watermark for="search" value="Search a file" />
-
                                 <p:splitButton value="#{UserController.user.login}" icon="ui-icon-user">
                                     <p:menuitem value="Logout" icon="ui-icon-closethick" action="#{UserController.logOut}" ajax="false" immediate="true"/>
                                 </p:splitButton>
@@ -102,67 +99,87 @@
 
 
                 <p:layoutUnit position="center" id="browserView">
-                    <h:form id="formBreadcrumb">
-                        <p:breadCrumb model="#{BrowserController.breadCrumbModel}">  
-                            <p:menuitem value="Root" url="#" />
-                            <p:menuitem value="Root" url="#" />
-                        </p:breadCrumb>
-                    </h:form> 
-                    <h:form id="formFolder" >
-                        <p:dataGrid var="doc" value="#{BrowserController.toDisplay}" 
-                                    columns="6" rendered="#{BrowserController.iconView}">  
+                    <div id="center-topbar">
+                        <h:form id="formBreadcrumb">
+                            <p:breadCrumb model="#{BrowserController.breadCrumbModel}">  
+                                <p:menuitem value="Root" url="#" />
+                                <p:menuitem value="Root" url="#" />
+                            </p:breadCrumb>
+                        </h:form> 
+                    </div>
+                    <div id="center-data">
+                        <h:form id="formFolder" >
+                            <p:dataGrid var="doc" value="#{BrowserController.toDisplay}" 
+                                        columns="6" rendered="#{BrowserController.iconView}">  
 
-                            <p:panel style="text-align:center" styleClass="browser-element">
-                                <h:panelGrid columns="1" style="width:100%" rendered="${!doc.isFolder()}" > 
-                                    <img src="img/file.png" alt="[file]" width="80px" height="80px"/>
-                                    <h:outputText value="#{doc.meta.name}" />  
-                                    <p:column>type : <h:outputText value="#{doc.meta.type.mimeType}" /></p:column>
-                                </h:panelGrid>
-                                <h:panelGrid columns="1" style="width:100%" rendered="${doc.isFolder()}">
-                                    <img src="img/folder.png" alt="[folder]" width="80px" height="80px"/>
-                                    <p:commandLink actionListener="#{BrowserController.clickOnFolder}" update=":formFolder,:formBreadcrumb" value="#{doc.folder.name}">
-                                        <f:param name="idFolder" value="#{doc.folder.idFolder}"/>
-                                    </p:commandLink>
-                                    <div>type : folder</div>
-                                </h:panelGrid>
-                            </p:panel>
+                                <p:panel style="text-align:center" styleClass="browser-element">
+                                    <h:panelGrid columns="1" style="width:100%"  onclick="PrimeFaces.ab({source:'formFolder',update:'formFolder formBreadcrumb',params:[{name:'idFolder',value:'4'}]});return false;" rendered="${!doc.isFolder()}"> 
+                                        <img src="img/file.png" alt="[file]" width="80px" height="80px"/>
+                                        <h:outputText value="#{doc.meta.name}" />  
+                                        <p:column>type : <h:outputText value="#{doc.meta.type.mimeType}" /></p:column>
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="1" style="width:100%" rendered="${doc.isFolder()}">
+                                        <img src="img/folder.png" alt="[folder]" width="80px" height="80px"/>
+                                        <p:commandLink actionListener="#{BrowserController.clickOnFolder}" update=":formFolder,:formBreadcrumb" value="#{doc.folder.name}">
+                                            <f:param name="idFolder" value="#{doc.folder.idFolder}"/>
+                                        </p:commandLink>
+                                        <div>type : folder</div>
+                                    </h:panelGrid>
+                                </p:panel>
 
-                        </p:dataGrid>
+                            </p:dataGrid>
 
-                        <p:dataTable id="tbl" var="docList" value="#{BrowserController.toDisplay}" paginator="false" rendered="#{BrowserController.listView}">  
-                            <p:column>  
-                                <f:facet name="header">  
-                                    <h:outputText value="Name" />  
-                                </f:facet>  
-                                <h:outputText value="#{docList.meta.name}" rendered="#{!docList.isFolder()}"/>  
-                                <h:outputText value="#{docList.folder.name}" rendered="#{docList.isFolder()}"/>  
-                            </p:column>  
+                            <p:dataTable id="tbl" var="docList" value="#{BrowserController.toDisplay}" paginator="false" rendered="#{BrowserController.listView}">  
+                                <p:column rendered="#{!docList.isFolder()}">  
+                                    <f:facet name="header">  
+                                        <h:outputText value="Name" />  
+                                    </f:facet>
+                                    <span class="file">
+                                        <div class="icon"></div>
+                                        <h:outputText value="#{docList.meta.name}" /> 
+                                    </span>
+                                </p:column>  
+                                
+                                <p:column rendered="#{docList.isFolder()}">  
+                                    <f:facet name="header">  
+                                        <h:outputText value="Name" />  
+                                    </f:facet>
+                                    <span class="folder">
+                                        <div class="icon"></div>
+                                        <p:commandLink actionListener="#{BrowserController.clickOnFolder}" update=":formFolder,:formBreadcrumb" value="#{docList.folder.name}">
+                                            <f:param name="idFolder" value="#{docList.folder.idFolder}"/>
+                                        </p:commandLink>
+                                    </span> 
+                                </p:column> 
 
-                            <p:column exportable="false">  
-                                <f:facet name="header">  
-                                    <h:outputText value="Size" />  
-                                </f:facet>  
-                                <h:outputText value="#{docList.meta.size}" rendered="#{!docList.isFolder()}"/>  
-                                <h:outputText value="-" rendered="#{docList.isFolder()}"/>  
-                            </p:column>  
+                                <p:column exportable="false">  
+                                    <f:facet name="header">  
+                                        <h:outputText value="Size" />  
+                                    </f:facet>  
+                                    <h:outputText value="#{docList.meta.size}" rendered="#{!docList.isFolder()}"/>  
+                                    <h:outputText value="-" rendered="#{docList.isFolder()}"/>  
+                                </p:column>  
 
-                            <p:column>  
-                                <f:facet name="header">  
-                                    <h:outputText value="Type" />  
-                                </f:facet>  
-                                <h:outputText value="#{docList.meta.type.mimeType}" rendered="#{!docList.isFolder()}"/>  
-                                <h:outputText value="Folder" rendered="#{docList.isFolder()}"/>   
-                            </p:column>  
+                                <p:column>  
+                                    <f:facet name="header">  
+                                        <h:outputText value="Type" />  
+                                    </f:facet>  
+                                    <h:outputText value="#{docList.meta.type.mimeType}" rendered="#{!docList.isFolder()}"/>  
+                                    <h:outputText value="Folder" rendered="#{docList.isFolder()}"/>   
+                                </p:column>  
 
-                        </p:dataTable>
-  
-                        <p:galleria value="#{ImagesController.listOfImages}" var="image" panelWidth="500" panelHeight="313" showCaption="true" rendered="#{BrowserController.galleriaView}">  
-                            <p:graphicImage value="#{image}"  title="#{ImagesController.retrieveNameInHash(image)}"/>  
-                        </p:galleria>  
-                    </h:form>
+                            </p:dataTable>
+
+                            <p:galleria value="#{ImagesController.listOfImages}" var="image" panelWidth="500" panelHeight="313" showCaption="true" rendered="#{BrowserController.galleriaView}">  
+                                <p:graphicImage value="#{image}"  title="#{ImagesController.retrieveNameInHash(image)}"/>  
+                            </p:galleria>  
+
+                        </h:form>
+                    </div>
                 </p:layoutUnit>
 
             </p:layout>
+            <script src="js/makeOnClick.js" type="text/javascript"/>
         </h:body>
 
     </f:view>
