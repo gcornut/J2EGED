@@ -90,11 +90,13 @@ public class BrowserController implements Serializable {
     }
     
     public void onLoad() {
-        String paramId = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("idFolder");
+        final FacesContext context = FacesContext.getCurrentInstance();
+        String paramId = context.getExternalContext().getRequestParameterMap().get("idFolder");
         Integer idDestFolder = -1;
         try {
            idDestFolder = paramId.equals("null") ? null : Integer.valueOf(paramId);
            changeFolder(idDestFolder);
+           context.getExternalContext().redirect("browser.xhtml");
            return;
         } catch (Exception e) {}
         
@@ -231,7 +233,7 @@ public class BrowserController implements Serializable {
         this.helper.createFolder(currentFolder, newFolderName);
         
         changeFolder(currentFolder, false);
-        //newFolderName = "";
+        newFolderName = "";
     }
     
     public class FolderHistory implements Serializable {

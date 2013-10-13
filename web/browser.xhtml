@@ -28,7 +28,7 @@
 
                     <p:fileUpload fileUploadListener="#{UploadController.handleUploadFile}" 
                                   mode="advanced" dragDropSupport="true" multiple="false" oncomplete="PF('dlg').hide();"
-                                  sizeLimit="100000" update=":formFolder,:formBreadcrumb">
+                                  sizeLimit="16000000" update=":formFolder,:formBreadcrumb,:formTree">
                         <f:attribute name="user" value="#{UserController.user}" />
                         <f:attribute name="folder" value="#{BrowserController.currentFolder}" />
 
@@ -47,8 +47,8 @@
                         <p:commandButton 
                             ajax="true" immediate="false"
                             action="#{BrowserController.createFolder()}" value="Create" 
-                            update=":formFolder,:formBreadcrumb" oncomplete="PF('dlgCF').hide();"
-                            />  
+                            update=":formFolder,:formBreadcrumb,:formTree" oncomplete="PF('dlgCF').hide();"
+                        />  
                     </h:panelGrid>
                 </h:form>  
             </p:dialog> 
@@ -59,8 +59,8 @@
                         <p:toolbar>
                             <p:toolbarGroup align="left">
                                 <span class="button-group ui-widget ui-splitbutton ui-buttonset">
-                                    <p:commandButton styleClass="ui-corner-left" title="Backward" icon="ui-icon-backward" ajax="true" immediate="true" update=":formFolder,:formBreadcrumb" action="#{BrowserController.clickOnBackward}" />  
-                                    <p:commandButton styleClass="ui-corner-right" title="Forward" icon="ui-icon-forward" ajax="true" immediate="true" update=":formFolder,:formBreadcrumb" action="#{BrowserController.clickOnForward}" />
+                                    <p:commandButton styleClass="ui-corner-left" title="Backward" icon="ui-icon-backward" ajax="true" immediate="true" update=":formFolder,:formBreadcrumb,:formTree" action="#{BrowserController.clickOnBackward}" />  
+                                    <p:commandButton styleClass="ui-corner-right" title="Forward" icon="ui-icon-forward" ajax="true" immediate="true" update=":formFolder,:formBreadcrumb,:formTree" action="#{BrowserController.clickOnForward}" />
                                 </span>
                                 <p:separator/>
                                 <span class="button-group ui-widget ui-splitbutton ui-buttonset">
@@ -101,7 +101,7 @@
 
                         <p:tree value="#{TreeController.root}" var="node" id="tree">  
                             <p:treeNode id="treeNode">  
-                                <p:commandLink actionListener="#{BrowserController.clickOnFolder}" update=":formFolder,:formBreadcrumb" value="#{node.name}">
+                                <p:commandLink actionListener="#{BrowserController.clickOnFolder}" update=":formFolder,:formBreadcrumb,:formTree" value="#{node.name}">
                                     <f:param name="idFolder" value="#{node.toString()}"/>
                                 </p:commandLink>
                             </p:treeNode>  
@@ -137,7 +137,7 @@
                                     </h:panelGrid>
                                     <h:panelGrid columns="1" style="width:100%" rendered="${doc.isFolder()}">
                                         <img src="img/folder.png" alt="[folder]" width="80px" height="80px"/>
-                                        <p:commandLink actionListener="#{BrowserController.clickOnFolder}" update=":formFolder,:formBreadcrumb" value="#{doc.folder.name}">
+                                        <p:commandLink actionListener="#{BrowserController.clickOnFolder}" update=":formFolder,:formBreadcrumb,:formTree" value="#{doc.folder.name}">
                                             <f:param name="idFolder" value="#{doc.folder.idFolder}"/>
                                         </p:commandLink>
                                         <div>type : folder</div>
@@ -164,7 +164,7 @@
                                     </f:facet>
                                     <span class="folder">
                                         <div class="icon"></div>
-                                        <p:commandLink actionListener="#{BrowserController.clickOnFolder}" update=":formFolder,:formBreadcrumb" value="#{docList.folder.name}">
+                                        <p:commandLink actionListener="#{BrowserController.clickOnFolder}" update=":formFolder,:formBreadcrumb,:formTree" value="#{docList.folder.name}">
                                             <f:param name="idFolder" value="#{docList.folder.idFolder}"/>
                                         </p:commandLink>
                                     </span> 
