@@ -20,8 +20,6 @@
             <f:event listener="#{BrowserController.onLoad()}" type="preRenderView" />
             <f:event listener="#{UserController.checkLogged()}" type="preRenderView" />
             <f:event listener="#{ImagesController.loadImages(BrowserController.currentFolder)}" type="preRenderView" />
-            <f:event listener="#{TreeController.initAll()}" type="preRenderView" />
-
 
             <p:growl showDetail="true" sticky="false"/>
 
@@ -39,11 +37,6 @@
                 </h:form>  
             </p:dialog> 
 
-            <p:dialog header="Doc Detail" widgetVar="docDialog" modal="true">  
-                <p:outputPanel id="docDetail" style="text-align:center;">  
-                    <h:outputText value="#{BrowserController.currentDocument.meta.name}" />
-                </p:outputPanel>  
-            </p:dialog>  
 
             <p:dialog header="Create a folder" modal="true" id="dialogCreateFolder" widgetVar="dlgCF" resizable="false" width="300px">  
                 <h:form id="formCreateFolder">  
@@ -55,7 +48,7 @@
                             ajax="true" immediate="false"
                             action="#{BrowserController.createFolder()}" value="Create" 
                             update=":formFolder,:formBreadcrumb" oncomplete="PF('dlgCF').hide();"
-                        />  
+                            />  
                     </h:panelGrid>
                 </h:form>  
             </p:dialog> 
@@ -140,8 +133,6 @@
                                         <h:outputText value="#{doc.meta.name}" />  
                                         <p:column>type : <h:outputText value="#{doc.meta.type.mimeType}" /></p:column>
 
-                                        <p:button icon="ui-icon-search" onclick="PF('docDialog').show();
-                                        return false;"/>
 
                                     </h:panelGrid>
                                     <h:panelGrid columns="1" style="width:100%" rendered="${doc.isFolder()}">
@@ -155,7 +146,8 @@
 
                             </p:dataGrid>
 
-                            <p:dataTable id="tbl" var="docList" value="#{BrowserController.toDisplay}" paginator="false" rendered="#{BrowserController.listView}">  
+                            <p:dataTable id="dataTableID" var="docList" value="#{BrowserController.toDisplay}" 
+                                         paginator="false" rendered="#{BrowserController.listView}" >  
                                 <p:column rendered="#{!docList.isFolder()}">  
                                     <f:facet name="header">  
                                         <h:outputText value="Name" />  
@@ -191,17 +183,17 @@
                                         <h:outputText value="Type" />  
                                     </f:facet>  
                                     <h:outputText value="#{docList.meta.type.mimeType}" rendered="#{!docList.isFolder()}"/>  
-                                    <h:outputText value="Folder" rendered="#{docList.isFolder()}"/>   
+                                    <h:outputText value="Folder" rendered="#{docList.isFolder()}"/>  
                                 </p:column>  
 
                             </p:dataTable>
 
-                            <h:form id="plop" rendered="#{BrowserController.galleriaView}">
+                            <h:form id="galleria" rendered="#{BrowserController.galleriaView}">
                                 <h:form id="no_record" rendered="#{ImagesController.listIsNull()}">
                                     <img src="img/No_record_found.png" width="300px" height="300px"/>
                                 </h:form>
                                 <p:galleria value="#{ImagesController.listOfID}" var="image" autoPlay="false" showCaption="true" rendered="#{!ImagesController.listIsNull()}">  
-                                    <p:graphicImage value="/ImageServlet/?Image_id=#{image}" height="250" width="250"/> 
+                                    <p:graphicImage value="/ImageServlet/?Image_id=#{image}" title="#{ImagesController.getNameFromID(image)}"/> 
                                 </p:galleria>  
                             </h:form>
                         </h:form>
