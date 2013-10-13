@@ -8,6 +8,7 @@ import fr.gphy.piotrgui.j2eged.hibernate.HibernateUtil;
 import fr.gphy.piotrgui.j2eged.model.Folder;
 import fr.gphy.piotrgui.j2eged.model.Metadata;
 import fr.gphy.piotrgui.j2eged.model.PhysicalDocument;
+import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -16,7 +17,7 @@ import org.hibernate.Session;
  *
  * @author Piotr
  */
-public class ImagesHelper {
+public class ImagesHelper implements Serializable{
      Session session = null;
 
     public ImagesHelper() {
@@ -40,6 +41,8 @@ public class ImagesHelper {
         } catch (Exception e) {
             throw e;
         }
+        
+
             
 
     }

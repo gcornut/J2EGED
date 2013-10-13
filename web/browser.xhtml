@@ -32,7 +32,7 @@
                                   mode="advanced" dragDropSupport="true" multiple="false"
                                   fileLimit="1" sizeLimit="100000" update=":formFolder,:formBreadcrumb">
                         <f:attribute name="user" value="#{UserController.user}" />
-                        <f:attribute name="folder" value="#{BrowserController.currenFolder}" />
+                        <f:attribute name="folder" value="#{BrowserController.currentFolder}" />
 
                     </p:fileUpload>  
 
@@ -155,10 +155,22 @@
                             </p:column>  
 
                         </p:dataTable>
-  
-                        <p:galleria value="#{ImagesController.listOfImages}" var="image" panelWidth="500" panelHeight="313" showCaption="true" rendered="#{BrowserController.galleriaView}">  
-                            <p:graphicImage value="#{image}"  title="#{ImagesController.retrieveNameInHash(image)}"/>  
-                        </p:galleria>  
+
+                        <h:form id="formGalleria" rendered="#{BrowserController.galleriaView}" >
+
+                            <p:commandButton type="button" onclick="PF('switcher').previous();"  
+                                             icon="ui-icon-circle-triangle-w"/>  
+                            <p:commandButton type="button" onclick="PF('switcher').next();"  
+                                             icon="ui-icon-circle-triangle-e"/>  
+
+                            <p:imageSwitch effect="wipe" widgetVar="switcher" slideshowAuto="false">  
+                                <ui:repeat value="#{ImagesController.listOfImages}" var="image">  
+                                    <p:graphicImage value="#{ImagesController.retrieveMyPicture()}" />  
+                                </ui:repeat>  
+                            </p:imageSwitch>  
+                           
+                        </h:form>
+
                     </h:form>
                 </p:layoutUnit>
 
