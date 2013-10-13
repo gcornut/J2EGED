@@ -29,7 +29,9 @@ public class BrowserController implements Serializable {
     private List<Folder> folders;
     private List<DisplayDoc> toDisplay;
     private final BrowserHelper helper;
+    
     private Folder currentFolder;
+    private DisplayDoc currentDocument;
     
     private boolean listView = false;
     private boolean iconView = true;
@@ -39,6 +41,15 @@ public class BrowserController implements Serializable {
     
     private String newFolderName;
 
+    public DisplayDoc getCurrentDocument() {
+        return currentDocument;
+    }
+
+    public void setCurrentDocument(DisplayDoc currentDocument) {
+        this.currentDocument = currentDocument;
+    }
+
+    
     public String getNewFolderName() {
         return newFolderName;
     }
