@@ -23,6 +23,8 @@ public class TreeController implements Serializable {
     }
 
     public TreeNode getRoot() {
+        this.initAll();
+        System.err.println("toto");
         return root;
     }
 
