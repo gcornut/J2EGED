@@ -169,4 +169,9 @@ public class ImagesController implements Serializable {
         this.myImage = null;
         this.listOfID = new ArrayList<>();
     }
+    
+    public boolean listIsNull() {
+        return (this.listOfID.isEmpty());
+    }
+            
 }

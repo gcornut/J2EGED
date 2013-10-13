@@ -19,8 +19,8 @@
         <h:body id="body">
             <f:event listener="#{BrowserController.onLoad()}" type="preRenderView" />
             <f:event listener="#{UserController.checkLogged()}" type="preRenderView" />
-            <f:event listener="#{ImagesController.loadImages(BrowserController.currentFolder)}" type="preRenderView" >
-            </f:event>
+            <f:event listener="#{ImagesController.loadImages(BrowserController.currentFolder)}" type="preRenderView" />
+            <f:event listener="#{TreeController.initAll()}" type="preRenderView" />
 
 
             <p:growl showDetail="true" sticky="false"/>
@@ -38,6 +38,12 @@
 
                 </h:form>  
             </p:dialog> 
+
+            <p:dialog header="Doc Detail" widgetVar="docDialog" modal="true">  
+                <p:outputPanel id="docDetail" style="text-align:center;">  
+                    <h:outputText value="#{BrowserController.currentDocument.meta.name}" />
+                </p:outputPanel>  
+            </p:dialog>  
 
             <p:dialog header="Create a folder" modal="true" id="dialogCreateFolder" widgetVar="dlgCF" resizable="false" width="300px">  
                 <h:form id="formCreateFolder">  
@@ -119,15 +125,20 @@
                     </div>
                     <div id="center-data">
                         <h:form id="formFolder" >
-                            <p:dataGrid var="doc" value="#{BrowserController.toDisplay}" 
+                            <p:dataGrid id="iconViewData" var="doc" value="#{BrowserController.toDisplay}" 
                                         columns="6" rendered="#{BrowserController.iconView}">  
 
-                                <p:panel style="text-align:center" styleClass="browser-element">
-                                    <h:panelGrid columns="1" style="width:100%"  onclick="PrimeFaces.ab({source: 'formFolder', update: 'formFolder formBreadcrumb', params: [{name: 'idFolder', value: '4'}]});
+                                <p:panel  style="text-align:center" styleClass="browser-element">
+
+                                    <h:panelGrid  columns="1" style="width:100%"  onclick="PrimeFaces.ab({source: 'formFolder', update: 'formFolder formBreadcrumb', params: [{name: 'idFolder', value: '4'}]});
                                         return false;" rendered="${!doc.isFolder()}"> 
                                         <img src="img/file.png" alt="[file]" width="80px" height="80px"/>
                                         <h:outputText value="#{doc.meta.name}" />  
                                         <p:column>type : <h:outputText value="#{doc.meta.type.mimeType}" /></p:column>
+
+                                        <p:button icon="ui-icon-search" onclick="PF('docDialog').show();
+                                        return false;"/>
+
                                     </h:panelGrid>
                                     <h:panelGrid columns="1" style="width:100%" rendered="${doc.isFolder()}">
                                         <img src="img/folder.png" alt="[folder]" width="80px" height="80px"/>
@@ -181,11 +192,14 @@
 
                             </p:dataTable>
 
-                            
-                            <p:galleria value="#{ImagesController.listOfID}" var="image" autoPlay="false" showCaption="true" rendered="#{BrowserController.galleriaView}">  
-                                <p:graphicImage value="/ImageServlet/?Image_id=#{image}" height="250" width="250"/> 
-                            </p:galleria>  
-
+                            <h:form id="plop" rendered="#{BrowserController.galleriaView}">
+                                <h:form id="no_record" rendered="#{ImagesController.listIsNull()}">
+                                    <img src="img/No_record_found.png" width="300px" height="300px"/>
+                                </h:form>
+                                <p:galleria value="#{ImagesController.listOfID}" var="image" autoPlay="false" showCaption="true" rendered="#{!ImagesController.listIsNull()}">  
+                                    <p:graphicImage value="/ImageServlet/?Image_id=#{image}" height="250" width="250"/> 
+                                </p:galleria>  
+                            </h:form>
                         </h:form>
                     </div>
 
