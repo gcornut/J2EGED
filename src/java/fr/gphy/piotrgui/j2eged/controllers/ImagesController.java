@@ -43,6 +43,8 @@ public class ImagesController implements Serializable {
     private List<MyImage> listOfImages;
     private ImagesHelper helper;
     
+    private List<Integer> listOfID;
+    
     private int ite = -1;
 
     public ImagesController() {
@@ -66,10 +68,14 @@ public class ImagesController implements Serializable {
     public void setListOfImages(List<MyImage> listOfImages) {
         this.listOfImages = listOfImages;
     }
+    
+    
+    
 
     public void loadImages(Folder currentFolder) throws IOException {
 
         if(this.helper.getImages(currentFolder) != null) this.initList();
+        
 
         for (Object[] tab : this.helper.getImages(currentFolder)) {
             /*ByteArrayInputStream bis = new ByteArrayInputStream(((PhysicalDocument) tab[1]).getBinaryBlob());
@@ -94,13 +100,26 @@ public class ImagesController implements Serializable {
        */
             System.err.println("plop" + ((PhysicalDocument) tab[1]).getBinaryBlob().length);
             this.listOfImages.add(new MyImage(((PhysicalDocument) tab[1]).getBinaryBlob(), ((Metadata) tab[0]).getName(), ((Metadata) tab[0]).getType().getMimeType()));
-
+            this.listOfID.add(((PhysicalDocument) tab[1]).getDocument().getIdDoc());
         }
             
        // this.listOfImages.add(new DefaultStreamedContent(new ByteArrayInputStream(((PhysicalDocument) tab[1]).getBinaryBlob()), ((Metadata) tab[0]).getType().getMimeType()));
         //this.myImage = new DefaultStreamedContent(new ByteArrayInputStream(((PhysicalDocument) tab[1]).getBinaryBlob()), ((Metadata) tab[0]).getType().getMimeType());}
        
 
+    }
+
+    public List<Integer> getListOfID() {
+        return listOfID;
+    }
+
+    public void setListOfID(List<Integer> listOfID) {
+        this.listOfID = listOfID;
+    }
+    
+    public String getIntegerID() {
+        this.ite++;
+        return this.listOfID.get(ite).toString();
     }
 
     public int sizeOfList() {
@@ -132,9 +151,22 @@ public class ImagesController implements Serializable {
         System.err.println(ite + "  " + this.listOfImages.get(ite).getName() + "   " + this.listOfImages.get(ite).getPicture().getContentType());
         return this.listOfImages.get(ite).getPicture();
     }
+     
+      public String retrieveMyPictureName() {
+        //System.err.println(this.listOfImages.size() + " size");
+        if (this.listOfImages == null) {
+            System.err.println("plop fkjksjdfslkd");
+            return null;
+        }
+        //this.ite++;
+        //System.err.println(ite + "  " + this.listOfImages.get(ite).getName() + "   " + this.listOfImages.get(ite).getPicture().getContentType());
+          System.err.println("plop" + ite);
+        return "plop" + ite;
+    }
     
     public void initList() {
         this.listOfImages = new ArrayList<>();
         this.myImage = null;
+        this.listOfID = new ArrayList<>();
     }
 }
