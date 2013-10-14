@@ -149,13 +149,8 @@
 
                             </p:dataGrid>
 
-<<<<<<< HEAD
-                            <p:dataTable id="tbl" var="docList" value="#{BrowserController.toDisplay}" paginator="false" 
-                                         rendered="${BrowserController.isListView()}">  
-=======
                             <p:dataTable id="dataTableID" var="docList" value="#{BrowserController.toDisplay}" 
-                                         paginator="false" rendered="#{BrowserController.listView}" >  
->>>>>>> 04fa166a12fa7b91ad64ddebf88ca6c94cf4c763
+                                         paginator="false" rendered="#{BrowserController.isListView()}" >  
                                 <p:column rendered="#{!docList.isFolder()}">  
                                     <f:facet name="header">  
                                         <h:outputText value="Name" />  

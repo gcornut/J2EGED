@@ -47,7 +47,6 @@ public class BrowserController implements Serializable {
     public void setCurrentDocument(DisplayDoc currentDocument) {
         this.currentDocument = currentDocument;
     }
-
     
     public String getNewFolderName() {
         return newFolderName;
@@ -90,20 +89,19 @@ public class BrowserController implements Serializable {
     }
     
     public void onLoad() {
+        folderHistory.clear();
+        
         final FacesContext context = FacesContext.getCurrentInstance();
         String paramId = context.getExternalContext().getRequestParameterMap().get("idFolder");
-        Integer idDestFolder = -1;
         try {
-           idDestFolder = paramId.equals("null") ? null : Integer.valueOf(paramId);
+           Integer idDestFolder = paramId.equals("null") ? null : Integer.valueOf(paramId);
            changeFolder(idDestFolder);
            context.getExternalContext().redirect("browser.xhtml");
            return;
         } catch (Exception e) {}
         
         //System.err.println(idDestFolder);
-        
         changeFolder(currentFolder, false);
-        folderHistory.clear();
     }
     
     public MenuModel getBreadCrumbModel() {
