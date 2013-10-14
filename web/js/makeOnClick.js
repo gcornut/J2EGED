@@ -18,4 +18,10 @@ var makeOnClick = function() {
 };
 
 $(makeOnClick);
-PrimeFaces.ab = function (cfg,ext){setTimeout(makeOnClick ,250);setTimeout(makeOnClick ,500);setTimeout(makeOnClick ,800);setTimeout(makeOnClick ,1000);return PrimeFaces.ajax.AjaxRequest(cfg,ext);};
+PrimeFaces.ab = function (cfg,ext){
+    setTimeout(makeOnClick ,250);
+    setTimeout(makeOnClick ,500);
+    setTimeout(makeOnClick ,1000);
+    setTimeout(makeOnClick ,2000);
+    return PrimeFaces.ajax.AjaxRequest(cfg,ext);
+};

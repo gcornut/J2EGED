@@ -49,6 +49,33 @@ body {
     .ui-toolbar-group-center img {
         margin-bottom: -7px;
     }
+    
+    /* view-buttons */
+        .view-buttons span {
+            visibility: hidden;
+        }
+
+        .view-buttons div {
+            background-repeat: no-repeat !important;
+            background-position: center center !important;
+        }
+
+        .view-buttons div:hover {
+            background-repeat: no-repeat !important;
+            background-position: center center !important;
+        }
+
+        .view-buttons div:nth-child(1) {
+            background-image: url("../img/iconView.png") !important;
+        }
+
+        .view-buttons div:nth-child(2) {
+            background-image: url("../img/listView.png") !important;
+        }
+
+        .view-buttons div:nth-child(3) {
+            background-image: url("../img/galleriaView.png") !important;
+        }
 
 /* Center */
     .ui-layout-center {
@@ -154,15 +181,15 @@ body {
 }
 
 /* Split button */
-    .button-group button:nth-child(2),
+    .ui-buttonset button:nth-child(2),
     .ui-splitbutton button:nth-child(2),
-    .button-group button:nth-child(3),
+    .ui-buttonset button:nth-child(3),
     .ui-splitbutton button:nth-child(3)
-    .button-group button:nth-child(4),
+    .ui-buttonset button:nth-child(4),
     .ui-splitbutton button:nth-child(4),
-    .button-group button:nth-child(5),
+    .ui-buttonset button:nth-child(5),
     .ui-splitbutton button:nth-child(5) {
-        border-left: 0px!important;
+        border-left: 0px !important;
     }
 
     .button-group.ui-splitbutton {

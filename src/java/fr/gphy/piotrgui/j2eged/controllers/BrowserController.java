@@ -33,9 +33,8 @@ public class BrowserController implements Serializable {
     private Folder currentFolder;
     private DisplayDoc currentDocument;
     
-    private boolean listView = false;
-    private boolean iconView = true;
-    private boolean galleriaView = false;
+    private int selectedView;
+    
     private MenuModel breadCrumbModel;
     private final FolderHistory folderHistory;
     
@@ -48,7 +47,6 @@ public class BrowserController implements Serializable {
     public void setCurrentDocument(DisplayDoc currentDocument) {
         this.currentDocument = currentDocument;
     }
-
     
     public String getNewFolderName() {
         return newFolderName;
@@ -59,6 +57,7 @@ public class BrowserController implements Serializable {
     }
     
     public BrowserController() {
+        selectedView = 1;
         toDisplay = new ArrayList<DisplayDoc>();
         helper = new BrowserHelper();
         
@@ -90,20 +89,19 @@ public class BrowserController implements Serializable {
     }
     
     public void onLoad() {
+        folderHistory.clear();
+        
         final FacesContext context = FacesContext.getCurrentInstance();
         String paramId = context.getExternalContext().getRequestParameterMap().get("idFolder");
-        Integer idDestFolder = -1;
         try {
-           idDestFolder = paramId.equals("null") ? null : Integer.valueOf(paramId);
+           Integer idDestFolder = paramId.equals("null") ? null : Integer.valueOf(paramId);
            changeFolder(idDestFolder);
            context.getExternalContext().redirect("browser.xhtml");
            return;
         } catch (Exception e) {}
         
         //System.err.println(idDestFolder);
-        
         changeFolder(currentFolder, false);
-        folderHistory.clear();
     }
     
     public MenuModel getBreadCrumbModel() {
@@ -199,33 +197,15 @@ public class BrowserController implements Serializable {
     }
     
     public boolean isListView() {
-        return listView;
-    }
-    
-    public void setListView(boolean listView) {
-        this.listView = listView;
-        this.iconView = !listView;
-        this.galleriaView = !listView;
+        return selectedView==2;
     }
     
     public boolean isIconView() {
-        return iconView;
-    }
-    
-    public void setIconView(boolean iconView) {
-        this.iconView = iconView;
-        this.listView = !iconView;
-        this.galleriaView = !iconView;
+        return selectedView==1;
     }
     
     public boolean isGalleriaView() {
-        return galleriaView;
-    }
-    
-    public void setGalleriaView(boolean galleriaView) {
-        this.galleriaView = galleriaView;
-        this.iconView = !galleriaView;
-        this.listView = !galleriaView;
+        return selectedView==3;
     }
     
     public void createFolder() {
@@ -234,6 +214,14 @@ public class BrowserController implements Serializable {
         
         changeFolder(currentFolder, false);
         newFolderName = "";
+    }
+
+    public int getSelectedView() {
+        return selectedView;
+    }
+
+    public void setSelectedView(int selectedView) {
+        this.selectedView = selectedView;
     }
     
     public class FolderHistory implements Serializable {
