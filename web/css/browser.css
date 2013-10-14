@@ -51,8 +51,24 @@ body {
     }
     
     /* view-buttons */
+        .view-buttons {
+            background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+            background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+            background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+            background-image: linear-gradient(top, #ffffff, #e6e6e6);
+            background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+        }
+    
         .view-buttons span {
             visibility: hidden;
+        }
+        
+        .view-buttons .ui-state-default {
+            background-color: transparent !important;
+        }
+        
+        .view-buttons .ui-state-active {
+            background-color: #e6e6e6 !important;
         }
 
         .view-buttons div {
@@ -181,14 +197,10 @@ body {
 }
 
 /* Split button */
-    .ui-buttonset button:nth-child(2),
-    .ui-splitbutton button:nth-child(2),
-    .ui-buttonset button:nth-child(3),
-    .ui-splitbutton button:nth-child(3)
-    .ui-buttonset button:nth-child(4),
-    .ui-splitbutton button:nth-child(4),
-    .ui-buttonset button:nth-child(5),
-    .ui-splitbutton button:nth-child(5) {
+    .ui-buttonset > *:nth-child(2),
+    .ui-buttonset > *:nth-child(3),
+    .ui-buttonset > *:nth-child(4),
+    .ui-buttonset > *:nth-child(5) {
         border-left: 0px !important;
     }
 
