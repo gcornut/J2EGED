@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.gphy.piotrgui.j2eged.controllers;
+package fr.gphy.piotrgui.j2eged.utils;
 
 import fr.gphy.piotrgui.j2eged.model.Metadata;
 import java.io.ByteArrayInputStream;

@@ -24,7 +24,7 @@ public class TreeController implements Serializable {
     }
 
     public TreeNode getRoot() {
-        this.initAll();
+       // this.initAll();
         return root;
     }
 
