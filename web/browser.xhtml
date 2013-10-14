@@ -177,7 +177,7 @@
                                     <f:facet name="header">  
                                         <h:outputText value="Size" />  
                                     </f:facet>  
-                                    <h:outputText value="#{docList.meta.size}" rendered="#{!docList.isFolder()}"/>  
+                                    <h:outputText value="#{docList.meta.prettySize}" rendered="#{!docList.isFolder()}"/>  
                                     <h:outputText value="-" rendered="#{docList.isFolder()}"/>  
                                 </p:column>  
 

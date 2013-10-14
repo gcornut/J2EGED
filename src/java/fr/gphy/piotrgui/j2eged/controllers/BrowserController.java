@@ -7,6 +7,7 @@ import fr.gphy.piotrgui.j2eged.model.Metadata;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -112,6 +113,13 @@ public class BrowserController implements Serializable {
         for (Folder fold : this.folders) {
             this.toDisplay.add(new DisplayDoc(fold));
         }
+        
+        Collections.sort(this.data, new Comparator<Object[]>() {
+            public int compare(Object[] a, Object[] b) {
+                int compareTo = ((Metadata)a[1]).getName().compareTo(((Metadata)b[1]).getName());
+                return compareTo;
+            }
+        });
         
         for (Object[] row : this.data) {
             this.toDisplay.add(new DisplayDoc((Document) row[0], (Metadata) row[1]));

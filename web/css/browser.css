@@ -24,7 +24,7 @@ body {
 }
 
 /* Toolbar */
-    .ui-layout-north {
+    .ui-layout-north, .ui-layout-north .ui-layout-unit-content {
         padding: 0 !important;
         border: 0px !important;
     }
@@ -165,8 +165,8 @@ body {
             border-left-width: 0px !important;
         }
         
-        .ui-datatable td:last-child {
-            border-right-width: 0px !important;
+        .ui-datatable tr {
+            border-left: 0px hidden !important;
         }
         
         .ui-datatable .icon {

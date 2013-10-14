@@ -2,6 +2,7 @@ package fr.gphy.piotrgui.j2eged.model;
 // Generated 12 oct. 2013 14:58:54 by Hibernate Tools 3.2.1.GA
 
 
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -80,6 +81,13 @@ public class Metadata  implements java.io.Serializable {
     }
     public int getSize() {
         return this.size;
+    }
+    
+    public String getPrettySize() {
+        if(size <= 0) return "0";
+        final String[] units = new String[] { "B", "KB", "MB", "GB", "TB" };
+        int digitGroups = (int) (Math.log10(size)/Math.log10(1024));
+        return new DecimalFormat("#,##0.#").format(size/Math.pow(1024, digitGroups)) + " " + units[digitGroups];
     }
     
     public void setSize(int size) {
