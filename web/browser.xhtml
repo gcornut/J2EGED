@@ -167,8 +167,9 @@
                                     </f:facet>
                                     <span class="folder">
                                         <div class="icon"></div>
-                                        <p:commandLink actionListener="#{BrowserController.clickOnFolder}" update=":formFolder,:formBreadcrumb,:formTree" value="#{docList.folder.name}">
+                                        <p:commandLink actionListener="#{BrowserController.clickOnFolder}" ajax="false" value="#{docList.folder.name}">
                                             <f:param name="idFolder" value="#{docList.folder.idFolder}"/>
+ 
                                         </p:commandLink>
                                     </span> 
                                 </p:column> 
@@ -187,6 +188,11 @@
                                     </f:facet>  
                                     <h:outputText value="#{docList.meta.type.mimeType}" rendered="#{!docList.isFolder()}"/>  
                                     <h:outputText value="Folder" rendered="#{docList.isFolder()}"/>  
+
+                                    <h:commandLink actionListener="#{DownloadController.save}" rendered="#{!docList.isFolder()}"  styleClass="ui-icon ui-icon-download">
+                                        <f:param name="DocID" value="#{docList.doc.idDoc}"/>
+                                        <p:fileDownload value="#{DownloadController.file}" contentDisposition="attachment" />
+                                    </h:commandLink>
                                 </p:column>  
 
                             </p:dataTable>

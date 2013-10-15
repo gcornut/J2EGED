@@ -5,11 +5,19 @@
 package fr.gphy.piotrgui.j2eged.controllers;
 
 import fr.gphy.piotrgui.j2eged.helpers.DownloadHelper;
+import fr.gphy.piotrgui.j2eged.model.Metadata;
+import fr.gphy.piotrgui.j2eged.model.PhysicalDocument;
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.servlet.http.HttpServletRequest;
+import org.primefaces.component.filedownload.FileDownloadActionListener;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
@@ -29,14 +37,21 @@ public class DownloadController implements Serializable {
         this.helper = new DownloadHelper();
     }
 
-    public void save(BrowserController.DisplayDoc doc) {
-        this.selectedDoc = doc;
-        System.err.println("save");
-        if (selectedDoc != null) {
-            ByteArrayInputStream stream = new ByteArrayInputStream(this.helper.getByteFromID(this.selectedDoc.getDoc().getIdDoc()).getBinaryBlob());
-            file = new DefaultStreamedContent(stream, this.selectedDoc.getMeta().getType().getMimeType(), this.selectedDoc.getMeta().getName());
-
+    public void save(ActionEvent event) throws IOException {
+        String paramId = ((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest()).getParameter("DocID");
+        
+        if (paramId.equals("null")) {
+            System.err.println("Save : idNUll");
+            return;
         }
+        Metadata meta = this.helper.getMetaFromID(paramId);
+
+        PhysicalDocument phyDoc = this.helper.getByteFromID(paramId);
+      
+        ByteArrayInputStream stream = new ByteArrayInputStream(phyDoc.getBinaryBlob());
+
+        file = new DefaultStreamedContent(stream, meta.getType().getMimeType(), meta.getName());
+
 
     }
 
@@ -50,10 +65,12 @@ public class DownloadController implements Serializable {
     }
 
     public StreamedContent getFile() {
-        System.err.println(file.getName());
+        //System.err.println(file.getName());
         if (file == null) {
             System.err.println("error getFile");
         }
+        
+        System.err.println("Name of file : " + file.getName());
         return file;
     }
 
