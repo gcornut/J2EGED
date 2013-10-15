@@ -26,7 +26,7 @@
             <p:dialog header="Upload file" modal="true" id="dialogUpload" widgetVar="dlg" resizable="false" width="700px">  
                 <h:form id="formUpload">  
 
-                    <p:fileUpload fileUploadListener="#{UploadController.handleUploadFile}" fileLimit="1"
+                    <p:fileUpload fileUploadListener="#{UploadController.handleUploadFile}"
                                   mode="advanced" dragDropSupport="true" multiple="false" oncomplete="PF('dlg').hide();"
                                   sizeLimit="16000000" update=":formFolder,:formBreadcrumb,:formTree">
                         <f:attribute name="user" value="#{UserController.user}" />
@@ -161,6 +161,7 @@
                                     </span>
                                 </p:column>  
 
+                                
                                 <p:column rendered="#{docList.isFolder()}">  
                                     <f:facet name="header">  
                                         <h:outputText value="Name" />  
@@ -173,6 +174,17 @@
                                         </p:commandLink>
                                     </span> 
                                 </p:column> 
+                                
+                                
+                                <p:column width="15">
+                                    <h:commandLink rendered="#{!docList.isFolder()}"  
+                                                   actionListener="#{DownloadController.save}" 
+                                                   styleClass="ui-icon ui-icon-download"
+                                                   title="Download">
+                                        <f:param name="DocID" value="#{docList.doc.idDoc}"/>
+                                        <p:fileDownload value="#{DownloadController.file}" contentDisposition="attachment" />
+                                    </h:commandLink>
+                                </p:column>
 
                                 <p:column exportable="false">  
                                     <f:facet name="header">  
@@ -189,11 +201,8 @@
                                     <h:outputText value="#{docList.meta.type.mimeType}" rendered="#{!docList.isFolder()}"/>  
                                     <h:outputText value="Folder" rendered="#{docList.isFolder()}"/>  
 
-                                    <h:commandLink actionListener="#{DownloadController.save}" rendered="#{!docList.isFolder()}"  styleClass="ui-icon ui-icon-download">
-                                        <f:param name="DocID" value="#{docList.doc.idDoc}"/>
-                                        <p:fileDownload value="#{DownloadController.file}" contentDisposition="attachment" />
-                                    </h:commandLink>
                                 </p:column>  
+                                
 
                             </p:dataTable>
 
