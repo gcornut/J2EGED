@@ -26,7 +26,7 @@
             <p:dialog header="Upload file" modal="true" id="dialogUpload" widgetVar="dlg" resizable="false" width="700px">  
                 <h:form id="formUpload">  
 
-                    <p:fileUpload fileUploadListener="#{UploadController.handleUploadFile}" 
+                    <p:fileUpload fileUploadListener="#{UploadController.handleUploadFile}" fileLimit="1"
                                   mode="advanced" dragDropSupport="true" multiple="false" oncomplete="PF('dlg').hide();"
                                   sizeLimit="16000000" update=":formFolder,:formBreadcrumb,:formTree">
                         <f:attribute name="user" value="#{UserController.user}" />
