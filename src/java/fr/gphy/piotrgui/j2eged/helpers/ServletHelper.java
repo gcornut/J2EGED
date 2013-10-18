@@ -25,6 +25,7 @@ public class ServletHelper {
     }
     
     public byte[] retriveByteFromID(String id){
+        this.reloadSession();
         session.beginTransaction();
         try {
             Query q = session.createSQLQuery("select physical_document.* from physical_document "

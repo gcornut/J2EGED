@@ -27,6 +27,7 @@ public class DownloadHelper {
     }
     
     public PhysicalDocument getByteFromID(String id) {
+        this.reloadSession();
         session.beginTransaction();
         
         try {
@@ -40,6 +41,7 @@ public class DownloadHelper {
     }
 
     public Metadata getMetaFromID(String paramId) {
+        this.reloadSession();
         session.beginTransaction();
         
         try {

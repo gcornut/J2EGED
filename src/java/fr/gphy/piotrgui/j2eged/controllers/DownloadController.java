@@ -9,15 +9,12 @@ import fr.gphy.piotrgui.j2eged.model.Metadata;
 import fr.gphy.piotrgui.j2eged.model.PhysicalDocument;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpServletRequest;
-import org.primefaces.component.filedownload.FileDownloadActionListener;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 

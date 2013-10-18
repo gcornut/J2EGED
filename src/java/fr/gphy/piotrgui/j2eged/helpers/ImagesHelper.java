@@ -29,7 +29,8 @@ public class ImagesHelper implements Serializable {
     }
     
     public List<Object[]> getImages(Folder folder) {
-          session.beginTransaction();      
+        this.reloadSession();
+        session.beginTransaction();      
 
         try {
             Integer id = (folder == null) ? null : folder.getIdFolder();

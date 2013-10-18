@@ -28,6 +28,7 @@ public class TreeHelper implements Serializable {
     }
 
     public List<Folder> getFolders(Integer clef) {
+        this.reloadSession();
         session.beginTransaction();
 
         try {
