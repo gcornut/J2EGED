@@ -8,7 +8,7 @@ var makeOnClick = function() {
         var cell = $(link).parents("td.ui-datagrid-column");
         cell.attr("onclick", onclick);
     }
-    links = $(".ui-datatable td:first-child a");
+    links = $(".ui-datatable td a");
     for (var i = 0; i < links.length; i++) {
         link = links[i];
         var onclick = $(link).attr("onclick");

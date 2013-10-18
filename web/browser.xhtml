@@ -17,18 +17,21 @@
         </h:head>
 
         <h:body id="body">
+
             <f:event listener="#{BrowserController.onLoad()}" type="preRenderView" />
             <f:event listener="#{UserController.checkLogged()}" type="preRenderView" />
             <f:event listener="#{ImagesController.loadImages(BrowserController.currentFolder)}" type="preRenderView" />
+            <f:event listener="#{TreeController.initAll()}" type="preRenderView" />
 
             <p:growl showDetail="true" sticky="false"/>
 
+            <p:hotkey bind="esc" handler="PF('dlg').hide();PF('dlgInfo').hide();PF('dlgCF').hide()"></p:hotkey>
             <p:dialog header="Upload file" modal="true" id="dialogUpload" widgetVar="dlg" resizable="false" width="700px">  
                 <h:form id="formUpload" enctype="multipart/form-data">  
 
                     <p:fileUpload fileUploadListener="#{UploadController.handleUploadFile}"
                                   mode="advanced" dragDropSupport="true" multiple="false" oncomplete="PF('dlg').hide();"
-                                  sizeLimit="16000000" update=":formFolder,:formBreadcrumb,:formTree">
+                                  sizeLimit="16000000" update=":formFolder">
                         <f:attribute name="user" value="#{UserController.user}" />
                         <f:attribute name="folder" value="#{BrowserController.currentFolder}" />
 
@@ -94,7 +97,7 @@
                         <p:commandButton 
                             ajax="true" immediate="false"
                             action="#{BrowserController.createFolder()}" value="Create" 
-                            update=":formFolder,:formBreadcrumb,:formTree" oncomplete="PF('dlgCF').hide();"
+                            update=":formFolder,:formTree" oncomplete="PF('dlgCF').hide();"
                             />  
                     </h:panelGrid>
                 </h:form>  
@@ -154,7 +157,7 @@
                 <p:layoutUnit position="west" resizable="true" header="Sidebar" size="200" collapsible="true" closable="false">
                     <h:form id="formTree" enctype="multipart/form-data">  
 
-                        <p:tree value="#{TreeController.root}" var="node" id="tree">  
+                        <p:tree value="#{TreeController.root}" var="node" id="tree" dynamic="true">  
                             <p:treeNode id="treeNode">  
                                 <p:commandLink actionListener="#{BrowserController.clickOnFolder}" update=":formFolder,:formBreadcrumb,:formTree" value="#{node.name}">
                                     <f:param name="idFolder" value="#{node.toString()}"/>
@@ -234,6 +237,16 @@
                                     </span> 
                                 </p:column> 
 
+                                <p:column width="15">
+                                    <p:commandLink 
+                                        rendered="#{!docList.isFolder()}"
+                                        actionListener="#{BrowserController.clickOnInfo}" 
+                                        immediate="true" ajax="true"
+                                        update=":formInfo" styleClass="ui-icon ui-icon-info"
+                                        oncomplete="PF('dlgInfo').show();">
+                                        <f:param name="idFile" value="#{doc.doc.idDoc}"/>
+                                    </p:commandLink>
+                                </p:column>
 
                                 <p:column width="15">
                                     <h:commandLink rendered="#{!docList.isFolder()}"  
@@ -246,15 +259,27 @@
                                 </p:column>
 
                                 <p:column width="15">
-                                    <p:commandButton id="deleteDoc" actionListener="#{DeleteController.deleteListenerDoc}" rendered="#{!docList.isFolder()}" value="javascript:void(0)"  title="Delete" styleClass="ui-icon ui-icon-circle-close" >
+                                    <p:commandLink
+                                        rendered="#{!docList.isFolder()}"
+                                        immediate="true" ajax="true"
+                                        actionListener="#{DeleteController.deleteListenerDoc}" 
+                                        update=":formFolder"  value="javascript:void(0)"
+                                        title="Delete" 
+                                        styleClass="ui-icon ui-icon-circle-close" >
                                         <f:param name="toDeleteDocID" value="#{docList.doc.idDoc}"/>
                                         <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />  
-                                    </p:commandButton>  
+                                    </p:commandLink>  
 
-                                    <p:commandButton id="deleteFolder" actionListener="#{DeleteController.deleteListenerFolder}" rendered="#{docList.isFolder()}" value="javascript:void(0)"  title="Delete" styleClass="ui-icon ui-icon-circle-close" >
+                                    <p:commandLink 
+                                        rendered="#{docList.isFolder()}"
+                                        immediate="true" ajax="true"
+                                        actionListener="#{DeleteController.deleteListenerFolder}" 
+                                        update=":formFolder, :formTree" value="javascript:void(0)" 
+                                        title="Delete" styleClass="ui-icon ui-icon-circle-close" >
+
                                         <f:param name="toDeleteFolderID" value="#{docList.folder.idFolder}"/>
                                         <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />  
-                                    </p:commandButton>  
+                                    </p:commandLink>  
                                 </p:column>
 
                                 <p:column exportable="false">  
@@ -272,11 +297,6 @@
                                     <h:outputText value="#{docList.meta.type.mimeType}" rendered="#{!docList.isFolder()}"/>  
                                     <h:outputText value="Folder" rendered="#{docList.isFolder()}"/>  
 
-                                    <h:commandLink actionListener="#{DownloadController.save}" rendered="#{!docList.isFolder()}"  styleClass="ui-icon ui-icon-download">
-                                        <f:param name="DocID" value="#{docList.doc.idDoc}"/>
-                                        <p:fileDownload value="#{DownloadController.file}" contentDisposition="attachment" />
-                                    </h:commandLink>
-
                                 </p:column>  
 
 
@@ -290,6 +310,8 @@
                                 <p:galleria value="#{ImagesController.listOfID}" var="image" autoPlay="false" showCaption="true" rendered="#{!ImagesController.listIsNull()}">  
                                     <p:graphicImage value="/ImageServlet/?Image_id=#{image}" styleClass="image" title="#{ImagesController.getNameFromID(image)}"/> 
                                 </p:galleria>  
+                                <p:remoteCommand name="updateme" update="@form" oncomplete="PrimeFaces.cw('Galleria','widget_companydetail_merchant-gallery',{id:'companydetail:merchant-gallery',transitionInterval:0,panelWidth:640,panelHeight:480,custom:false},'galleria');"/>
+
                             </h:form>
                         </h:form>
                     </div>

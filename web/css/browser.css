@@ -355,3 +355,12 @@ button:focus {
 .left {
     float: left;
 }
+
+.ui-dialog-buttonpane .ui-confirmdialog-no {
+    float: right;
+    margin-right: 0px !important;
+}
+
+.ui-confirm-dialog .ui-dialog-content{
+    text-align: center;
+}
