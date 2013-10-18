@@ -191,6 +191,18 @@
                                         <p:fileDownload value="#{DownloadController.file}" contentDisposition="attachment" />
                                     </h:commandLink>
                                 </p:column>
+                                
+                                <p:column width="15">
+                                    <p:commandButton id="deleteDoc" actionListener="#{DeleteController.deleteListenerDoc}" rendered="#{!docList.isFolder()}" value="javascript:void(0)"  title="Delete" styleClass="ui-icon ui-icon-circle-close" >
+                                        <f:param name="toDeleteDocID" value="#{docList.doc.idDoc}"/>
+                                        <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />  
+                                    </p:commandButton>  
+                                    
+                                    <p:commandButton id="deleteFolder" actionListener="#{DeleteController.deleteListenerFolder}" rendered="#{docList.isFolder()}" value="javascript:void(0)"  title="Delete" styleClass="ui-icon ui-icon-circle-close" >
+                                        <f:param name="toDeleteFolderID" value="#{docList.folder.idFolder}"/>
+                                        <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />  
+                                    </p:commandButton>  
+                                </p:column>
 
                                 <p:column exportable="false">  
                                     <f:facet name="header">  
@@ -211,16 +223,7 @@
                                         <f:param name="DocID" value="#{docList.doc.idDoc}"/>
                                         <p:fileDownload value="#{DownloadController.file}" contentDisposition="attachment" />
                                     </h:commandLink>
-
-                                    <p:commandButton id="deleteDoc" actionListener="#{DeleteController.deleteListenerDoc}" rendered="#{!docList.isFolder()}" value="javascript:void(0)"  title="Delete" styleClass="ui-icon ui-icon-circle-close" >
-                                        <f:param name="toDeleteDocID" value="#{docList.doc.idDoc}"/>
-                                        <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />  
-                                    </p:commandButton>  
                                     
-                                    <p:commandButton id="deleteFolder" actionListener="#{DeleteController.deleteListenerFolder}" rendered="#{docList.isFolder()}" value="javascript:void(0)"  title="Delete" styleClass="ui-icon ui-icon-circle-close" >
-                                        <f:param name="toDeleteFolderID" value="#{docList.folder.idFolder}"/>
-                                        <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />  
-                                    </p:commandButton>  
                                 </p:column>  
                                 
 

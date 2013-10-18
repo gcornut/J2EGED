@@ -12,7 +12,7 @@ var makeOnClick = function() {
     for (var i = 0; i < links.length; i++) {
         link = links[i];
         var onclick = $(link).attr("onclick");
-        var cell = $(link).parents(".ui-datatable-tablewrapper tr");
+        var cell = $($(link).parents(".ui-datatable-tablewrapper td")[0]);
         cell.attr("onclick", onclick);
     }
 };
