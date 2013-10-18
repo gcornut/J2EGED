@@ -206,12 +206,8 @@
                                     </f:facet>  
                                     <h:outputText value="#{docList.meta.type.mimeType}" rendered="#{!docList.isFolder()}"/>  
                                     <h:outputText value="Folder" rendered="#{docList.isFolder()}"/>  
-
-                                    <h:commandLink actionListener="#{DownloadController.save}" rendered="#{!docList.isFolder()}"  styleClass="ui-icon ui-icon-download">
-                                        <f:param name="DocID" value="#{docList.doc.idDoc}"/>
-                                        <p:fileDownload value="#{DownloadController.file}" contentDisposition="attachment" />
-                                    </h:commandLink>
-
+                                 
+                                    
                                     <p:commandButton id="deleteDoc" actionListener="#{DeleteController.deleteListenerDoc}" rendered="#{!docList.isFolder()}" value="javascript:void(0)"  title="Delete" styleClass="ui-icon ui-icon-circle-close" >
                                         <f:param name="toDeleteDocID" value="#{docList.doc.idDoc}"/>
                                         <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />  
