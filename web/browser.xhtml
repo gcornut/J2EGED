@@ -24,7 +24,7 @@
             <p:growl showDetail="true" sticky="false"/>
 
             <p:dialog header="Upload file" modal="true" id="dialogUpload" widgetVar="dlg" resizable="false" width="700px">  
-                <h:form id="formUpload">  
+                <h:form id="formUpload" enctype="multipart/form-data">  
 
                     <p:fileUpload fileUploadListener="#{UploadController.handleUploadFile}"
                                   mode="advanced" dragDropSupport="true" multiple="false" oncomplete="PF('dlg').hide();"
@@ -37,9 +37,56 @@
                 </h:form>  
             </p:dialog> 
 
+            <p:dialog header="File info" modal="true" id="dialogInfo" widgetVar="dlgInfo" resizable="false" width="500px">  
+                <h:form id="formInfo" enctype="multipart/form-data">
+                    <p:panelGrid styleClass="infoGrid">
+                        <p:row>
+                            <p:column><span class="name">Name</span></p:column>
+                            <p:column><h:outputText value="#{BrowserController.currentDocument.meta.name}"/></p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column><span class="name">Type</span></p:column>
+                            <p:column><h:outputText value="#{BrowserController.currentDocument.meta.type.mimeType}"/></p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column><span class="name">Size</span></p:column>
+                            <p:column><h:outputText value="#{BrowserController.currentDocument.meta.prettySize}"/></p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column><span class="name">Creation date</span></p:column>
+                            <p:column><h:outputText value="#{BrowserController.currentDocument.meta.dateCreation}"/></p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column><span class="name">Author</span></p:column>
+                            <p:column><h:outputText value="#{BrowserController.currentDocument.meta.user.login}"/></p:column>
+                        </p:row>
+                    </p:panelGrid>
+                    <p:separator/>
+                    <div class="left">
+                        <h:commandLink immediate="true"
+                                       value="Donwload"
+                                       actionListener="#{DownloadController.save}" 
+                                       styleClass="ui-icon-download">
+                            <f:param name="DocID" value="#{BrowserController.currentDocument.doc.idDoc}"/>
+                            <p:fileDownload value="#{DownloadController.file}" contentDisposition="attachment" />
+                        </h:commandLink>
+                    </div>
+
+                    <div class="right">
+                        <p:commandLink actionListener="#{DeleteController.deleteListenerDoc}" 
+                                       immediate="true" ajax="true"
+                                       value="Delete" update=":formFolder"
+                                       styleClass="ui-icon ui-icon-circle-close"
+                                       oncomplete="PF('dlgInfo').hide();">
+                            <f:param name="toDeleteDocID" value="#{BrowserController.currentDocument.doc.idDoc}"/>
+                            <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />  
+                        </p:commandLink>
+                    </div>
+                </h:form>
+            </p:dialog>
 
             <p:dialog header="Create a folder" modal="true" id="dialogCreateFolder" widgetVar="dlgCF" resizable="false" width="300px">  
-                <h:form id="formCreateFolder">  
+                <h:form id="formCreateFolder" enctype="multipart/form-data">  
                     <h:panelGrid columns="2" style="margin-bottom:10px;width: 100%">  
                         <h:outputLabel for="name" value="Folder name" />  
                         <p:inputText id="name" required="true" value="#{BrowserController.newFolderName}" />  
@@ -61,7 +108,7 @@
 
             <p:layout fullPage="true">
                 <p:layoutUnit position="north" size="42" resizable="false" closable="false" collapsible="false">
-                    <h:form id="formToolbar">
+                    <h:form id="formToolbar" enctype="multipart/form-data">
                         <p:toolbar>
                             <p:toolbarGroup align="left">
                                 <span class="button-group ui-widget ui-splitbutton ui-buttonset">
@@ -105,7 +152,7 @@
                 -->
 
                 <p:layoutUnit position="west" resizable="true" header="Sidebar" size="200" collapsible="true" closable="false">
-                    <h:form id="formTree">  
+                    <h:form id="formTree" enctype="multipart/form-data">  
 
                         <p:tree value="#{TreeController.root}" var="node" id="tree">  
                             <p:treeNode id="treeNode">  
@@ -121,7 +168,7 @@
 
                 <p:layoutUnit position="center" id="browserView">
                     <div id="center-topbar">
-                        <h:form id="formBreadcrumb">
+                        <h:form id="formBreadcrumb" enctype="multipart/form-data">
                             <p:breadCrumb model="#{BrowserController.breadCrumbModel}">  
                                 <p:menuitem value="Root" url="#" />
                                 <p:menuitem value="Root" url="#" />
@@ -129,7 +176,7 @@
                         </h:form> 
                     </div>
                     <div id="center-data">
-                        <h:form id="formFolder" >
+                        <h:form id="formFolder" enctype="multipart/form-data">
                             <p:dataGrid id="iconViewData" var="doc" 
                                         value="#{BrowserController.toDisplay}" columns="6" 
                                         rendered="${BrowserController.isIconView()}">  
@@ -140,13 +187,19 @@
                                         return false;" rendered="${!doc.isFolder()}"> 
                                         <img src="img/file.png" alt="[file]" width="80px" height="80px"/>
                                         <h:outputText value="#{doc.meta.name}" />  
+                                        <p:commandLink actionListener="#{BrowserController.clickOnInfo}" 
+                                                       immediate="true" ajax="true"
+                                                       update=":formInfo" styleClass="ui-ion-info"
+                                                       oncomplete="PF('dlgInfo').show();">
+                                            <f:param name="idFile" value="#{doc.doc.idDoc}"/>
+                                        </p:commandLink>
                                         <p:column>type : <h:outputText value="#{doc.meta.type.mimeType}" /></p:column>
-
-
                                     </h:panelGrid>
                                     <h:panelGrid columns="1" style="width:100%" rendered="${doc.isFolder()}">
                                         <img src="img/folder.png" alt="[folder]" width="80px" height="80px"/>
-                                        <p:commandLink actionListener="#{BrowserController.clickOnFolder}" update=":formFolder,:formBreadcrumb,:formTree" value="#{doc.folder.name}">
+                                        <p:commandLink actionListener="#{BrowserController.clickOnFolder}" 
+                                                       update=":formFolder,:formBreadcrumb,:formTree" 
+                                                       value="#{doc.folder.name}">
                                             <f:param name="idFolder" value="#{doc.folder.idFolder}"/>
                                         </p:commandLink>
                                         <div>type : folder</div>
@@ -167,7 +220,7 @@
                                     </span>
                                 </p:column>  
 
-                                
+
                                 <p:column rendered="#{docList.isFolder()}">  
                                     <f:facet name="header">  
                                         <h:outputText value="Name" />  
@@ -180,8 +233,8 @@
                                         </p:commandLink>
                                     </span> 
                                 </p:column> 
-                                
-                                
+
+
                                 <p:column width="15">
                                     <h:commandLink rendered="#{!docList.isFolder()}"  
                                                    actionListener="#{DownloadController.save}" 
@@ -191,13 +244,13 @@
                                         <p:fileDownload value="#{DownloadController.file}" contentDisposition="attachment" />
                                     </h:commandLink>
                                 </p:column>
-                                
+
                                 <p:column width="15">
                                     <p:commandButton id="deleteDoc" actionListener="#{DeleteController.deleteListenerDoc}" rendered="#{!docList.isFolder()}" value="javascript:void(0)"  title="Delete" styleClass="ui-icon ui-icon-circle-close" >
                                         <f:param name="toDeleteDocID" value="#{docList.doc.idDoc}"/>
                                         <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />  
                                     </p:commandButton>  
-                                    
+
                                     <p:commandButton id="deleteFolder" actionListener="#{DeleteController.deleteListenerFolder}" rendered="#{docList.isFolder()}" value="javascript:void(0)"  title="Delete" styleClass="ui-icon ui-icon-circle-close" >
                                         <f:param name="toDeleteFolderID" value="#{docList.folder.idFolder}"/>
                                         <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />  
@@ -223,13 +276,13 @@
                                         <f:param name="DocID" value="#{docList.doc.idDoc}"/>
                                         <p:fileDownload value="#{DownloadController.file}" contentDisposition="attachment" />
                                     </h:commandLink>
-                                    
+
                                 </p:column>  
-                                
+
 
                             </p:dataTable>
 
-                            <h:form id="galleria" 
+                            <h:form id="galleria" enctype="multipart/form-data"
                                     rendered="${BrowserController.isGalleriaView()}">
                                 <h:form id="no_record" rendered="#{ImagesController.listIsNull()}">
                                     <img src="img/No_record_found.png" width="300px" height="300px"/>
