@@ -195,6 +195,7 @@ public class BrowserController implements Serializable {
         for(DisplayDoc d: toDisplay) {
             if(d.getDoc().getIdDoc().equals(idDestFile)) {
                 currentDocument = d;
+                break;
             }
         }
     }

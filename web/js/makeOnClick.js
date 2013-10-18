@@ -16,12 +16,16 @@ var makeOnClick = function() {
         cell.attr("onclick", onclick);
     }
 };
-
-$(makeOnClick);
-PrimeFaces.ab = function (cfg,ext){
+var cycleMakeOnClick = function() {
     setTimeout(makeOnClick ,250);
     setTimeout(makeOnClick ,500);
     setTimeout(makeOnClick ,1000);
     setTimeout(makeOnClick ,2000);
+}
+
+$(makeOnClick);
+PrimeFaces.ab = function (cfg,ext){
+    cycleMakeOnClick();
     return PrimeFaces.ajax.AjaxRequest(cfg,ext);
 };
+$('button.ui-fileupload-upload').on("click", cycleMakeOnClick);

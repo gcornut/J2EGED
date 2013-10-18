@@ -115,8 +115,8 @@
                         <p:toolbar>
                             <p:toolbarGroup align="left">
                                 <span class="button-group ui-widget ui-splitbutton ui-buttonset">
-                                    <p:commandButton styleClass="ui-corner-left" title="Backward" icon="ui-icon-backward" ajax="true" immediate="true" update=":formFolder,:formBreadcrumb,:formTree" action="#{BrowserController.clickOnBackward}" />  
-                                    <p:commandButton styleClass="ui-corner-right" title="Forward" icon="ui-icon-forward" ajax="true" immediate="true" update=":formFolder,:formBreadcrumb,:formTree" action="#{BrowserController.clickOnForward}" />
+                                    <p:commandButton styleClass="ui-corner-left" title="Backward" icon="ui-icon-backward" ajax="true" immediate="true" update=":formFolder,:formBreadcrumb" action="#{BrowserController.clickOnBackward}" />  
+                                    <p:commandButton styleClass="ui-corner-right" title="Forward" icon="ui-icon-forward" ajax="true" immediate="true" update=":formFolder,:formBreadcrumb" action="#{BrowserController.clickOnForward}" />
                                 </span>
                                 <p:separator/>
                                 <p:selectOneButton styleClass="view-buttons" value="#{BrowserController.selectedView}" >  
@@ -159,7 +159,7 @@
 
                         <p:tree value="#{TreeController.root}" var="node" id="tree" dynamic="true">  
                             <p:treeNode id="treeNode">  
-                                <p:commandLink actionListener="#{BrowserController.clickOnFolder}" update=":formFolder,:formBreadcrumb,:formTree" value="#{node.name}">
+                                <p:commandLink actionListener="#{BrowserController.clickOnFolder}" update=":formFolder,:formBreadcrumb" value="#{node.name}">
                                     <f:param name="idFolder" value="#{node.toString()}"/>
                                 </p:commandLink>
                             </p:treeNode>  
@@ -186,8 +186,7 @@
 
                                 <p:panel  style="text-align:center" styleClass="browser-element">
 
-                                    <h:panelGrid  columns="1" style="width:100%"  onclick="PrimeFaces.ab({source: 'formFolder', update: 'formFolder formBreadcrumb', params: [{name: 'idFolder', value: '4'}]});
-                                        return false;" rendered="${!doc.isFolder()}"> 
+                                    <h:panelGrid  columns="1" style="width:100%" rendered="${!doc.isFolder()}"> 
                                         <img src="img/file.png" alt="[file]" width="80px" height="80px"/>
                                         <h:outputText value="#{doc.meta.name}" />  
                                         <p:commandLink actionListener="#{BrowserController.clickOnInfo}" 
@@ -244,7 +243,7 @@
                                         immediate="true" ajax="true"
                                         update=":formInfo" styleClass="ui-icon ui-icon-info"
                                         oncomplete="PF('dlgInfo').show();">
-                                        <f:param name="idFile" value="#{doc.doc.idDoc}"/>
+                                        <f:param name="idFile" value="#{docList.doc.idDoc}"/>
                                     </p:commandLink>
                                 </p:column>
 
