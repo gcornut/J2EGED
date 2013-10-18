@@ -53,6 +53,12 @@
                 </h:form>  
             </p:dialog> 
 
+
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">  
+                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
+            </p:confirmDialog>  
+
             <p:layout fullPage="true">
                 <p:layoutUnit position="north" size="42" resizable="false" closable="false" collapsible="false">
                     <h:form id="formToolbar">
@@ -169,7 +175,7 @@
                                         <div class="icon"></div>
                                         <p:commandLink actionListener="#{BrowserController.clickOnFolder}" ajax="false" value="#{docList.folder.name}">
                                             <f:param name="idFolder" value="#{docList.folder.idFolder}"/>
- 
+
                                         </p:commandLink>
                                     </span> 
                                 </p:column> 
@@ -193,6 +199,16 @@
                                         <f:param name="DocID" value="#{docList.doc.idDoc}"/>
                                         <p:fileDownload value="#{DownloadController.file}" contentDisposition="attachment" />
                                     </h:commandLink>
+
+                                    <p:commandButton id="deleteDoc" actionListener="#{DeleteController.deleteListenerDoc}" rendered="#{!docList.isFolder()}" value="javascript:void(0)"  title="Delete" styleClass="ui-icon ui-icon-circle-close" >
+                                        <f:param name="toDeleteDocID" value="#{docList.doc.idDoc}"/>
+                                        <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />  
+                                    </p:commandButton>  
+                                    
+                                    <p:commandButton id="deleteFolder" actionListener="#{DeleteController.deleteListenerFolder}" rendered="#{docList.isFolder()}" value="javascript:void(0)"  title="Delete" styleClass="ui-icon ui-icon-circle-close" >
+                                        <f:param name="toDeleteFolderID" value="#{docList.folder.idFolder}"/>
+                                        <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />  
+                                    </p:commandButton>  
                                 </p:column>  
 
                             </p:dataTable>

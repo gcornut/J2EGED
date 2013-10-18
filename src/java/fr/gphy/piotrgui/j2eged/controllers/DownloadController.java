@@ -70,7 +70,7 @@ public class DownloadController implements Serializable {
             System.err.println("error getFile");
         }
         
-        System.err.println("Name of file : " + file.getName());
+        //System.err.println("Name of file : " + file.getName());
         return file;
     }
 
