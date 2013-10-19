@@ -200,7 +200,7 @@
                                     <h:panelGrid columns="1" style="width:100%" rendered="${doc.isFolder()}">
                                         <img src="img/folder.png" alt="[folder]" width="80px" height="80px"/>
                                         <p:commandLink actionListener="#{BrowserController.clickOnFolder}" 
-                                                       update=":formFolder,:formBreadcrumb,:formTree" 
+                                                       update=":formFolder,:formBreadcrumb" 
                                                        value="#{doc.folder.name}">
                                             <f:param name="idFolder" value="#{doc.folder.idFolder}"/>
                                         </p:commandLink>

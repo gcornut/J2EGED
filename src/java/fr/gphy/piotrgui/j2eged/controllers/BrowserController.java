@@ -14,6 +14,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpServletRequest;
+import org.primefaces.component.commandlink.CommandLink;
 import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
 import org.primefaces.model.menu.MenuModel;
@@ -193,7 +194,7 @@ public class BrowserController implements Serializable {
         Integer idDestFile = !paramId.equals("null") ? Integer.valueOf(paramId) : null;
         
         for(DisplayDoc d: toDisplay) {
-            if(d.getDoc().getIdDoc().equals(idDestFile)) {
+            if(!d.isFolder() && d.getDoc().getIdDoc().equals(idDestFile)) {
                 currentDocument = d;
                 break;
             }
