@@ -234,6 +234,7 @@
                                 <p:galleria value="#{ImagesController.listOfID}" var="image" autoPlay="false" showCaption="true" rendered="#{!ImagesController.listIsNull()}">  
                                     <p:graphicImage value="/ImageServlet/?Image_id=#{image}" styleClass="image" title="#{ImagesController.getNameFromID(image)}"/> 
                                 </p:galleria>  
+                                
                                 <p:remoteCommand name="updateme" update="@form" oncomplete="PrimeFaces.cw('Galleria','widget_companydetail_merchant-gallery',{id:'companydetail:merchant-gallery',transitionInterval:0,panelWidth:640,panelHeight:480,custom:false},'galleria');"/>
             
                             </h:form>
