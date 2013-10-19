@@ -48,8 +48,6 @@ public class DownloadController implements Serializable {
         ByteArrayInputStream stream = new ByteArrayInputStream(phyDoc.getBinaryBlob());
 
         file = new DefaultStreamedContent(stream, meta.getType().getMimeType(), meta.getName());
-
-
     }
 
     public BrowserController.DisplayDoc getSelectedDoc() {

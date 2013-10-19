@@ -188,6 +188,18 @@ public class BrowserController implements Serializable {
         changeFolder(idDestFolder);
     }
     
+    public void clickOnInfo(ActionEvent event) {
+        String paramId = ((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest()).getParameter("idFile");
+        Integer idDestFile = !paramId.equals("null") ? Integer.valueOf(paramId) : null;
+        
+        for(DisplayDoc d: toDisplay) {
+            if(d.getDoc().getIdDoc().equals(idDestFile)) {
+                currentDocument = d;
+                break;
+            }
+        }
+    }
+    
     public void clickOnBackward() {
         changeFolder(folderHistory.backward(), false);
     }

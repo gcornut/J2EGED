@@ -318,3 +318,49 @@ button:focus {
 .ui-galleria-nav-prev, .ui-galleria-nav-next {
     z-index:100;
 }
+
+/* Dialog Info */
+#formInfo .infoGrid {
+    margin: 0 auto;
+}
+
+#formInfo .name {
+    margin-right: 20px;
+    margin-bottom: 30px;
+}
+
+#formInfo .ui-icon-download {
+    display: block;
+    width: 16px;
+    height: 16px;
+    overflow: visible !important;
+    text-indent: 20px !important;
+    background-repeat: no-repeat;
+}
+
+#formInfo .ui-icon-circle-close {
+    display: block;
+    width: 16px;
+    height: 16px;
+    overflow: visible !important;
+    text-indent: 20px !important;
+    background-repeat: no-repeat;
+    margin-left: -63px;
+}
+
+.right {
+    float: right;
+}
+
+.left {
+    float: left;
+}
+
+.ui-dialog-buttonpane .ui-confirmdialog-no {
+    float: right;
+    margin-right: 0px !important;
+}
+
+.ui-confirm-dialog .ui-dialog-content{
+    text-align: center;
+}
